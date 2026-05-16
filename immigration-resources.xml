@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	WordPress eXtended RSS (WXR) import file
+	Page: "Immigration Legal Resources" for patrickbrookslaw.com
+
+	HOW TO IMPORT
+	1. In WordPress admin, go to Tools > Import.
+	2. Under "WordPress", click "Install Now" (first time only), then "Run Importer".
+	3. Upload this file (immigration-resources.xml) and click "Upload file and import".
+	4. On the next screen, assign the posts to an existing author (any admin user).
+	5. You do NOT need to import attachments.
+	6. The page imports as a DRAFT named "Immigration Legal Resources".
+	   Review it under Pages, then click Publish when you are ready.
+	   Its address will be: https://patrickbrookslaw.com/immigration-resources/
+	7. Add a link to this new page from your Legal Resources page or your menu.
+-->
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+	<title>Patrick Brooks Law</title>
+	<link>https://patrickbrookslaw.com</link>
+	<description>Immigration Legal Resources page import</description>
+	<pubDate>Fri, 16 May 2026 10:00:00 +0000</pubDate>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>https://patrickbrookslaw.com</wp:base_site_url>
+	<wp:base_blog_url>https://patrickbrookslaw.com</wp:base_blog_url>
+
+	<wp:author>
+		<wp:author_id>1</wp:author_id>
+		<wp:author_login><![CDATA[admin]]></wp:author_login>
+		<wp:author_email><![CDATA[]]></wp:author_email>
+		<wp:author_display_name><![CDATA[Patrick Brooks Law]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[]]></wp:author_last_name>
+	</wp:author>
+
+	<generator>https://wordpress.org/?v=6.7</generator>
+
+	<item>
+		<title>Immigration Legal Resources</title>
+		<link>https://patrickbrookslaw.com/immigration-resources/</link>
+		<pubDate>Fri, 16 May 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://patrickbrookslaw.com/?page_id=90001</guid>
+		<description></description>
+		<content:encoded><![CDATA[
+<p><em>This page is provided as a free community resource. Last reviewed May 2026.</em></p>
+
+<div style="border-left:4px solid #c08a1e;background:#fbf6ea;padding:16px 20px;margin:0 0 28px;border-radius:3px;">
+<p style="margin:0 0 12px;"><strong>Please read first.</strong> This page is a community referral list of nonprofit organizations and public resources that assist with immigration matters. These are independent, third-party organizations. Patrick Brooks Law does not operate, control, endorse, or guarantee any organization listed here, and inclusion here is not a recommendation of any particular provider. Services, eligibility requirements, office locations, fees, and contact information change frequently &mdash; please confirm all details directly with each organization before relying on them.</p>
+<p style="margin:0;">The information on this page is general in nature and is <strong>not legal advice</strong>. Reading this page does not create an attorney-client relationship. Immigration law is complex and every case is different. For advice about your specific situation, consult a licensed immigration attorney or a representative accredited by the U.S. Department of Justice.</p>
+</div>
+
+<p>The organizations and tools below provide free or low-cost immigration legal services, advocacy, and trustworthy guides for immigrants and their families. This list emphasizes resources in <strong>Tennessee, Mississippi, and Arkansas</strong>, and also includes national organizations that serve people nationwide.</p>
+
+<h2>Start Here &mdash; Find Legal Help Near You</h2>
+<p>These free directories and tools are the best first step. They can connect you with vetted nonprofit immigration legal services anywhere in the country.</p>
+<ul>
+<li><strong><a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" target="_blank" rel="noopener noreferrer">National Immigration Legal Services Directory</a></strong> &mdash; A searchable directory (by state, county, or detention facility) of nonprofit organizations that provide free or low-cost immigration legal help. A project of the Immigration Advocates Network and Pro Bono Net.</li>
+<li><strong><a href="https://www.immigrationlawhelp.org/" target="_blank" rel="noopener noreferrer">ImmigrationLawHelp.org</a></strong> &mdash; A companion directory designed to help low-income immigrants find nonprofit legal aid in their area.</li>
+<li><strong><a href="https://www.immi.org/" target="_blank" rel="noopener noreferrer">Immi</a></strong> &mdash; A free, confidential online tool to screen for possible immigration options, learn about your rights, and get referrals to nonprofit legal help.</li>
+<li><strong><a href="https://www.justice.gov/eoir/list-pro-bono-legal-service-providers" target="_blank" rel="noopener noreferrer">EOIR List of Pro Bono Legal Service Providers</a></strong> &mdash; The U.S. Department of Justice's list of free legal-service providers, organized by immigration court. Useful for anyone who has a case in immigration court.</li>
+<li><strong><a href="https://www.ailalawyer.com/" target="_blank" rel="noopener noreferrer">AILA Immigration Lawyer Search</a></strong> &mdash; A free search to find a licensed private immigration attorney through the American Immigration Lawyers Association.</li>
+</ul>
+
+<h2>Tennessee</h2>
+<ul>
+<li><strong><a href="https://www.tnjfon.org/" target="_blank" rel="noopener noreferrer">Tennessee Justice for Our Neighbors (TN-JFON)</a></strong> &mdash; A nonprofit immigration law firm serving survivors of war, human trafficking, and abuse.</li>
+<li><strong><a href="https://www.tnimmigrant.org/" target="_blank" rel="noopener noreferrer">Tennessee Immigrant &amp; Refugee Rights Coalition (TIRRC)</a></strong> &mdash; A statewide, immigrant- and refugee-led coalition offering citizenship assistance, advocacy, know-your-rights education, and a multilingual <a href="https://www.tnimmigrant.org/resource-line" target="_blank" rel="noopener noreferrer">resource line</a>.</li>
+<li><strong><a href="https://cctenn.org/causes/new-americans/immigration-support-services/" target="_blank" rel="noopener noreferrer">Catholic Charities of Tennessee &mdash; Immigration Support Services</a></strong> &mdash; Affordable immigration counseling and assistance completing immigration forms, serving Middle Tennessee.</li>
+<li><strong><a href="https://ccwtn.org/" target="_blank" rel="noopener noreferrer">Catholic Charities of West Tennessee</a></strong> &mdash; Immigration services and legal referrals for refugees and immigrants in the Memphis area.</li>
+<li><strong><a href="https://clcmemphis.org/programs/immigrant-justice-program/" target="_blank" rel="noopener noreferrer">Community Legal Center &mdash; Immigrant Justice Program</a></strong> &mdash; Affordable immigration legal services in the Memphis area since 2006, including family-based petitions, humanitarian relief, and removal defense.</li>
+<li><strong><a href="https://miamemphis.org/" target="_blank" rel="noopener noreferrer">Mid-South Immigration Advocates (MIA)</a></strong> &mdash; A nonprofit immigration law firm providing direct representation before the Memphis Immigration Court and USCIS.</li>
+<li><strong><a href="https://latinomemphis.org/immigration-hub/" target="_blank" rel="noopener noreferrer">Latino Memphis (Derechos / Immigrant Rights Defense Center)</a></strong> &mdash; West Tennessee's largest Latino-serving nonprofit; low-cost immigration legal services plus a know-your-rights hub.</li>
+<li><strong><a href="https://worldrelief.org/memphis/" target="_blank" rel="noopener noreferrer">World Relief Memphis</a></strong> &mdash; Refugee resettlement, immigration legal support, employment assistance, and English-language services.</li>
+<li><strong><a href="https://www.airlegal.org/" target="_blank" rel="noopener noreferrer">Advocates for Immigrant Rights (AIR)</a></strong> &mdash; A nonprofit law firm focused on removal/deportation defense, including representation for people in ICE detention. Serves Tennessee, Mississippi, and Arkansas.</li>
+<li><strong><a href="https://law.vanderbilt.edu/clinics-experiential-learning/immigration-practice-clinic/" target="_blank" rel="noopener noreferrer">Vanderbilt Law School &mdash; Immigration Practice Clinic</a></strong> &mdash; A law school clinic representing low-income immigrants in humanitarian cases before the Memphis Immigration Court and the federal courts.</li>
+<li><strong><a href="https://www.facebook.com/MariposasCollective/" target="_blank" rel="noopener noreferrer">Mariposas Collective (Memphis)</a></strong> &mdash; A grassroots, volunteer-run mutual-aid group providing meals, clothing, supplies, translation help, and community to immigrants and asylum seekers in Memphis. This is community support rather than legal services.</li>
+</ul>
+
+<h2>Mississippi</h2>
+<ul>
+<li><strong><a href="https://yourmira.org/" target="_blank" rel="noopener noreferrer">Mississippi Immigrants Rights Alliance (MIRA)</a></strong> &mdash; A statewide nonprofit offering legal clinics, know-your-rights workshops, low-cost immigration and naturalization services, and advocacy for immigrant and working communities.</li>
+<li><strong><a href="https://elpueblo-ms.org/" target="_blank" rel="noopener noreferrer">El Pueblo Immigration Legal Services</a></strong> &mdash; Low-cost, DOJ/BIA-recognized humanitarian and family-based immigration legal services, with offices in Forest, Biloxi, and Columbus.</li>
+<li><em>See also:</em> <strong><a href="https://www.airlegal.org/" target="_blank" rel="noopener noreferrer">Advocates for Immigrant Rights (AIR)</a></strong> provides removal-defense representation for Mississippi residents, and the Memphis-based legal organizations listed under Tennessee also serve northern Mississippi, which falls within the Memphis Immigration Court's jurisdiction.</li>
+</ul>
+
+<h2>Arkansas</h2>
+<ul>
+<li><strong><a href="https://arkansasunited.org/" target="_blank" rel="noopener noreferrer">Arkansas United</a></strong> &mdash; Arkansas's statewide immigrant-rights organization; its Immigrant Resource Center in Springdale offers family-based legal services, citizenship help, and know-your-rights resources.</li>
+<li><strong><a href="https://www.dolr.org/immigration-services" target="_blank" rel="noopener noreferrer">Catholic Charities of Arkansas &mdash; Catholic Immigration Services</a></strong> &mdash; Low-cost immigration counseling and legal assistance through offices in Little Rock and Springdale.</li>
+<li><strong><a href="https://www.canopynwa.org/" target="_blank" rel="noopener noreferrer">Canopy NWA</a></strong> &mdash; Refugee resettlement and newcomer support services in Northwest Arkansas.</li>
+<li><em>See also:</em> <strong><a href="https://www.airlegal.org/" target="_blank" rel="noopener noreferrer">Advocates for Immigrant Rights (AIR)</a></strong> provides removal-defense representation for Arkansas residents (see the Tennessee section above).</li>
+</ul>
+
+<h2>National Nonprofit &amp; Advocacy Organizations</h2>
+<ul>
+<li><strong><a href="https://www.americanimmigrationcouncil.org/" target="_blank" rel="noopener noreferrer">American Immigration Council</a></strong> &mdash; Research, policy analysis, and litigation on immigration law and policy.</li>
+<li><strong><a href="https://www.cliniclegal.org/" target="_blank" rel="noopener noreferrer">Catholic Legal Immigration Network, Inc. (CLINIC)</a></strong> &mdash; Supports a nationwide network of nonprofit immigration legal programs and offers public resources for immigrants.</li>
+<li><strong><a href="https://www.ilrc.org/" target="_blank" rel="noopener noreferrer">Immigrant Legal Resource Center (ILRC)</a></strong> &mdash; Legal trainings, practice materials, and immigrant-rights advocacy, including know-your-rights resources.</li>
+<li><strong><a href="https://www.nilc.org/" target="_blank" rel="noopener noreferrer">National Immigration Law Center (NILC)</a></strong> &mdash; An advocacy and policy organization defending the rights of low-income immigrants.</li>
+<li><strong><a href="https://immigrantjustice.org/" target="_blank" rel="noopener noreferrer">National Immigrant Justice Center (NIJC)</a></strong> &mdash; Direct legal services and advocacy for immigrants, refugees, and asylum seekers.</li>
+<li><strong><a href="https://supportkind.org/" target="_blank" rel="noopener noreferrer">Kids in Need of Defense (KIND)</a></strong> &mdash; Legal protection and representation for unaccompanied and separated immigrant children.</li>
+<li><strong><a href="https://www.tahirih.org/" target="_blank" rel="noopener noreferrer">Tahirih Justice Center</a></strong> &mdash; Free legal and social services for immigrant women and girls fleeing gender-based violence.</li>
+<li><strong><a href="https://www.aclu.org/issues/immigrants-rights" target="_blank" rel="noopener noreferrer">ACLU Immigrants' Rights Project</a></strong> &mdash; Litigation and advocacy protecting the constitutional and civil rights of immigrants.</li>
+<li><strong><a href="https://www.splcenter.org/" target="_blank" rel="noopener noreferrer">Southern Poverty Law Center (SPLC)</a></strong> &mdash; Civil rights litigation and advocacy across the Deep South, including immigrant-justice work in the region.</li>
+</ul>
+
+<h2>Government &amp; Official Information</h2>
+<ul>
+<li><strong><a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">U.S. Citizenship and Immigration Services (USCIS)</a></strong> &mdash; The official federal agency for immigration benefits. Use it for official forms, filing instructions, fees, case-status checks, and processing times.</li>
+<li><strong><a href="https://www.justice.gov/eoir" target="_blank" rel="noopener noreferrer">Executive Office for Immigration Review (EOIR)</a></strong> &mdash; The U.S. immigration court system, with information on hearings, legal representation, and the pro bono provider list.</li>
+</ul>
+
+<h2>Know Your Rights &amp; Avoiding Immigration Scams</h2>
+<p><strong>Watch out for immigration scams.</strong> In the United States, a "notario p&uacute;blico" or notary public is <em>not</em> a lawyer and is not authorized to give legal advice or represent you in immigration matters &mdash; this is different from the role of a "notario" in many other countries. Only a licensed attorney or a representative accredited by the U.S. Department of Justice may give you legal advice. Be cautious of anyone who guarantees results, pressures you to sign blank or English-only forms you do not understand, or refuses to give you copies of your paperwork.</p>
+<ul>
+<li><strong><a href="https://www.tnimmigrant.org/rights" target="_blank" rel="noopener noreferrer">TIRRC &mdash; Know Your Rights</a></strong> &mdash; Plain-language guidance on your rights, available in multiple languages.</li>
+<li><strong><a href="https://latinomemphis.org/know-your-rights-hub/" target="_blank" rel="noopener noreferrer">Latino Memphis &mdash; Know Your Rights Hub</a></strong> &mdash; Practical resources for immigrants and families in the Mid-South.</li>
+<li><strong><a href="https://www.ilrc.org/" target="_blank" rel="noopener noreferrer">Immigrant Legal Resource Center &mdash; Know Your Rights</a></strong> &mdash; Free red cards and know-your-rights materials in many languages.</li>
+<li><strong><a href="https://www.aclu.org/issues/immigrants-rights" target="_blank" rel="noopener noreferrer">ACLU &mdash; Immigrants' Rights</a></strong> &mdash; Guidance on your rights when interacting with immigration enforcement.</li>
+</ul>
+
+<hr />
+
+<p><em>If you are not sure where to begin, start with the national directories at the top of this page &mdash; they will point you to a trusted nonprofit near you. This page is maintained as a public service and is updated periodically; if you notice a broken link or outdated information, please let our office know.</em></p>
+]]></content:encoded>
+		<excerpt:encoded><![CDATA[A community referral list of nonprofit immigration legal-aid and advocacy organizations and trusted guides, with an emphasis on Tennessee, Mississippi, and Arkansas.]]></excerpt:encoded>
+		<wp:post_id>90001</wp:post_id>
+		<wp:post_date><![CDATA[2026-05-16 10:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-05-16 10:00:00]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2026-05-16 10:00:00]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2026-05-16 10:00:00]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[immigration-resources]]></wp:post_name>
+		<wp:status><![CDATA[draft]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+</channel>
+</rss>
