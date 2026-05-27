@@ -301,6 +301,91 @@ const COUNTY_SEEDS: CountySeed[] = [
   // Wyoming
   { name: 'Laramie County', state: 'WY', label: 'Wyoming Judicial Branch Case Search', url: 'https://efiling.courts.state.wy.us/public/caseSearch.do', description: 'Statewide court case search.', confidence: 'med' },
   { name: 'Natrona County', state: 'WY', label: 'Natrona County Sheriff Warrants Search', url: 'https://warrants.natronacounty-wy.gov/', description: 'County warrants, 7th Judicial District/Circuit.', confidence: 'high' },
+
+  // --- 4th+ counties for the largest states (2026-05 research pass 3) ---
+
+  // California
+  { name: 'Kern County', state: 'CA', label: 'Kern Superior Court Case Information', url: 'https://www.kern.courts.ca.gov/online-services/case-information-search', description: 'Criminal/civil/traffic case search by name or number.', confidence: 'high' },
+  { name: 'Ventura County', state: 'CA', label: 'Ventura Superior Court Case Inquiry', url: 'https://ventura.courts.ca.gov/online-services/case-inquiry', description: 'Court case lookup by name (online portal).', confidence: 'high' },
+  { name: 'San Francisco County', state: 'CA', label: 'SF Superior Court Case Information', url: 'https://sf.courts.ca.gov/online-services/case-information', description: 'Civil/criminal case search by name or number.', confidence: 'high' },
+  { name: 'San Mateo County', state: 'CA', label: 'San Mateo Superior Court Records Index', url: 'https://web.sanmateocourt.org/midx/', description: 'Civil, criminal, family, probate index.', confidence: 'high' },
+  { name: 'San Joaquin County', state: 'CA', label: 'San Joaquin Superior Court Case Search', url: 'https://www.sjcourts.org/case-management-search', description: 'Court case search by party name.', confidence: 'high' },
+  // Texas
+  { name: 'Montgomery County', state: 'TX', label: 'Montgomery District Clerk Case Inquiry', url: 'https://www.mctx.org/departments/departments_d_-_f/district_clerk/case_inquiry.php', description: 'Criminal, civil, family case records online.', confidence: 'high' },
+  { name: 'Williamson County', state: 'TX', label: 'Williamson Judicial Records Public Access', url: 'https://judicialrecords.wilco.org/', description: 'Criminal and civil court case records search.', confidence: 'high' },
+  { name: 'Cameron County', state: 'TX', label: 'Cameron County Clerk Judicial Case Search', url: 'https://www.cameroncountytx.gov/county-clerk/cameron-county-clerk-judicial-case-search/', description: 'Judicial case search via county portals.', confidence: 'high' },
+  { name: 'Nueces County', state: 'TX', label: 'Nueces District Clerk Case Search', url: 'https://www.nuecesco.com/courts/district-clerk/case-search', description: 'Court case search by name or number.', confidence: 'high' },
+  { name: 'Brazoria County', state: 'TX', label: 'Brazoria Public Access Court Records', url: 'https://pubweb.brazoriacountytx.gov/PublicAccess/default.aspx', description: 'Criminal, civil, probate court case search.', confidence: 'high' },
+  // Florida
+  { name: 'Brevard County', state: 'FL', label: 'Brevard Clerk Case Search (BECA)', url: 'https://www.brevardclerk.us/case-search', description: 'Civil and criminal cases by name/number.', confidence: 'high' },
+  { name: 'Volusia County', state: 'FL', label: 'Volusia Clerk of Court Records Search', url: 'https://www.clerk.org/Search-Records.aspx', description: 'Circuit/county civil, family, probate, criminal.', confidence: 'high' },
+  { name: 'Pasco County', state: 'FL', label: 'Pasco Clerk Search Court Records', url: 'https://www.pascoclerk.com/172/Search-Court-Records', description: 'Court records by name, case number, division.', confidence: 'high' },
+  { name: 'Seminole County', state: 'FL', label: 'Seminole Clerk Court Case Search', url: 'https://www.seminoleclerk.org/search-for-a-court-case/', description: 'Civil, criminal, traffic, family, probate cases.', confidence: 'high' },
+  { name: 'Sarasota County', state: 'FL', label: 'Sarasota Clerk Court Records (ClerkNet)', url: 'https://www.sarasotaclerk.com/Records/Court-Records', description: 'Civil and criminal court case search.', confidence: 'high' },
+  // New York
+  { name: 'Onondaga County', state: 'NY', label: 'Onondaga Sheriff Active Warrants', url: 'https://sheriff.ongov.net/awarrants/', description: "Sheriff's published active warrant list.", confidence: 'high' },
+  { name: 'Albany County', state: 'NY', label: 'Albany County Clerk Online Records', url: 'https://www.albanycountyny.gov/government/county-clerk/services/online-records-search', description: 'Court judgments, liens, tax warrants, records.', confidence: 'med' },
+  { name: 'Rockland County', state: 'NY', label: 'Rockland County Clerk Court Records', url: 'https://www.rocklandcountyny.gov/departments/clerk-s-office/court-records', description: 'County clerk court and land records search.', confidence: 'med' },
+  { name: 'Dutchess County', state: 'NY', label: 'NYS WebCrims Defendant Search', url: 'https://iapps.courts.state.ny.us/webcrim_attorney/DefendantSearch', description: 'Statewide criminal case search; no county warrant DB.', confidence: 'high' },
+  { name: 'Orange County', state: 'NY', label: 'NYS WebCrims Defendant Search', url: 'https://iapps.courts.state.ny.us/webcrim_attorney/DefendantSearch', description: 'Statewide criminal case search; no county warrant DB.', confidence: 'high' },
+  // Illinois
+  { name: 'McHenry County', state: 'IL', label: 'McHenry Circuit Clerk Public Case Access', url: 'https://caseinfo.mchenrycountyil.gov/PublicCaseAccess/CaseSearch', description: 'Court case search by name/number, bench warrants.', confidence: 'high' },
+  { name: 'Winnebago County', state: 'IL', label: 'Winnebago Sheriff Records & Warrant Entry', url: 'https://winnebagosheriff.com/records-warrant-entry', description: 'Sheriff warrant lookup by name.', confidence: 'med' },
+  { name: 'St. Clair County', state: 'IL', label: 'St. Clair Circuit Clerk Criminal Records', url: 'https://www.co.st-clair.il.us/departments/circuit-clerk/courts/criminal-records', description: 'Criminal court case search by name/number.', confidence: 'high' },
+  // Pennsylvania
+  { name: 'Lancaster County', state: 'PA', label: 'Lancaster County Courts', url: 'https://www.court.co.lancaster.pa.us/', description: 'County court records; warrants via UJS portal.', confidence: 'med' },
+  { name: 'York County', state: 'PA', label: 'York Prothonotary Public Search', url: 'https://prothysearchnew.yorkcountypa.gov/', description: 'County court case search by name/number.', confidence: 'high' },
+  { name: 'Berks County', state: 'PA', label: 'PA UJS Web Portal', url: 'https://ujsportal.pacourts.us/casesearch', description: 'Statewide docket/warrant search; covers Berks.', confidence: 'high' },
+  // Ohio
+  { name: 'Stark County', state: 'OH', label: 'Stark County CJIS', url: 'https://www.starkcjis.org/', description: 'Unified county court docket/warrant search.', confidence: 'high' },
+  { name: 'Butler County', state: 'OH', label: 'Butler Area Courts Record Search', url: 'https://docket.bcohio.gov/', description: 'County court case/docket search.', confidence: 'high' },
+  { name: 'Lorain County', state: 'OH', label: 'Lorain Common Pleas Online Dockets', url: 'https://cp.onlinedockets.com/loraincp/case_dockets/search.aspx', description: 'Court case search by name/number/date.', confidence: 'high' },
+  // Georgia
+  { name: 'Clayton County', state: 'GA', label: 'Clayton County Court Case Inquiry', url: 'https://www.claytoncountyga.gov/government/courts/court-case-inquiry/', description: 'County court case search by name/number.', confidence: 'high' },
+  { name: 'Henry County', state: 'GA', label: 'Henry Superior Court Case Search', url: 'https://micropact.co.henry.ga.us/SuperiorCMWS/', description: 'Superior court case search by name/number.', confidence: 'high' },
+  { name: 'Cherokee County', state: 'GA', label: 'Cherokee Sheriff Warrants', url: 'https://sheriff.cherokeecountyga.gov/jail/warrant.php', description: 'Sheriff active warrant information.', confidence: 'high' },
+  // North Carolina
+  { name: 'Cumberland County', state: 'NC', label: 'NC eCourts Portal', url: 'https://portal.nccourts.gov/', description: 'Statewide court case search by name/number.', confidence: 'high' },
+  { name: 'Buncombe County', state: 'NC', label: 'NC eCourts Portal', url: 'https://portal.nccourts.gov/', description: 'Statewide court case search by name/number.', confidence: 'high' },
+  { name: 'Union County', state: 'NC', label: 'NC eCourts Portal', url: 'https://portal.nccourts.gov/', description: 'Statewide court case search by name/number.', confidence: 'high' },
+  // Michigan
+  { name: 'Washtenaw County', state: 'MI', label: 'Washtenaw Trial Court Name Search', url: 'https://www.washtenaw.org/1031/Name-Search', description: 'County court records name search.', confidence: 'high' },
+  { name: 'Ingham County', state: 'MI', label: 'Ingham Court Record Search', url: 'https://courts.ingham.org/CourtRecordSearch/', description: 'County court case record search.', confidence: 'high' },
+  { name: 'Ottawa County', state: 'MI', label: 'Michigan MiCOURT Case Search', url: 'https://micourt.courts.michigan.gov/case-search/', description: 'Statewide court case search (20th Circuit).', confidence: 'med' },
+  // New Jersey
+  { name: 'Union County', state: 'NJ', label: 'Union County Sheriff', url: 'https://ucnj.org/sheriff/', description: 'Sheriff fugitive/most-wanted info.', confidence: 'med' },
+  { name: 'Camden County', state: 'NJ', label: 'Camden Sheriff Special Investigations', url: 'https://www.camdencounty.com/service/sheriffs-office/special-investigations-bureau/', description: 'Sheriff most-wanted/warrant division.', confidence: 'med' },
+  { name: 'Passaic County', state: 'NJ', label: 'Passaic County Sheriff', url: 'https://pcsheriff.org/', description: 'Sheriff most-wanted/warrant search.', confidence: 'med' },
+  // Virginia
+  { name: 'Chesterfield County', state: 'VA', label: 'Chesterfield Police Active Warrants', url: 'https://www.chesterfield.gov/5971/Active-Warrants', description: 'County police active warrants page.', confidence: 'high' },
+  { name: 'Henrico County', state: 'VA', label: 'Henrico Sheriff Inmate/Warrant Search', url: 'https://www.henricosheriff.org/search/mobilepage.aspx', description: 'Sheriff records; also statewide VA OCIS.', confidence: 'med' },
+  // Washington
+  { name: 'Clark County', state: 'WA', label: 'Clark County Sheriff Criminal Records', url: 'https://clark.wa.gov/sheriff/criminal-records-warrants', description: 'Sheriff records unit; no public name search.', confidence: 'high' },
+  { name: 'Thurston County', state: 'WA', label: 'Thurston County Sheriff Warrants', url: 'https://www.thurstoncountywa.gov/warrants-section', description: 'Sheriff warrants info; no online name search.', confidence: 'high' },
+  // Arizona
+  { name: 'Yavapai County', state: 'AZ', label: 'Yavapai Sheriff Warrant Search', url: 'https://apps.yavapaiaz.gov/WarrantSearch/', description: 'Searchable warrant database by name.', confidence: 'high' },
+  { name: 'Yuma County', state: 'AZ', label: 'Arizona Public Access Case Lookup', url: 'https://apps.supremecourt.az.gov/publicaccess/', description: 'Statewide portal; Yuma cases selectable.', confidence: 'med' },
+  // Massachusetts
+  { name: 'Norfolk County', state: 'MA', label: 'MassCourts eAccess', url: 'https://www.masscourts.org/eservices/home.page', description: 'Statewide trial court dockets; select division.', confidence: 'high' },
+  { name: 'Bristol County', state: 'MA', label: 'MassCourts eAccess', url: 'https://www.masscourts.org/eservices/home.page', description: 'Statewide trial court dockets; select division.', confidence: 'high' },
+  // Indiana
+  { name: 'St. Joseph County', state: 'IN', label: 'Indiana MyCase Court Search', url: 'https://public.courts.in.gov/mycase', description: 'Statewide portal; St. Joseph selectable.', confidence: 'high' },
+  { name: 'Vanderburgh County', state: 'IN', label: 'Vanderburgh Sheriff Warrant Search', url: 'https://vanderburghsheriff.org/warrant-search/', description: 'Searchable online warrant database by name.', confidence: 'high' },
+  // Maryland
+  { name: 'Baltimore City', state: 'MD', level: 'city', label: 'Maryland Judiciary Case Search', url: 'https://casesearch.courts.state.md.us/casesearch', description: 'Statewide portal; independent city.', confidence: 'high' },
+  { name: 'Howard County', state: 'MD', label: 'Howard Sheriff Warrant/Fugitive Section', url: 'https://www.howardcountymd.gov/sheriffs-office/warrant-fugitive-section', description: 'Sheriff warrants info; also MD Case Search.', confidence: 'high' },
+  // Wisconsin
+  { name: 'Racine County', state: 'WI', label: 'Racine County Sheriff Warrants', url: 'https://www.racinecounty.gov/departments/sheriff-s-office/operations-division/specialized-teams/warrants', description: 'Sheriff warrants lookup; also WCCA.', confidence: 'high' },
+  { name: 'Winnebago County', state: 'WI', label: 'Wisconsin Circuit Court Access (WCCA)', url: 'https://wcca.wicourts.gov/', description: 'Statewide portal; Winnebago selectable.', confidence: 'med' },
+  // Minnesota
+  { name: 'Washington County', state: 'MN', label: 'Washington County Sheriff Warrant Search', url: 'https://www.washingtoncountymn.gov/2514/Warrant-Search', description: 'Online searchable warrant database by name.', confidence: 'high' },
+  { name: 'Stearns County', state: 'MN', label: 'Stearns Sheriff Outstanding Warrants', url: 'https://jailroster.stearnscountymn.gov/Outstanding', description: 'Searchable outstanding warrants list.', confidence: 'high' },
+  // Colorado
+  { name: 'Adams County', state: 'CO', label: 'Adams County Sheriff Warrant Search', url: 'https://adamssheriffco.gov/community/public-records/warrant-search/', description: 'Searchable warrant database; updated daily.', confidence: 'high' },
+  { name: 'Larimer County', state: 'CO', label: 'Larimer Sheriff Records/Most Wanted', url: 'https://www.larimer.gov/sheriff/records', description: 'Sheriff records; most-wanted list.', confidence: 'med' },
+  // Missouri
+  { name: 'St. Louis City', state: 'MO', level: 'city', label: 'Missouri Case.net', url: 'https://www.courts.mo.gov/casenet/welcome.do', description: 'Select City of St. Louis 22nd Circuit; independent city.', confidence: 'high' },
+  { name: 'Clay County', state: 'MO', label: 'Clay County Sheriff Warrants', url: 'https://www.sheriffclayco.org/', description: 'Sheriff online warrants database; also Case.net.', confidence: 'med' },
 ];
 
 function slug(s: string): string {
