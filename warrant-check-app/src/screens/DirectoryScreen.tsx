@@ -31,7 +31,11 @@ export default function DirectoryScreen({ navigation }: Props) {
       <View style={{ flex: 1 }}>
         <Text style={styles.rowTitle}>{item.name}</Text>
         <Text style={styles.rowSub}>
-          {item.level === 'state' ? 'State' : `County · ${item.state}`}
+          {item.level === 'federal'
+            ? 'Federal · U.S. Marshals, FBI, PACER'
+            : item.level === 'state'
+            ? 'State'
+            : `County · ${item.state}`}
         </Text>
       </View>
       {!item.verified && <Badge label="VERIFY" tone="warning" />}

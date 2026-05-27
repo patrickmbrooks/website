@@ -1,4 +1,4 @@
-export type JurisdictionLevel = 'state' | 'county' | 'city';
+export type JurisdictionLevel = 'federal' | 'state' | 'county' | 'city';
 
 export type Confidence = 'high' | 'med' | 'low';
 
