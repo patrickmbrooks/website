@@ -9,16 +9,19 @@ export function buildSearchFallbackUrl(jurisdictionName: string): string {
   return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
 }
 
-const STATE_JURISDICTIONS: Jurisdiction[] = STATES.map((s) => ({
-  id: `state-${s.abbr.toLowerCase()}`,
-  name: s.name,
-  level: 'state',
-  state: s.abbr,
-  resources: CURATED_STATE_RESOURCES[s.abbr] ?? [],
-  verified: false,
-  note:
-    'Outstanding warrants are usually published at the county sheriff or local court level. Start here, then drill down to the relevant county.',
-}));
+const STATE_JURISDICTIONS: Jurisdiction[] = STATES.map((s) => {
+  const resources = CURATED_STATE_RESOURCES[s.abbr] ?? [];
+  return {
+    id: `state-${s.abbr.toLowerCase()}`,
+    name: s.name,
+    level: 'state' as const,
+    state: s.abbr,
+    resources,
+    verified: resources.some((r) => r.confidence === 'high'),
+    note:
+      'Most states have no public "active warrant" search — bench/arrest warrants usually appear within a court case docket or are published by the county sheriff. Start here, then drill down to the relevant county.',
+  };
+});
 
 export const ALL_JURISDICTIONS: Jurisdiction[] = [
   ...STATE_JURISDICTIONS,

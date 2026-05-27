@@ -54,7 +54,7 @@ export default function StateDetailScreen({ route, navigation }: Props) {
           <Card key={i}>
             <View style={styles.cardHeader}>
               <P style={{ fontWeight: '700', flex: 1 }}>{r.label}</P>
-              {!jurisdiction.verified && <Badge label="VERIFY" tone="warning" />}
+              {r.confidence !== 'high' && <Badge label="VERIFY" tone="warning" />}
             </View>
             <P muted style={{ marginVertical: spacing.sm }}>
               {r.description}

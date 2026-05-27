@@ -32,9 +32,13 @@ wired up before launch:
    data. Wire it to a **secure backend** that calls an FCRA-compliant Consumer
    Reporting Agency (Checkr, Sterling, Accurate). Never put provider keys in the
    client.
-3. **Jurisdiction URLs** — every entry in `src/data/` is marked `verified: false`.
-   The seeded URLs are official state-judiciary domains, but warrant lookups are
-   usually county/sheriff-level. **Verify each URL and coverage before launch.**
+3. **Jurisdiction URLs** — all 50 states + DC have a researched official
+   resource (`src/data/curatedResources.ts`), plus ~30 of the largest counties
+   (`src/data/counties.ts`). Each resource carries a `confidence` level; the UI
+   shows a **VERIFY** badge on anything below `high`. Most states have no public
+   "active warrant" search — warrants appear within court dockets or county
+   sheriff lists, which is reflected in each description. Re-confirm URLs
+   periodically (last research pass: 2026-05); government portals move.
 
 ## ⚠️ Legal (needs attorney review)
 
