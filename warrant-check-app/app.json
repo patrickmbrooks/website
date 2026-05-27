@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Warrant & Background Check",
+    "slug": "warrant-check-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "warrantcheck",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.patrickbrookslaw.warrantcheck"
+    },
+    "android": {
+      "package": "com.patrickbrookslaw.warrantcheck"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": ["expo-web-browser"]
+  }
+}
