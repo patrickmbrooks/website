@@ -224,13 +224,13 @@ const COUNTY_SEEDS: CountySeed[] = [
   { name: 'Brown County', state: 'WI', label: 'Brown County Sheriff Outstanding Warrants', url: 'https://www.brownso.org/warrants/', description: 'Outstanding warrant list by name.', confidence: 'high' },
   // Indiana
   { name: 'Allen County', state: 'IN', label: 'Indiana MyCase Court Search', url: 'https://public.courts.in.gov/mycase/', description: 'Statewide case search; sheriff has no online tool.', confidence: 'high' },
-  { name: 'Hamilton County', state: 'IN', label: 'Hamilton County Sheriff Open Warrants', url: 'https://www.hcsheriff.gov/cid/owio/', description: 'Open warrants by name/number/address (verify vs TN).', confidence: 'med' },
+  { name: 'Hamilton County', state: 'IN', label: 'Hamilton County Sheriff Records / MyCase', url: 'https://www.hamiltoncounty.in.gov/594/Records', description: 'Sheriff records page; criminal cases via mycase.in.gov.', confidence: 'high' },
   // Missouri
   { name: 'St. Charles County', state: 'MO', label: 'Missouri Case.net', url: 'https://www.courts.mo.gov/casenet/base/welcome.do', description: 'Statewide case search; St. Charles selectable.', confidence: 'high' },
   { name: 'Greene County', state: 'MO', label: 'Greene County Sheriff Warrants Division', url: 'https://greenecountymo.gov/sheriff/division/warrants_div.php', description: 'Warrants division info; also Case.net.', confidence: 'med' },
   // Tennessee
   { name: 'Knox County', state: 'TN', label: 'Knox County Sheriff Criminal Warrants', url: 'https://knoxsheriff.org/warrants/', description: 'Active criminal warrant info/search.', confidence: 'high' },
-  { name: 'Hamilton County', state: 'TN', label: 'Hamilton County Sheriff Open Warrants', url: 'https://www.hcsheriff.gov/', description: 'Open warrants searchable (verify domain vs IN).', confidence: 'med' },
+  { name: 'Hamilton County', state: 'TN', label: 'Hamilton County Sheriff Open Warrants', url: 'https://www.hcsheriff.gov/Warrants-app', description: 'Open warrants by name/number/address, daily update.', confidence: 'high' },
   { name: 'Rutherford County', state: 'TN', label: 'Rutherford County Sheriff Warrants', url: 'https://rcsotn.com/warrants-division', description: 'Warrant verification; no public online DB.', confidence: 'med' },
   // Oregon
   { name: 'Clackamas County', state: 'OR', label: 'Oregon eCourt Records (OECI)', url: 'https://www.courts.oregon.gov/courts/clackamas/records/pages/default.aspx', description: 'Statewide court records; Clackamas selectable.', confidence: 'high' },
