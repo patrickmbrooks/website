@@ -170,6 +170,137 @@ const COUNTY_SEEDS: CountySeed[] = [
   { name: 'Ada County', state: 'ID', label: 'Idaho iCourt Portal Smart Search', url: 'https://mycourts.idaho.gov/', description: 'Statewide court records; select Ada County.', confidence: 'high' },
   // Connecticut (no county government)
   { name: 'Hartford County', state: 'CT', label: 'CT Judicial Criminal/MV Case Look-up', url: 'https://www.jud.ct.gov/crim.htm', description: 'Statewide criminal/MV case lookup (no county govt).', confidence: 'high' },
+  { name: 'New Haven County', state: 'CT', label: 'CT Judicial Criminal/MV Case Look-up', url: 'https://www.jud.ct.gov/crim.htm', description: 'Statewide; shows bench warrants by name (no county govt).', confidence: 'high' },
+  { name: 'Fairfield County', state: 'CT', label: 'CT Judicial Criminal/MV Case Look-up', url: 'https://www.jud.ct.gov/crim.htm', description: 'Statewide; shows bench warrants by name (no county govt).', confidence: 'high' },
+
+  // --- Second/third counties & remaining states (2026-05 research pass 2) ---
+
+  // Georgia
+  { name: 'DeKalb County', state: 'GA', label: 'DeKalb County Active Warrant Search', url: 'https://spatial.dekalbcounty.org/warrants/welcome.asp', description: 'Active arrest warrants, updated nightly.', confidence: 'high' },
+  { name: 'Chatham County', state: 'GA', label: 'Chatham Superior Court Criminal Division', url: 'https://superiorcourtclerk.chathamcountyga.gov/Superior/CriminalDivision', description: 'Superior court criminal records, Savannah.', confidence: 'med' },
+  // Illinois
+  { name: 'Will County', state: 'IL', label: 'Will County Circuit Clerk Case Lookup', url: 'https://www.circuitclerkofwillcounty.com/Public-Access/Case-Lookup', description: 'Circuit court civil/criminal/traffic cases.', confidence: 'high' },
+  { name: 'Kane County', state: 'IL', label: 'Kane County Sheriff Warrants Division', url: 'https://www.kanesheriff.com/Pages/Civil-Warrants-Division.aspx', description: 'Warrant division info; no online search.', confidence: 'med' },
+  // Michigan
+  { name: 'Kent County', state: 'MI', label: 'Kent County Sheriff', url: 'https://www.accesskent.com/Sheriff/', description: 'Sheriff warrant lookup via Warrants tab.', confidence: 'med' },
+  { name: 'Genesee County', state: 'MI', label: 'Michigan MiCOURT Case Search', url: 'https://micourt.courts.michigan.gov/case-search/', description: 'Statewide court case search; select Genesee.', confidence: 'high' },
+  // New Jersey
+  { name: 'Hudson County', state: 'NJ', label: 'NJ Courts Criminal Public Access', url: 'https://portal.njcourts.gov/webe41/ExternalPGPA/CaptchaServlet', description: 'Statewide criminal search covers Hudson.', confidence: 'med' },
+  { name: 'Monmouth County', state: 'NJ', label: 'Monmouth County Sheriff Warrants', url: 'https://www.mcsonj.org/divisions/law-enforcement/200-2-2/', description: 'Active arrest warrant/fugitive section.', confidence: 'med' },
+  { name: 'Ocean County', state: 'NJ', label: 'Ocean County Sheriff', url: 'https://sheriff.co.ocean.nj.us/', description: 'Sheriff warrants; phone/in-person only.', confidence: 'med' },
+  // North Carolina
+  { name: 'Forsyth County', state: 'NC', label: 'Forsyth Sheriff P2C Wanted List', url: 'https://p2c.fcso.us/wantedlist.aspx', description: 'Online active arrest warrant/wanted list.', confidence: 'high' },
+  { name: 'Durham County', state: 'NC', label: 'NC eCourts Portal', url: 'https://portal.nccourts.gov/', description: 'Statewide portal covers Durham County.', confidence: 'high' },
+  // Pennsylvania
+  { name: 'Bucks County', state: 'PA', label: 'Bucks County Web Viewer Case Search', url: 'https://propublic.buckscountyonline.org/PSI/v/search/case', description: 'Civil/criminal/family court case search.', confidence: 'high' },
+  { name: 'Delaware County', state: 'PA', label: 'Delaware County Public Access Web Viewer', url: 'https://delcopublicaccess.co.delaware.pa.us/', description: 'Common Pleas civil/criminal dockets.', confidence: 'high' },
+  { name: 'Chester County', state: 'PA', label: 'PA UJS Web Portal', url: 'https://ujsportal.pacourts.us/casesearch', description: 'Statewide portal covers Chester County dockets.', confidence: 'med' },
+  // Ohio
+  { name: 'Summit County', state: 'OH', label: 'Summit County Clerk of Courts Search', url: 'https://clerkweb.summitoh.net/', description: 'Civil/criminal/domestic/appeals case search.', confidence: 'high' },
+  { name: 'Montgomery County', state: 'OH', label: 'Montgomery County Clerk PRO System', url: 'https://pro.mcohio.org/', description: 'Traffic/criminal/civil case records search.', confidence: 'high' },
+  { name: 'Lucas County', state: 'OH', label: 'Lucas County Clerk Online Dockets', url: 'https://www.co.lucas.oh.us/3707/Online-Dockets', description: 'Common Pleas case info/dockets.', confidence: 'high' },
+  // Arizona
+  { name: 'Pinal County', state: 'AZ', label: 'Pinal County Superior Court — Criminal', url: 'https://www.pinalcourtsaz.gov/196/Criminal-Cases', description: 'Superior court criminal cases; statewide lookup.', confidence: 'med' },
+  // Washington
+  { name: 'Snohomish County', state: 'WA', label: 'Snohomish County Access Court Records', url: 'https://www.snohomishcountywa.gov/5508/Access-Court-Records', description: 'Superior court records access info.', confidence: 'med' },
+  { name: 'Spokane County', state: 'WA', label: 'Spokane County Court Document Viewer', url: 'https://cp.spokanecounty.org/courtdocumentviewer/', description: 'Superior/district court case + warrant search.', confidence: 'high' },
+  // Massachusetts
+  { name: 'Worcester County', state: 'MA', label: 'MassCourts eAccess', url: 'https://www.masscourts.org/eservices/home.page', description: 'Statewide trial court dockets; select Worcester.', confidence: 'med' },
+  { name: 'Essex County', state: 'MA', label: 'MassCourts eAccess', url: 'https://www.masscourts.org/eservices/home.page', description: 'Statewide trial court dockets; select Essex.', confidence: 'med' },
+  // Virginia
+  { name: 'Prince William County', state: 'VA', label: 'Virginia Online Case Information', url: 'https://eapps.courts.state.va.us/ocis/landing/false', description: 'Statewide criminal/traffic case search.', confidence: 'high' },
+  { name: 'Loudoun County', state: 'VA', label: 'Virginia Online Case Information', url: 'https://eapps.courts.state.va.us/ocis/landing/false', description: 'Statewide criminal/traffic case search.', confidence: 'high' },
+  // Maryland
+  { name: 'Baltimore County', state: 'MD', label: 'Maryland Judiciary Case Search', url: 'https://casesearch.courts.state.md.us/casesearch', description: 'Circuit/district court records; select county.', confidence: 'high' },
+  { name: 'Anne Arundel County', state: 'MD', label: 'Maryland Judiciary Case Search', url: 'https://casesearch.courts.state.md.us/casesearch', description: 'Circuit/district court records; select county.', confidence: 'high' },
+  // Colorado
+  { name: 'Arapahoe County', state: 'CO', label: 'Colorado Judicial Docket Search', url: 'https://www.courts.state.co.us/Courts/County/Dockets.cfm?County_ID=57', description: 'Statewide judicial dockets; Arapahoe selectable.', confidence: 'high' },
+  { name: 'Jefferson County', state: 'CO', label: 'Jefferson County Sheriff Warrant Search', url: 'https://www.jeffco.us/615/Warrants', description: 'Searchable active warrants by name.', confidence: 'high' },
+  // Minnesota
+  { name: 'Dakota County', state: 'MN', label: 'Dakota County Sheriff Warrant Search', url: 'https://www.co.dakota.mn.us/LawJustice/Warrants/Search/Pages/default.aspx', description: 'Active warrant search by name/DOB.', confidence: 'high' },
+  { name: 'Anoka County', state: 'MN', label: 'Anoka County Online Warrant Search', url: 'https://www.anokacountymn.gov/3266/Online-Warrant-Search', description: 'Active district court warrants searchable.', confidence: 'high' },
+  // Wisconsin
+  { name: 'Waukesha County', state: 'WI', label: 'Wisconsin Circuit Court Access (WCCA)', url: 'https://wcca.wicourts.gov/', description: 'Statewide case search; Waukesha selectable.', confidence: 'high' },
+  { name: 'Brown County', state: 'WI', label: 'Brown County Sheriff Outstanding Warrants', url: 'https://www.brownso.org/warrants/', description: 'Outstanding warrant list by name.', confidence: 'high' },
+  // Indiana
+  { name: 'Allen County', state: 'IN', label: 'Indiana MyCase Court Search', url: 'https://public.courts.in.gov/mycase/', description: 'Statewide case search; sheriff has no online tool.', confidence: 'high' },
+  { name: 'Hamilton County', state: 'IN', label: 'Hamilton County Sheriff Open Warrants', url: 'https://www.hcsheriff.gov/cid/owio/', description: 'Open warrants by name/number/address (verify vs TN).', confidence: 'med' },
+  // Missouri
+  { name: 'St. Charles County', state: 'MO', label: 'Missouri Case.net', url: 'https://www.courts.mo.gov/casenet/base/welcome.do', description: 'Statewide case search; St. Charles selectable.', confidence: 'high' },
+  { name: 'Greene County', state: 'MO', label: 'Greene County Sheriff Warrants Division', url: 'https://greenecountymo.gov/sheriff/division/warrants_div.php', description: 'Warrants division info; also Case.net.', confidence: 'med' },
+  // Tennessee
+  { name: 'Knox County', state: 'TN', label: 'Knox County Sheriff Criminal Warrants', url: 'https://knoxsheriff.org/warrants/', description: 'Active criminal warrant info/search.', confidence: 'high' },
+  { name: 'Hamilton County', state: 'TN', label: 'Hamilton County Sheriff Open Warrants', url: 'https://www.hcsheriff.gov/', description: 'Open warrants searchable (verify domain vs IN).', confidence: 'med' },
+  { name: 'Rutherford County', state: 'TN', label: 'Rutherford County Sheriff Warrants', url: 'https://rcsotn.com/warrants-division', description: 'Warrant verification; no public online DB.', confidence: 'med' },
+  // Oregon
+  { name: 'Clackamas County', state: 'OR', label: 'Oregon eCourt Records (OECI)', url: 'https://www.courts.oregon.gov/courts/clackamas/records/pages/default.aspx', description: 'Statewide court records; Clackamas selectable.', confidence: 'high' },
+  { name: 'Lane County', state: 'OR', label: 'Oregon eCourt Records (OECI)', url: 'https://www.courts.oregon.gov/courts/lane/', description: 'Statewide OECI records; sheriff in-person only.', confidence: 'med' },
+  // Utah
+  { name: 'Davis County', state: 'UT', label: 'Utah Statewide Warrants Search (BCI)', url: 'https://bci.utah.gov/warrants/', description: 'Free statewide active warrant search.', confidence: 'med' },
+  { name: 'Weber County', state: 'UT', label: 'Utah Statewide Warrants Search (BCI)', url: 'https://bci.utah.gov/warrants/', description: 'Free statewide active warrant search.', confidence: 'med' },
+  // Oklahoma
+  { name: 'Cleveland County', state: 'OK', label: 'Cleveland County Sheriff Records', url: 'https://www.ccso-ok.us/233/Records', description: 'Warrant records; also OSCN court search.', confidence: 'med' },
+  // Kentucky
+  { name: 'Kenton County', state: 'KY', label: 'Kenton County Sheriff Current Warrants', url: 'https://www.kentoncountysheriff.org/205/Current-Warrants', description: 'Current warrant list.', confidence: 'high' },
+  { name: 'Boone County', state: 'KY', label: 'Kentucky Court of Justice — Boone County', url: 'https://www.kycourts.gov/Courts/County-Information/Pages/Boone.aspx', description: 'Court info; CourtNet statewide records.', confidence: 'med' },
+  // South Carolina
+  { name: 'Richland County', state: 'SC', label: 'SC Judicial Public Index — Richland', url: 'https://publicindex.sccourts.org/Richland/PublicIndex/PISearch.aspx', description: 'County case records search.', confidence: 'high' },
+  { name: 'Horry County', state: 'SC', label: 'SC Judicial Public Index — Horry', url: 'https://publicindex.sccourts.org/horry/publicindex/', description: 'County case records search.', confidence: 'high' },
+  // Alabama
+  { name: 'Madison County', state: 'AL', label: 'Madison Circuit Court Magistrate Warrants', url: 'https://madison.alacourt.gov/magistrates-warrants/', description: 'County circuit court warrant list page.', confidence: 'high' },
+  { name: 'Baldwin County', state: 'AL', label: 'Baldwin County Sheriff Warrants Division', url: 'https://sheriff.baldwincountyal.gov/divisions-details/warrantdetails', description: 'Sheriff warrant info; no public name search.', confidence: 'med' },
+  // Louisiana
+  { name: 'Jefferson Parish', state: 'LA', label: 'Jefferson Parish Sheriff (JPSO)', url: 'https://www.jpso.com/', description: 'Sheriff site; warrant search under public services.', confidence: 'med' },
+  { name: 'St. Tammany Parish', state: 'LA', label: 'St. Tammany Clerk Criminal Records', url: 'https://www.sttammanyclerk.org/departments/criminal/', description: 'Clerk criminal case records for the parish.', confidence: 'med' },
+  // Kansas
+  { name: 'Shawnee County', state: 'KS', label: 'Kansas District Court Case Search', url: 'https://casesearch.kscourts.gov/', description: 'Statewide portal; Shawnee selectable.', confidence: 'high' },
+  { name: 'Wyandotte County', state: 'KS', label: 'Kansas District Court Case Search', url: 'https://casesearch.kscourts.gov/', description: 'Statewide portal; Wyandotte selectable.', confidence: 'high' },
+  // Iowa
+  { name: 'Linn County', state: 'IA', label: 'Linn County Sheriff', url: 'https://www.linncountyiowa.gov/151/Sheriffs-Office', description: 'Sheriff office; also Iowa Courts Online.', confidence: 'med' },
+  { name: 'Scott County', state: 'IA', label: 'Scott County Sheriff Warrant Search', url: 'https://www.scottcountyiowa.gov/sheriff/warrants', description: 'Searchable active sheriff warrant database.', confidence: 'high' },
+  // Arkansas
+  { name: 'Benton County', state: 'AR', label: 'Benton County Sheriff Warrant Search', url: 'https://sheriff.bentoncountyar.gov/WarrantSearch/WarrantData.aspx', description: 'Searchable sheriff active warrant database.', confidence: 'high' },
+  { name: 'Washington County', state: 'AR', label: 'Washington County Sheriff Warrants', url: 'https://www.washcosoar.gov/res/Warrants.aspx', description: 'Searchable sheriff active warrant database.', confidence: 'high' },
+  // New Mexico
+  { name: 'Doña Ana County', state: 'NM', label: 'New Mexico Courts Case Lookup', url: 'https://caselookup.nmcourts.gov/caselookup/', description: 'Statewide portal; Doña Ana cases searchable.', confidence: 'high' },
+  { name: 'Santa Fe County', state: 'NM', label: 'New Mexico Courts Case Lookup', url: 'https://caselookup.nmcourts.gov/caselookup/', description: 'Statewide portal; Santa Fe cases searchable.', confidence: 'high' },
+  // Nebraska
+  { name: 'Lancaster County', state: 'NE', label: 'Lancaster County Sheriff Warrant List', url: 'https://www.lancaster.ne.gov/450/Warrant-List', description: 'County sheriff active warrant list.', confidence: 'high' },
+  { name: 'Sarpy County', state: 'NE', label: 'Sarpy County Sheriff Active Warrants', url: 'https://apps.sarpy.gov/warrants/', description: 'Searchable sheriff active warrant database.', confidence: 'high' },
+  // Idaho
+  { name: 'Canyon County', state: 'ID', label: 'Canyon County Sheriff Warrants Unit', url: 'https://www.canyoncounty.id.gov/elected-officials/sheriff/warrants-unit/', description: 'Sheriff warrant info page.', confidence: 'med' },
+  { name: 'Kootenai County', state: 'ID', label: 'Kootenai County Sheriff Active Warrants', url: 'https://www.kcsheriff.com/168/Active-Warrants', description: 'Sheriff active warrant lookup page.', confidence: 'high' },
+  // Nevada
+  { name: 'Carson City', state: 'NV', level: 'city', label: 'Carson City Sheriff Active Warrants', url: 'https://www.carsoncity.gov/government/departments-g-z/sheriff-s-office/crime-in-our-area', description: 'Sheriff active warrant report page.', confidence: 'med' },
+  // Alaska
+  { name: 'Anchorage Municipality', state: 'AK', label: 'Alaska CourtView (statewide)', url: 'https://records.courts.alaska.gov/eaccess/home.page.2', description: 'Statewide trial court cases; search by name/case.', confidence: 'high' },
+  // Delaware
+  { name: 'New Castle County', state: 'DE', label: 'Delaware Courts CourtConnect', url: 'https://courts.delaware.gov/docket.aspx', description: 'Statewide civil/criminal dockets; New Castle included.', confidence: 'med' },
+  // Hawaii
+  { name: 'Honolulu County', state: 'HI', label: 'Hawaii eCourt Kokua', url: 'https://www.courts.state.hi.us/legal_references/records/jims_system_availability', description: 'Statewide criminal/civil/traffic case info.', confidence: 'med' },
+  // Maine
+  { name: 'Cumberland County', state: 'ME', label: 'Maine re:SearchMaine eCourts', url: 'https://www.courts.maine.gov/ecourts/', description: 'Statewide e-filed cases; phased county rollout.', confidence: 'med' },
+  // Mississippi
+  { name: 'Hinds County', state: 'MS', label: 'Hinds County Sheriff', url: 'https://www.hindscountyms.com/elected-offices/sheriff', description: 'County sheriff warrant/arrest info.', confidence: 'med' },
+  { name: 'Harrison County', state: 'MS', label: 'Harrison County Sheriff', url: 'https://www.harrisoncountysheriff.com/', description: 'County sheriff inmate/warrant info.', confidence: 'med' },
+  // Montana
+  { name: 'Yellowstone County', state: 'MT', label: 'Yellowstone Justice Court Record Search', url: 'https://www.yellowstonecountymt.gov/justicecourt/JCRecordSearch.asp', description: 'County justice court case records.', confidence: 'high' },
+  // North Dakota
+  { name: 'Cass County', state: 'ND', label: 'North Dakota Courts Public Search', url: 'https://publicsearch.ndcourts.gov/', description: 'Statewide criminal/civil/traffic cases; select Cass.', confidence: 'high' },
+  // New Hampshire
+  { name: 'Hillsborough County', state: 'NH', label: 'NH Judiciary Case Access Portal', url: 'https://odypa.nhecourt.us/portal', description: 'Statewide e-filed case records.', confidence: 'med' },
+  // Rhode Island
+  { name: 'Providence County', state: 'RI', label: 'RI Judiciary Public Portal Smart Search', url: 'https://publicportal.courts.ri.gov/PublicPortal/', description: 'Statewide cases incl. bench warrants.', confidence: 'high' },
+  // South Dakota
+  { name: 'Minnehaha County', state: 'SD', label: 'South Dakota UJS Records Search', url: 'https://ujs.sd.gov/cases-and-records/court-records-search/', description: 'Statewide court records; eCourts/PARS access.', confidence: 'med' },
+  // Vermont
+  { name: 'Chittenden County', state: 'VT', label: 'Vermont Judiciary Public Portal', url: 'https://portal.vtcourts.gov/Portal/Home/Dashboard/29', description: 'Statewide case/hearing records.', confidence: 'high' },
+  // West Virginia
+  { name: 'Kanawha County', state: 'WV', label: 'Kanawha County Sheriff Warrants', url: 'https://www.kanawhasheriff.us/law-enforcement/warrants/', description: 'County sheriff active warrants by patrol area.', confidence: 'high' },
+  { name: 'Berkeley County', state: 'WV', label: 'WV Magistrate Case Record Search', url: 'https://mcrsearch.courtswv.gov/', description: 'Statewide magistrate court records, all 55 counties.', confidence: 'high' },
+  // Wyoming
+  { name: 'Laramie County', state: 'WY', label: 'Wyoming Judicial Branch Case Search', url: 'https://efiling.courts.state.wy.us/public/caseSearch.do', description: 'Statewide court case search.', confidence: 'med' },
+  { name: 'Natrona County', state: 'WY', label: 'Natrona County Sheriff Warrants Search', url: 'https://warrants.natronacounty-wy.gov/', description: 'County warrants, 7th Judicial District/Circuit.', confidence: 'high' },
 ];
 
 function slug(s: string): string {
