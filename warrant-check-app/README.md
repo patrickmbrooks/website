@@ -13,32 +13,45 @@ Targets the **iOS App Store** and **Google Play** from one codebase.
 
 ## Run it
 
+`react-native-purchases` requires a native build — **Expo Go will not work** once
+subscriptions are wired. Use a custom dev client (already added as a dep):
+
 ```bash
 cd warrant-check-app
 npm install
-npm start        # then press i (iOS sim), a (Android), or w (web)
+npx expo prebuild            # generates ios/ and android/ (first run only)
+npx expo run:ios             # or run:android — builds + boots the dev client
 npm run typecheck
 ```
 
-## Status: foundation / scaffold
+Before subscriptions work you need RevenueCat keys — see step 1 below. Until they
+are set the paywall runs in "DEV MODE" with placeholder plans.
 
-This is a working, navigable foundation. Three things are **stubbed** and must be
-wired up before launch:
+## Status: foundation + real subscriptions, provider still stubbed
 
-1. **Subscriptions** — `src/services/subscriptions.ts` is an in-memory stub.
-   Replace with [RevenueCat](https://www.revenuecat.com/) (`react-native-purchases`).
-   Apple requires StoreKit IAP for digital subscriptions.
+1. **Subscriptions (RevenueCat)** — `src/services/subscriptions.ts` wraps
+   `react-native-purchases` (Apple requires StoreKit IAP for digital subs; Play
+   handles Android). To activate:
+   1. Create a RevenueCat project, add your App Store / Play Store products, and
+      define an entitlement with identifier **`pro`**.
+   2. Copy the **public SDK keys** (one iOS, one Android) into
+      `app.json → expo.extra.revenuecatApiKeyIos` / `revenuecatApiKeyAndroid`,
+      OR set `EXPO_PUBLIC_REVENUECAT_API_KEY_IOS` / `_ANDROID` at build time.
+   3. Rebuild the dev client (`npx expo run:ios` / `run:android`).
+   Plans, prices, and periods are pulled from your current RevenueCat Offering
+   — do not hardcode prices.
 2. **Background-check provider** — `src/services/backgroundCheck.ts` returns mock
    data. Wire it to a **secure backend** that calls an FCRA-compliant Consumer
    Reporting Agency (Checkr, Sterling, Accurate). Never put provider keys in the
    client.
 3. **Jurisdiction URLs** — all 50 states + DC have a researched official
-   resource (`src/data/curatedResources.ts`), plus ~30 of the largest counties
-   (`src/data/counties.ts`). Each resource carries a `confidence` level; the UI
-   shows a **VERIFY** badge on anything below `high`. Most states have no public
-   "active warrant" search — warrants appear within court dockets or county
-   sheriff lists, which is reflected in each description. Re-confirm URLs
-   periodically (last research pass: 2026-05); government portals move.
+   resource (`src/data/curatedResources.ts`), plus ~210 counties across every
+   state (`src/data/counties.ts`) and a Federal category (U.S. Marshals, FBI,
+   PACER — `src/data/federal.ts`). Each resource carries a `confidence` level;
+   the UI shows a **VERIFY** badge on anything below `high`. Most states have
+   no public "active warrant" search — warrants appear within court dockets or
+   county sheriff lists, which is reflected in each description. Re-confirm
+   URLs periodically (last research pass: 2026-05); government portals move.
 
 ## ⚠️ Legal (needs attorney review)
 
