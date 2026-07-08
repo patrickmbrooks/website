@@ -148,6 +148,16 @@ export async function purchase(plan: SubscriptionPlan): Promise<EntitlementStatu
   }
 }
 
+/** Stable id for this app user, used as the requesterId in backend calls. */
+export async function getRequesterId(): Promise<string> {
+  if (!isConfigured()) return 'anonymous';
+  try {
+    return await Purchases.getAppUserID();
+  } catch {
+    return 'anonymous';
+  }
+}
+
 export async function restorePurchases(): Promise<EntitlementStatus> {
   if (!isConfigured()) return currentStatus;
   try {

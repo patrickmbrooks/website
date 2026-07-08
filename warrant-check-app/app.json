@@ -19,7 +19,9 @@
     "plugins": ["expo-web-browser"],
     "extra": {
       "revenuecatApiKeyIos": "",
-      "revenuecatApiKeyAndroid": ""
+      "revenuecatApiKeyAndroid": "",
+      "backendUrl": "",
+      "backendApiKey": ""
     }
   }
 }

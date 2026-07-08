@@ -27,7 +27,7 @@ npm run typecheck
 Before subscriptions work you need RevenueCat keys — see step 1 below. Until they
 are set the paywall runs in "DEV MODE" with placeholder plans.
 
-## Status: foundation + real subscriptions, provider still stubbed
+## Status: subscriptions + backend wired, jurisdiction URLs to verify
 
 1. **Subscriptions (RevenueCat)** — `src/services/subscriptions.ts` wraps
    `react-native-purchases` (Apple requires StoreKit IAP for digital subs; Play
@@ -40,10 +40,15 @@ are set the paywall runs in "DEV MODE" with placeholder plans.
    3. Rebuild the dev client (`npx expo run:ios` / `run:android`).
    Plans, prices, and periods are pulled from your current RevenueCat Offering
    — do not hardcode prices.
-2. **Background-check provider** — `src/services/backgroundCheck.ts` returns mock
-   data. Wire it to a **secure backend** that calls an FCRA-compliant Consumer
-   Reporting Agency (Checkr, Sterling, Accurate). Never put provider keys in the
-   client.
+2. **Background-check backend** — `src/services/backgroundCheck.ts` calls the
+   Fastify proxy in `backend/` (see `backend/README.md`). The proxy authenticates
+   requests, verifies the `pro` entitlement, records FCRA consent, and forwards
+   to a CRA driver (mock by default; Checkr driver included). To activate:
+   1. Deploy the backend and set `CRA_PROVIDER=checkr` with your Checkr keys.
+   2. Set `backendUrl` and `backendApiKey` in `app.json → expo.extra`, OR
+      `EXPO_PUBLIC_BACKEND_URL` / `EXPO_PUBLIC_BACKEND_API_KEY` at build time.
+   3. Rebuild the dev client.
+   Until then the app runs a local mock so the flow stays testable.
 3. **Jurisdiction URLs** — all 50 states + DC have a researched official
    resource (`src/data/curatedResources.ts`), plus ~210 counties across every
    state (`src/data/counties.ts`) and a Federal category (U.S. Marshals, FBI,
