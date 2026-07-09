@@ -16,7 +16,7 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-web-browser"],
+    "plugins": [],
     "extra": {
       "revenuecatApiKeyIos": "",
       "revenuecatApiKeyAndroid": "",

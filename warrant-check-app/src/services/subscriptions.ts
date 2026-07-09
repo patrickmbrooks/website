@@ -1,4 +1,4 @@
-import Purchases, {
+import type {
   CustomerInfo,
   PurchasesOffering,
   PurchasesPackage,
@@ -10,6 +10,24 @@ import {
   getPlatformKey,
   isConfigured,
 } from '../config/revenuecat';
+
+type PurchasesModule = typeof import('react-native-purchases').default;
+
+let purchasesModule: PurchasesModule | null = null;
+
+/**
+ * Lazy-load react-native-purchases only when API keys are configured. The
+ * native module doesn't exist in Expo Go or web builds, so importing it
+ * eagerly would crash those environments — and dev mode never needs it.
+ */
+function getPurchases(): PurchasesModule | null {
+  if (!isConfigured()) return null;
+  if (!purchasesModule) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    purchasesModule = (require('react-native-purchases') as { default: PurchasesModule }).default;
+  }
+  return purchasesModule;
+}
 
 export type EntitlementStatus = 'free' | 'subscribed';
 
@@ -70,7 +88,8 @@ function updateStatus(info: CustomerInfo | null | undefined): void {
 
 /** Call once at app start. Safe to call before keys are configured. */
 export async function configureSubscriptions(): Promise<void> {
-  if (configured || !isConfigured()) return;
+  const Purchases = getPurchases();
+  if (configured || !Purchases) return;
   Purchases.configure({ apiKey: getPlatformKey() });
   Purchases.addCustomerInfoUpdateListener(updateStatus);
   try {
@@ -115,7 +134,8 @@ function packageToPlan(pkg: PurchasesPackage): SubscriptionPlan {
 }
 
 export async function getPlans(): Promise<SubscriptionPlan[]> {
-  if (!isConfigured()) return FALLBACK_PLANS;
+  const Purchases = getPurchases();
+  if (!Purchases) return FALLBACK_PLANS;
   try {
     const offerings = await Purchases.getOfferings();
     const offering: PurchasesOffering | null =
@@ -129,7 +149,8 @@ export async function getPlans(): Promise<SubscriptionPlan[]> {
 }
 
 export async function purchase(plan: SubscriptionPlan): Promise<EntitlementStatus> {
-  if (!plan.pkg) {
+  const Purchases = getPurchases();
+  if (!plan.pkg || !Purchases) {
     throw new Error(
       'Subscriptions are not configured yet. Add your RevenueCat API key in app.json to enable purchases.',
     );
@@ -150,7 +171,8 @@ export async function purchase(plan: SubscriptionPlan): Promise<EntitlementStatu
 
 /** Stable id for this app user, used as the requesterId in backend calls. */
 export async function getRequesterId(): Promise<string> {
-  if (!isConfigured()) return 'anonymous';
+  const Purchases = getPurchases();
+  if (!Purchases) return 'anonymous';
   try {
     return await Purchases.getAppUserID();
   } catch {
@@ -159,7 +181,8 @@ export async function getRequesterId(): Promise<string> {
 }
 
 export async function restorePurchases(): Promise<EntitlementStatus> {
-  if (!isConfigured()) return currentStatus;
+  const Purchases = getPurchases();
+  if (!Purchases) return currentStatus;
   try {
     const info = await Purchases.restorePurchases();
     updateStatus(info);

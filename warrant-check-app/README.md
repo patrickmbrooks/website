@@ -11,10 +11,22 @@ Targets the **iOS App Store** and **Google Play** from one codebase.
 - **Paid — Background Checks:** subscription paywall gating an FCRA-compliant
   background-check flow (disclosure + written-consent gate → run report).
 
-## Run it
+## Try it (no store account needed)
 
-`react-native-purchases` requires a native build — **Expo Go will not work** once
-subscriptions are wired. Use a custom dev client (already added as a dep):
+`react-native-purchases` is **lazy-loaded** — it is only required once RevenueCat
+keys are set. Until then the app runs everywhere in dev mode (mock paywall, mock
+background checks, full free directory):
+
+- **Browser:** `npx expo start` then press `w`. Or export a static build with
+  `npx expo export --platform web` (output in `dist/`).
+- **Your phone (closest to the real experience):** install **Expo Go** from the
+  App Store / Play Store, run `npx expo start --tunnel` on your computer, and
+  scan the QR code.
+
+## Run it (full native, once RevenueCat keys are set)
+
+Real in-app purchases need a native build — Expo Go can't load the StoreKit /
+Play Billing module. Use a custom dev client (already added as a dep):
 
 ```bash
 cd warrant-check-app
