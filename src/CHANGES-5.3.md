@@ -262,3 +262,63 @@ pruned automatically.
 **Immediate mitigation if a build ever misbehaves again:** Customizer →
 Brooks Law Firm → Performance → untick *Minify theme CSS & JS*. The original
 stylesheets are served and the site is restored without touching any files.
+
+---
+
+# 5.3.2 — Yoast schema collision
+
+Checking the export showed **Yoast SEO is live** (173 posts carry
+`_yoast_wpseo_title` and `_yoast_wpseo_metadesc`). That matters, because Yoast
+emits its own `@graph`, and its entity IDs are:
+
+```
+{home}/#website          WebSite
+{permalink}#webpage      WebPage
+{permalink}#breadcrumb   BreadcrumbList
+```
+
+The theme was publishing `{home}/#website` and `{permalink}#webpage` — **the same
+two @ids, with different node content, on every page**. Two nodes sharing one
+@id is exactly the ambiguity a knowledge graph cannot resolve, and it is the
+failure this file's own docblock claimed to avoid. It claimed it in prose and
+never checked. Same shape as the XML-RPC gap.
+
+`brooks_law_schema_engine_active()` now detects Yoast, Rank Math, AIOSEO and
+SEOPress at runtime. When one is present the theme emits only what that engine
+does not — the firm as a `LegalService`/`Attorney` with its hours, service area
+and practice catalogue, plus its attorneys as `Person` entities. `WebSite`,
+`WebPage` and `BreadcrumbList` are left to the engine that already writes them.
+
+Verified both ways:
+
+| | No SEO plugin | Yoast active |
+|---|---|---|
+| `#firm` (LegalService) | emitted | emitted |
+| `#attorney-*` (Person) | emitted | emitted |
+| `#website` | emitted | **stands down** |
+| `#webpage` | emitted | **stands down** |
+| `#breadcrumbs` | emitted | **stands down** |
+| collides with a Yoast @id | — | **no** |
+
+Present in 5.2.3 and live on the site now; not a regression introduced by this
+work.
+
+## Ownership map (verified, not assumed)
+
+Zero function-name collisions between theme 5.3.2 (207 functions) and the
+installed Docket Suite 5.2.2 (104). The only cross-call is `brooks_ess_get()`,
+which exists in 5.2.2 and is `function_exists`-guarded.
+
+| Concern | Owner |
+|---|---|
+| `<title>`, meta description | **Yoast** |
+| Canonical, Open Graph, Twitter | **Yoast** |
+| XML sitemap | **Yoast** |
+| robots.txt | **Docket Suite** |
+| /llms.txt | **Docket Suite** |
+| 301 redirects, 404 log | **Docket Suite** |
+| JSON-LD firm + attorney entities | **Theme** |
+| JSON-LD WebSite / WebPage / Breadcrumbs | **Yoast** (theme stands down) |
+
+Uploading the theme alone therefore changes the structured-data layer and
+nothing else.
