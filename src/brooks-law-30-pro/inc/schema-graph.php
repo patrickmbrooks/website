@@ -20,10 +20,18 @@
  * Nothing here is hardcoded per firm: editing the office hours changes both
  * the page and the structured data, and there is no third copy to drift.
  *
- * Complements rather than duplicates an SEO plugin: this graph describes the
- * ENTITIES; titles, meta descriptions and Open Graph belong to Yoast, Rank
- * Math, or Docket Suite's SEO half. Docket Suite deliberately ships no JSON-LD
- * for exactly this reason.
+ * Complements rather than duplicates an SEO plugin — and, since 5.3.2, checks
+ * rather than assumes. Yoast, Rank Math and AIOSEO all emit their own @graph
+ * containing WebSite, WebPage and BreadcrumbList nodes, and Yoast's use
+ * `{home}/#website` and `{permalink}#webpage` — byte-identical to the @ids this
+ * file used. Two different nodes sharing one @id is precisely the entity
+ * ambiguity a knowledge graph cannot resolve.
+ *
+ * So when another engine is handling page-level markup, this file emits only
+ * what that engine does NOT: the firm as a LegalService with its hours,
+ * service area and practice catalogue, and its attorneys as Person entities.
+ * Titles, meta descriptions, canonicals and Open Graph were never this file's
+ * job. Docket Suite's own SEO half ships no JSON-LD for the same reason.
  *
  * Toggle: Customizer → Brooks Law Firm → SEO & Schema.
  *
@@ -519,6 +527,33 @@ function brooks_law_graph_breadcrumbs() {
 }
 
 /**
+ * Is another SEO plugin already emitting page-level structured data?
+ *
+ * Asked at runtime, because the alternative is asserting it in a comment and
+ * being wrong — which is how this theme ended up publishing a second WebSite
+ * node at Yoast's exact @id on every page of a live site.
+ *
+ * @since 5.3.2
+ *
+ * @return bool
+ */
+function brooks_law_schema_engine_active() {
+	$active = defined( 'WPSEO_VERSION' )
+		|| defined( 'RANK_MATH_VERSION' )
+		|| defined( 'AIOSEO_VERSION' )
+		|| defined( 'SEOPRESS_VERSION' );
+
+	/**
+	 * Filter whether another engine owns page-level schema.
+	 *
+	 * @since 5.3.2
+	 *
+	 * @param bool $active Detected state.
+	 */
+	return (bool) apply_filters( 'brooks_law_schema_engine_active', $active );
+}
+
+/**
  * Assemble and print the graph.
  */
 function brooks_law_output_graph() {
@@ -538,16 +573,25 @@ function brooks_law_output_graph() {
 		$graph[] = $person;
 	}
 
-	$graph[] = brooks_law_graph_website( $ids );
+	/*
+	 * WebSite, WebPage and BreadcrumbList are page-level markup. When Yoast,
+	 * Rank Math or AIOSEO is active it already emits all three — at the same
+	 * @ids in Yoast's case — so this file contributes only the entities that
+	 * are genuinely its own. The firm and its attorneys are described either
+	 * way, which is the part no SEO plugin knows how to write.
+	 */
+	if ( ! brooks_law_schema_engine_active() ) {
+		$graph[] = brooks_law_graph_website( $ids );
 
-	$webpage = brooks_law_graph_webpage( $ids );
-	if ( $webpage ) {
-		$graph[] = $webpage;
-	}
+		$webpage = brooks_law_graph_webpage( $ids );
+		if ( $webpage ) {
+			$graph[] = $webpage;
+		}
 
-	$crumbs = brooks_law_graph_breadcrumbs();
-	if ( $crumbs ) {
-		$graph[] = $crumbs;
+		$crumbs = brooks_law_graph_breadcrumbs();
+		if ( $crumbs ) {
+			$graph[] = $crumbs;
+		}
 	}
 
 	/**
