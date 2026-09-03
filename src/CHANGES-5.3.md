@@ -369,3 +369,53 @@ active one deliberately *not* the richest:
 
 **No action needed if the photos have already been re-set by hand** — this is
 insurance for the next theme change, not a fix to re-apply.
+
+---
+
+# Docket Suite 5.2.4 — search-engine verification tags
+
+Yoast has been removed from the site in favour of Docket Suite's own SEO half.
+That lost the one place a Bing or Google verification code could be entered
+without touching the filesystem — Docket Suite had no such field (verified: zero
+matches for any verification setting in the codebase).
+
+`includes/verification.php` adds one: Bing, Google Search Console, Yandex and
+Pinterest, entered under **Settings → Site Essentials → Search-engine
+verification**, printed as meta tags in the head.
+
+Two decisions worth recording.
+
+**It does not stand down for other SEO plugins.** `seo.php` correctly stands
+down when Yoast or Rank Math is active, because titles and canonicals genuinely
+conflict. Verification tags do not — a duplicate is redundant but harmless, and
+an empty field emits nothing. Standing down here would mean losing verification
+the moment another plugin is switched off, which is precisely how this site lost
+its Bing field in the first place.
+
+**The field accepts the whole `<meta>` tag, not just the token.** Every one of
+these services displays the complete tag on screen, so the complete tag is what
+gets pasted. Accepting both is two lines and removes the most likely way this
+setting gets entered wrong — a field silently holding markup and emitting a tag
+inside a tag. Verified against eight paste shapes including single-quoted
+attributes, smart quotes, and an embedded `<script>`:
+
+```
+whole Bing tag        -> A1B2C3D4E5F6A1B2C3D4E5F6
+single-quoted attr    -> TOKEN123
+smart-quote paste     -> A1B2C3D4
+script injection try  -> x
+empty                 -> (emits nothing)
+```
+
+## Related: the Yoast meta migration has not been run
+
+`seo.php` reads Yoast's own meta keys at render time when its fields are empty
+(lines 143, 159, 182), so the 173 hand-written titles and meta descriptions kept
+working when Yoast was deactivated. That fallback holds only while Yoast's post
+meta remains in the database — **deactivating Yoast preserves it, deleting Yoast
+removes it.**
+
+The one-shot migration on the Docket SEO settings screen copies those values
+into `_docket_seo_*` keys. It never overwrites an existing value, skips Yoast
+template patterns such as `%%title%%`, and writes a per-post backup so a single
+Undo restores the previous state. It should be run before Yoast is deleted.

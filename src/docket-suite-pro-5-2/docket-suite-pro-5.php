@@ -3,7 +3,7 @@
  * Plugin Name:       Docket Suite Pro 5
  * Plugin URI:        https://patrickbrookslaw.com/
  * Description:       All-in-one site operations + SEO for law firm sites. Operational half (fallback 301 redirects with a cleaned rule set plus an early exact-match pass, 404 log, managed robots.txt, editable /llms.txt, upload-time image optimization, Super Page Cache disk-cache watchdog, firm-info shortcodes, hardening) runs always. SEO half (per-page titles/meta, canonical, OG/Twitter, XML sitemap, attachment 301s) stands down automatically when Yoast, Rank Math or AIOSEO is active. Part of the Docket suite.
- * Version:           5.2.3
+ * Version:           5.2.4
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Patrick Brooks
@@ -119,7 +119,7 @@ if ( docket_suite_boot_conflicts() ) {
 	return;
 }
 
-define( 'DOCKET_SUITE_VERSION', '5.2.3' );
+define( 'DOCKET_SUITE_VERSION', '5.2.4' );
 
 /*
  * ---------------------------------------------------------------------------

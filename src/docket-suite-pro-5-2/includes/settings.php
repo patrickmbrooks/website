@@ -87,6 +87,13 @@ function brooks_ess_sanitize( $input ) {
 		? sanitize_email( $input['firm_email'] )
 		: $defaults['firm_email'];
 
+	// Site verification. docket_verify_sanitize() accepts either the bare
+	// token or the whole <meta> tag, because the whole tag is what every one
+	// of these services actually shows you on screen.
+	foreach ( array_keys( docket_verify_services() ) as $key ) {
+		$clean[ $key ] = isset( $input[ $key ] ) ? docket_verify_sanitize( $input[ $key ] ) : '';
+	}
+
 	return $clean;
 }
 
@@ -431,6 +438,27 @@ function brooks_ess_render_page() {
 			brooks_ess_checkbox( 'disable_file_edit', __( 'Block the built-in theme and plugin file editors', 'docket-suite' ), __( 'You can still edit files over SFTP.', 'docket-suite' ) );
 			brooks_ess_checkbox( 'disable_xmlrpc', __( 'Turn off XML-RPC', 'docket-suite' ), __( 'Reduces brute-force surface. Leave off if you use the WordPress mobile app or Jetpack.', 'docket-suite' ) );
 			?>
+
+			<hr>
+
+			<h2><?php esc_html_e( 'Search-engine verification', 'docket-suite' ); ?></h2>
+			<p class="description" style="max-width:44em">
+				<?php esc_html_e( 'Each of these services will offer you a file to upload to the web root, a DNS record, or a meta tag. Paste the meta tag here and you never have to put a file in the web root or remember what is in a DNS panel. You can paste the whole tag or just the code inside it — both work.', 'docket-suite' ); ?>
+			</p>
+			<table class="form-table" role="presentation">
+				<?php
+				foreach ( docket_verify_services() as $verify_key => $verify_service ) {
+					brooks_ess_text( $verify_key, $verify_service[0] );
+					printf(
+						'<tr><td colspan="2" style="padding-top:0"><p class="description" style="margin-left:0">%s</p></td></tr>',
+						esc_html( $verify_service[2] )
+					);
+				}
+				?>
+			</table>
+			<p class="description" style="max-width:44em">
+				<?php esc_html_e( 'These tags are printed on every page and stay in place whether or not any other SEO plugin is active — which is the point: a verification that disappears when a plugin is switched off is a verification you will lose without noticing.', 'docket-suite' ); ?>
+			</p>
 
 			<hr>
 

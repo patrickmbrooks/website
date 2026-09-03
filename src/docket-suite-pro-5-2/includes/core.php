@@ -56,6 +56,12 @@ function brooks_ess_defaults() {
 		'firm_city_state'     => 'Memphis, Tennessee 38104',
 		'firm_hours'          => 'Monday – Friday, 8:00 a.m. – 5:30 p.m.',
 
+		// Search-engine site verification (meta-tag method).
+		'verify_bing'         => '',
+		'verify_google'       => '',
+		'verify_yandex'       => '',
+		'verify_pinterest'    => '',
+
 		// Housekeeping.
 		'delete_on_uninstall' => false,
 	);
@@ -137,6 +143,7 @@ require_once BROOKS_ESS_DIR . 'includes/redirects.php';
 require_once BROOKS_ESS_DIR . 'includes/early-redirects.php';
 require_once BROOKS_ESS_DIR . 'includes/shortcodes.php';
 require_once BROOKS_ESS_DIR . 'includes/crawlers.php';
+require_once BROOKS_ESS_DIR . 'includes/verification.php';
 require_once BROOKS_ESS_DIR . 'includes/cleanup.php';
 require_once BROOKS_ESS_DIR . 'includes/baked-rules.php';
 require_once BROOKS_ESS_DIR . 'includes/llms-auto.php';
