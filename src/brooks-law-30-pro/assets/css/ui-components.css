@@ -1,0 +1,144 @@
+/*!
+ * Brooks Law — UI components (v4.12)
+ *
+ * Four patterns borrowed from the federal design system that this theme did
+ * not have: a numbered process list, a callout box, post navigation, and a
+ * return-to-top control.
+ *
+ * Colours reuse the theme's own custom properties where they exist and fall
+ * back to literals only when a property is not defined, so these components
+ * follow the Design Studio settings rather than introducing a third palette.
+ */
+
+/* --------------------------------------------------------------
+   Numbered process list — the "1 / 2 / 3" pattern used on VA.gov
+   for sequential tasks. Block style on a List or Group block.
+----------------------------------------------------------------- */
+.is-style-brooks-steps { counter-reset: blfstep; list-style: none; padding-left: 0; margin-block: 1.6rem; }
+.is-style-brooks-steps > li {
+  counter-increment: blfstep;
+  position: relative;
+  padding: 0 0 1.5rem 3.35rem;
+  margin: 0;
+}
+.is-style-brooks-steps > li::before {
+  content: counter(blfstep);
+  position: absolute;
+  left: 0;
+  top: -.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--navy, #14213d);
+  color: var(--u-cream-plate);
+  font-family: var(--sans, system-ui), sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 2.1rem;
+  text-align: center;
+}
+/* Connector rail between steps, so the sequence reads as one thread. */
+.is-style-brooks-steps > li::after {
+  content: "";
+  position: absolute;
+  left: 1.03rem;
+  top: 2.35rem;
+  bottom: .35rem;
+  width: 2px;
+  background: var(--rule, #d7d2c6);
+}
+.is-style-brooks-steps > li:last-child { padding-bottom: 0; }
+.is-style-brooks-steps > li:last-child::after { display: none; }
+.is-style-brooks-steps > li > strong:first-child,
+.is-style-brooks-steps > li > b:first-child { display: block; margin-bottom: .15rem; }
+
+/* On the editorial ground the numerals go brick, the rail umber. */
+.blf-atmos .is-style-brooks-steps > li::before,
+.blfE .is-style-brooks-steps > li::before { background: var(--u-brick); }
+.blf-atmos .is-style-brooks-steps > li::after { background: #d8cfbe; }
+
+/* --------------------------------------------------------------
+   Callout — a bordered notice for a deadline or statutory warning.
+   Block style on a Paragraph or Group.
+----------------------------------------------------------------- */
+.is-style-brooks-callout {
+  border-left: 4px solid var(--oxblood, #7b2d26);
+  background: var(--limestone, #f4f1ea);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.15rem;
+  margin-block: 1.6rem;
+}
+.is-style-brooks-callout > :where(h2, h3, h4) { margin-top: 0; font-size: 1.05rem; }
+.is-style-brooks-callout > :last-child { margin-bottom: 0; }
+.is-style-brooks-callout.is-urgent { border-left-color: var(--u-brick); background: #fbf1ec; }
+.is-style-brooks-callout .brooks-meta,
+.is-style-brooks-callout > .brooks-meta:first-child,
+p.is-style-brooks-callout > .brooks-meta {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--oxblood, #7b2d26);
+  margin: 0 0 .3rem;
+}
+.blf-atmos .is-style-brooks-callout,
+.blfE .is-style-brooks-callout { background: #efe8da; border-left-color: var(--u-brick); }
+
+/* --------------------------------------------------------------
+   Post navigation — previous / next, so every post carries two
+   contextual internal links.
+----------------------------------------------------------------- */
+.blf-postnav { margin: 2.6rem 0 0; padding-top: 1.6rem; border-top: 1px solid var(--rule, #d7d2c6); }
+.blf-postnav ul { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; list-style: none; margin: 0; padding: 0; }
+.blf-postnav li { margin: 0; min-width: 0; }
+.blf-postnav .blf-postnav-next { text-align: right; }
+.blf-postnav .blf-postnav-label {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--oxblood, #7b2d26);
+  margin-bottom: .3rem;
+}
+.blf-postnav a { font-weight: 600; text-decoration: none; color: var(--ink, #222933); }
+.blf-postnav a:hover, .blf-postnav a:focus-visible { text-decoration: underline; }
+@media (max-width: 640px) {
+  .blf-postnav ul { grid-template-columns: 1fr; }
+  .blf-postnav .blf-postnav-next { text-align: left; }
+}
+
+/* --------------------------------------------------------------
+   Return to top
+----------------------------------------------------------------- */
+.blf-backtotop {
+  position: fixed;
+  right: clamp(.8rem, 3vw, 1.5rem);
+  bottom: clamp(.8rem, 3vw, 1.5rem);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .6rem .9rem;
+  border: 1px solid var(--rule, #d7d2c6);
+  border-radius: 999px;
+  background: var(--u-cream-plate);
+  color: var(--ink, #222933);
+  font-size: .8rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 26px -14px rgba(20, 24, 33, .45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.blf-backtotop.is-visible { opacity: 1; visibility: visible; transform: none; }
+.blf-backtotop:hover, .blf-backtotop:focus-visible { border-color: var(--navy, #14213d); }
+.blf-backtotop svg { width: 1em; height: 1em; }
+/* Never cover the sticky contact bar on small screens. */
+@media (max-width: 782px) { .blf-backtotop { bottom: 4.6rem; } }
+@media (prefers-reduced-motion: reduce) { .blf-backtotop { transition: none; } }

@@ -1,0 +1,166 @@
+/*!
+ * Brooks Law — Attorney profile layout (.pb-*)
+ *
+ * Lifted out of post content in v4.4. Both profile pages carried a
+ * near-identical ~8KB copy; the only real difference was the pull-quote
+ * measure (26ch on Patrick, 30ch on Beth), now a variable that either page
+ * can override. Every selector is prefixed .pb-, so nothing leaks.
+ *
+ * The Beth page's own comment asked for exactly this: "move this block into
+ * the theme once and delete it here."
+ */
+
+
+/* ============================================================
+   Brooks Law Firm — attorney profile
+   Variables are declared on every .pb-sec so each section is
+   self-contained and depends on no shared parent wrapper.
+   Every selector is prefixed, so nothing leaks into the theme.
+   ============================================================ */
+.pb-sec{
+  --pb-paper:#faf8f4;
+  --pb-panel:#f2eee6;
+  --pb-navy:#1d2a38;
+  --pb-accent:#8a3a30;
+  --pb-ink:#22201c;
+  --pb-body:#403d37;
+  --pb-faint:#6f6a61;
+  --pb-rule:rgba(34,32,28,.16);
+  --pb-pad:clamp(20px,5vw,56px);
+
+  background:var(--pb-paper);
+  color:var(--pb-ink);
+  font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+  font-size:17px;
+  line-height:1.7;
+  padding:clamp(34px,6vw,60px) var(--pb-pad);
+  margin:0;
+  -webkit-text-size-adjust:100%;
+}
+.pb-sec *{box-sizing:border-box}
+.pb-sec img{max-width:100%;height:auto;display:block}
+.pb-sec a{color:var(--pb-accent)}
+.pb-sec a:focus-visible{outline:3px solid var(--pb-accent);outline-offset:3px}
+.pb-sec h1,.pb-sec h2,.pb-sec h3{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-weight:700;letter-spacing:.02em;line-height:1.15;margin:0;
+}
+.pb-sec--panel{background:var(--pb-panel)}
+.pb-wrap{max-width:1080px;margin:0 auto}
+.pb-eyebrow{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--pb-accent);margin:0 0 10px;
+}
+.pb-sec h2{font-size:clamp(24px,4vw,34px);margin-bottom:14px}
+.pb-lede{font-size:clamp(16px,2vw,18px);color:var(--pb-body);max-width:70ch;margin:0 0 1em}
+
+/* ---------- hero (a core Columns block) ---------- */
+.pb-hero{max-width:1080px;margin-left:auto;margin-right:auto;gap:clamp(24px,4vw,48px)}
+.pb-hero .wp-block-column{min-width:0}
+
+/* PORTRAIT — a core Image block, chosen from the Media Library */
+.pb-portrait{margin:0 !important}
+.pb-portrait img{
+  width:100%;border-radius:2px;
+  box-shadow:0 12px 30px rgba(29,42,56,.18);
+}
+.pb-portrait figcaption{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:12px !important;line-height:1.6;color:var(--pb-faint);
+  margin-top:12px;padding-left:12px;border-left:3px solid var(--pb-accent);
+  text-align:left;
+}
+/* Dashed box shows only while the Image block is still empty.
+   :has() handles it declaratively; .pb-is-empty is the JS fallback. */
+.pb-portrait:not(:has(img))::before,
+.pb-portrait.pb-is-empty::before{
+  content:"Portrait \A 1200 \00D7 800 px";
+  white-space:pre;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;aspect-ratio:3 / 2;
+  background:var(--pb-panel);
+  border:2px dashed var(--pb-rule);
+  border-radius:2px;
+  color:var(--pb-faint);
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  text-align:center;line-height:2.2;
+}
+
+.pb-hero h1{font-size:clamp(32px,6vw,50px);color:var(--pb-navy)}
+.pb-rule{width:64px;height:4px;background:var(--pb-accent);margin:18px 0 20px}
+.pb-deck{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(13px,1.6vw,14px);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--pb-faint);line-height:1.9;margin:0 0 22px;
+}
+.pb-hero p{margin:0 0 1em;color:var(--pb-body)}
+
+.pb-stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--pb-rule)}
+.pb-stat{flex:1 1 150px;min-width:0;background:var(--pb-panel);border-left:3px solid var(--pb-accent);padding:14px 16px}
+.pb-stat b{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:26px;font-weight:700;color:var(--pb-navy);line-height:1.1}
+.pb-stat span{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pb-faint);margin-top:5px}
+
+/* ---------- practice list ---------- */
+.pb-list{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--pb-rule)}
+.pb-list li{display:grid;grid-template-columns:46px minmax(0,220px) minmax(0,1fr);gap:8px 20px;padding:16px 0;border-bottom:1px solid var(--pb-rule);align-items:baseline}
+.pb-list .pb-n{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--pb-accent)}
+.pb-list h3{font-size:16px;color:var(--pb-navy)}
+.pb-list p{margin:0;font-size:15.5px;color:var(--pb-body)}
+
+/* ---------- pull quote ---------- */
+.pb-quote{background:var(--pb-navy);color:var(--pb-paper)}
+.pb-quote blockquote{margin:0;font-size:clamp(19px,3vw,27px);line-height:1.5;font-style:italic;max-width:var(--pb-quote-measure, 28ch)}
+.pb-quote blockquote::before{content:"";display:block;width:52px;height:4px;background:var(--pb-accent);margin-bottom:22px}
+.pb-quote .pb-attrib{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:20px;opacity:.75;font-style:normal;display:block}
+
+/* ---------- optional wide image (core Image block) ---------- */
+.pb-figure-wide{margin:0 auto !important;max-width:1080px;padding:0 clamp(20px,5vw,56px)}
+.pb-figure-wide img{width:100%;border-radius:2px}
+.pb-figure-wide figcaption{
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px !important;color:#6f6a61;
+  margin-top:10px;padding-left:12px;border-left:3px solid #8a3a30;text-align:left;
+}
+.pb-figure-wide:not(:has(img))::before,
+.pb-figure-wide.pb-is-empty::before{
+  content:"Optional image \A 1600 \00D7 900 px \A delete this block if unused";
+  white-space:pre;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;aspect-ratio:16 / 9;
+  background:#f2eee6;border:2px dashed rgba(34,32,28,.16);border-radius:2px;
+  color:#6f6a61;font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  text-align:center;line-height:2.4;
+}
+
+/* ---------- credentials ---------- */
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-top:24px}
+.pb-card{background:var(--pb-paper);border:1px solid var(--pb-rule);border-top:3px solid var(--pb-accent);padding:22px}
+.pb-card h3{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--pb-faint);margin-bottom:12px}
+.pb-card ul{list-style:none;margin:0;padding:0}
+.pb-card li{font-size:15.5px;padding:7px 0;border-bottom:1px solid var(--pb-rule);color:var(--pb-body)}
+.pb-card li:last-child{border-bottom:none}
+
+/* ---------- contact ---------- */
+.pb-contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:24px}
+.pb-contact div{background:var(--pb-paper);border:1px solid var(--pb-rule);padding:22px}
+.pb-contact h3{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pb-faint);margin-bottom:8px}
+.pb-contact .pb-big{font-family:"Helvetica Neue",Arial,sans-serif;font-size:23px;font-weight:700;color:var(--pb-navy);text-decoration:none;display:inline-block;word-break:break-word}
+.pb-contact .pb-big:hover,.pb-contact .pb-big:focus-visible{color:var(--pb-accent)}
+.pb-contact p{margin:6px 0 0;font-size:15px;color:var(--pb-body)}
+.pb-cta{display:inline-block;margin-top:26px;background:var(--pb-accent);color:#fff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:16px 30px;border-radius:2px;transition:background .2s ease}
+.pb-cta:hover,.pb-cta:focus-visible{background:var(--pb-navy);color:#fff}
+
+.pb-disclaimer{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;line-height:1.75;color:var(--pb-faint);max-width:90ch;margin:0}
+
+/* ---------- mobile ---------- */
+@media (max-width:820px){
+  .pb-list li{grid-template-columns:1fr;gap:4px}
+  .pb-list .pb-n{letter-spacing:.16em}
+  .pb-quote blockquote{max-width:none}
+  .pb-portrait{max-width:340px;margin-left:auto !important;margin-right:auto !important}
+}
+@media (prefers-reduced-motion:reduce){
+  .pb-sec *{transition:none !important;animation:none !important}
+}

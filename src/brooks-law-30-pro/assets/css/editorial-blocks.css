@@ -1,0 +1,507 @@
+/*!
+ * Brooks Law — Editorial block styles (v4.7)
+ *
+ * The dark umber panels, cards, and buttons from the editorial pages, made
+ * available to any block on any page through the editor's Styles panel. No
+ * wrapper, no pasted markup, no page template — select a Group block, choose
+ * "Editorial panel", done.
+ *
+ * The palette is declared once here rather than inherited from .blfE, so these
+ * work on an ordinary page that has no editorial layout at all.
+ */
+
+/* --------------------------------------------------------------
+   Panel — a full-width dark block. For a Group holding a heading
+   and a few paragraphs.
+----------------------------------------------------------------- */
+.is-style-brooks-panel {
+  background: linear-gradient(180deg, var(--u-umber-2), var(--u-umber));
+  border: 1px solid var(--u-umber-3);
+  border-radius: 10px;
+  padding: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--u-cream);
+  box-shadow: 0 20px 44px -24px rgba(38, 32, 26, .55);
+  margin-block: 2.2rem;
+}
+
+/* --------------------------------------------------------------
+   Card — the floating box. Lifts slightly on hover, with a colour
+   spine down the right edge.
+----------------------------------------------------------------- */
+.is-style-brooks-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--u-umber-2), var(--u-umber));
+  border: 1px solid var(--u-umber-3);
+  border-radius: 10px;
+  padding: clamp(1.2rem, 3vw, 1.7rem);
+  color: var(--u-cream);
+  box-shadow: 0 18px 38px -22px rgba(38, 32, 26, .6);
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+  margin-block: 1.4rem;
+}
+.is-style-brooks-card::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  width: 9px;
+  background: var(--u-brick);
+}
+.is-style-brooks-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 52px -24px rgba(38, 32, 26, .68);
+}
+/* Second colourway, to alternate across a row. */
+.is-style-brooks-card.is-alt::after { background: var(--u-olive); }
+
+/* --------------------------------------------------------------
+   Fee box — same shell, tuned for a figure and a caption.
+----------------------------------------------------------------- */
+.is-style-brooks-fee {
+  background: linear-gradient(180deg, var(--u-umber-2), var(--u-umber));
+  border: 1px solid var(--u-umber-3);
+  border-radius: 10px;
+  padding: 1.4rem 1.25rem 1.6rem;
+  color: var(--u-cream);
+  box-shadow: 0 20px 44px -24px rgba(38, 32, 26, .55);
+  text-align: center;
+  margin-block: 1.4rem;
+}
+.is-style-brooks-fee strong,
+.is-style-brooks-fee b {
+  display: block;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  line-height: 1.1;
+  color: var(--u-cream-plate);
+}
+
+/* --------------------------------------------------------------
+   Shared interior treatment
+----------------------------------------------------------------- */
+.is-style-brooks-panel > :where(h1, h2, h3, h4),
+.is-style-brooks-card > :where(h1, h2, h3, h4),
+.is-style-brooks-fee > :where(h1, h2, h3, h4) {
+  color: var(--u-cream-plate);
+  margin-top: 0;
+}
+.is-style-brooks-panel :where(p, li),
+.is-style-brooks-card :where(p, li),
+.is-style-brooks-fee :where(p, li) {
+  color: var(--u-cream);
+}
+.is-style-brooks-panel :where(a),
+.is-style-brooks-card :where(a),
+.is-style-brooks-fee :where(a) {
+  color: var(--u-ochre);
+  text-underline-offset: 3px;
+}
+.is-style-brooks-panel :where(a):hover,
+.is-style-brooks-card :where(a):hover,
+.is-style-brooks-fee :where(a):hover { color: var(--u-cream-plate); }
+
+/* Small caps label, if a paragraph is given the "meta" look. */
+.is-style-brooks-panel .brooks-meta,
+.is-style-brooks-card .brooks-meta,
+.is-style-brooks-statement .brooks-meta,
+.blf-atmos .brooks-meta {
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--u-mute);
+  margin-bottom: .3rem;
+}
+
+/* --------------------------------------------------------------
+   Statement panel — the near-black block with a mono kicker top-left
+   and a large serif line at the bottom ("The permit has its own
+   hearing, its own burden."). Use on a Group: first Paragraph gets
+   class brooks-meta, the big line is a Heading or Paragraph.
+----------------------------------------------------------------- */
+.is-style-brooks-statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(240px, 34vw, 340px);
+  background: linear-gradient(165deg, var(--u-ink-deep), var(--u-ink-deepest) 70%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem 1.7rem;
+  margin-block: 2.2rem;
+  box-shadow: 0 26px 56px -28px rgba(20, 16, 12, .8);
+  color: var(--u-parchment);
+}
+.is-style-brooks-statement .brooks-meta {
+  margin-bottom: auto;
+  color: var(--u-mute);
+}
+.is-style-brooks-statement :where(h2, h3, p:not(.brooks-meta)) {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -.01em;
+  color: var(--u-cream-hi);
+  margin: 0;
+  max-width: 26ch;
+}
+/* Brick variant — "The fine ends. The question on the form does not." */
+.is-style-brooks-statement.is-brick {
+  background: linear-gradient(165deg, #a4502f, #8a3a26 75%);
+}
+.is-style-brooks-statement.is-brick .brooks-meta { color: var(--u-mute-warm); }
+
+/* --------------------------------------------------------------
+   Pull quote — light, with the ochre rule the editorial pages use.
+----------------------------------------------------------------- */
+.is-style-brooks-quote {
+  border-left: 3px solid var(--u-ochre);
+  padding-left: 1.25rem;
+  margin-block: 2.4rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.5;
+}
+.is-style-brooks-quote cite {
+  display: block;
+  margin-top: .6rem;
+  font-size: .85rem;
+  font-style: normal;
+  letter-spacing: .06em;
+  color: var(--muted, #4b5563);
+}
+
+/* --------------------------------------------------------------
+   Button — brick fill, matching .btnE.solid
+----------------------------------------------------------------- */
+.wp-block-button.is-style-brooks-button .wp-block-button__link {
+  background: var(--u-brick);
+  border: 1px solid var(--u-brick);
+  border-radius: 5px;
+  color: var(--u-cream-plate);
+  font-weight: 600;
+  padding: .85rem 1.4rem;
+  transition: background .18s ease, border-color .18s ease;
+}
+.wp-block-button.is-style-brooks-button .wp-block-button__link:hover,
+.wp-block-button.is-style-brooks-button .wp-block-button__link:focus-visible {
+  background: var(--u-umber);
+  border-color: var(--u-umber);
+  color: var(--u-cream-plate);
+}
+
+/* --------------------------------------------------------------
+   Motion and small screens
+----------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .is-style-brooks-card { transition: none; }
+  .is-style-brooks-card:hover { transform: none; }
+}
+@media (max-width: 600px) {
+  .is-style-brooks-card::after { width: 6px; }
+}
+
+/* --------------------------------------------------------------
+   Case file bar (v4.8)
+   The docket strip from the editorial pages: monospace, letter-spaced,
+   uppercase, with the brick accent on any <strong>. Use on a Paragraph.
+----------------------------------------------------------------- */
+.is-style-brooks-filebar {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #8a8069;
+  padding: 18px 0 10px;
+  border-bottom: 1px solid #dcd4c4;
+  margin-block: 0 1.4rem;
+}
+.is-style-brooks-filebar strong,
+.is-style-brooks-filebar b { color: var(--u-brick); font-weight: 500; }
+
+/* --------------------------------------------------------------
+   Display heading — black, with the brick rule beneath.
+   Use on a Heading block.
+----------------------------------------------------------------- */
+.is-style-brooks-heading {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: var(--u-ink);
+  letter-spacing: -.01em;
+  margin-block: 2rem .3rem;
+  display: inline-block;
+  background: var(--u-cream-plate);
+  padding: .35em .6em .4em .55em;
+  box-shadow: 0 10px 26px -18px rgba(38, 32, 26, .5);
+}
+.is-style-brooks-heading::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--u-ochre);
+  border-radius: 2px;
+  margin-top: .4em;
+  opacity: .85;
+}
+/* Two-tone: italicised words inside the heading turn brick, matching the
+   hero treatment ("One sale can start / *two separate cases.*"). */
+.is-style-brooks-heading em,
+.is-style-brooks-heading i {
+  font-style: italic;
+  color: var(--u-brick);
+}
+/* Bare variant: no plate, for use over the atmosphere or a photo. */
+.is-style-brooks-heading.is-bare {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------
+   Atmosphere — mocha ground with the drifting cloud scene behind.
+   Applied to <body> by inc/editorial-atmosphere.php, so ordinary
+   page content sits on it without any wrapper markup.
+----------------------------------------------------------------- */
+body.blf-atmos { background: var(--u-paper); }
+body.blf-atmos .blf-atmos-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+body.blf-atmos .blf-atmos-scene svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* Faint, like the pencil layers on the live pages — the scene is a
+   texture on the paper, never a backdrop the text has to fight. */
+body.blf-atmos .blf-atmos-scene .storm { opacity: calc((1 - var(--wx, 0)) * .14); }
+body.blf-atmos .blf-atmos-scene .clear { opacity: calc(var(--wx, 0) * .18); }
+body.blf-atmos .blf-atmos-scene .drift1 { animation: blfAtmosDrift 64s linear infinite; }
+body.blf-atmos .blf-atmos-scene .drift2 { animation: blfAtmosDrift 96s linear infinite; }
+body.blf-atmos .blf-atmos-scene .sunspin { animation: blfAtmosSpin 120s linear infinite; transform-origin: 1040px 128px; }
+
+@keyframes blfAtmosDrift { from { transform: translateX(0); } to { transform: translateX(-120px); } }
+@keyframes blfAtmosSpin  { from { transform: rotate(0); }     to { transform: rotate(360deg); } }
+
+/* Content floats above the scene, on the mocha ground. */
+body.blf-atmos .site-content,
+body.blf-atmos main,
+body.blf-atmos .entry-content { position: relative; z-index: 1; }
+body.blf-atmos .entry-content { color: var(--u-ink); }
+body.blf-atmos .entry-content :where(a) { color: var(--u-brick); }
+
+/* Mocha variant, if a page genuinely wants the dark ground: add the
+   class blf-atmos-dark alongside via the body_class filter or Additional
+   CSS. Everything above still applies; this flips the ground and text. */
+body.blf-atmos.blf-atmos-dark { background: var(--u-umber); }
+body.blf-atmos.blf-atmos-dark .blf-atmos-scene .storm { opacity: calc((1 - var(--wx, 0)) * .5); }
+body.blf-atmos.blf-atmos-dark .blf-atmos-scene .clear { opacity: calc(var(--wx, 0) * .55); }
+body.blf-atmos.blf-atmos-dark .entry-content { color: var(--u-cream); }
+body.blf-atmos.blf-atmos-dark .entry-content :where(h1, h2, h3, h4) { color: var(--u-cream-plate); }
+body.blf-atmos.blf-atmos-dark .entry-content :where(a) { color: var(--u-ochre); }
+body.blf-atmos.blf-atmos-dark .is-style-brooks-heading { background: transparent; box-shadow: none; color: var(--u-parchment); }
+body.blf-atmos.blf-atmos-dark .is-style-brooks-filebar { color: var(--u-mute); border-bottom-color: var(--u-umber-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  body.blf-atmos .blf-atmos-scene .drift1,
+  body.blf-atmos .blf-atmos-scene .drift2,
+  body.blf-atmos .blf-atmos-scene .sunspin { animation: none; }
+}
+
+/* --------------------------------------------------------------
+   Ghost card (v4.10) — the carousel card with the giant letters
+   bleeding off the top band. The letters are a real element the
+   editor types, not a data attribute, so they are easy to change.
+----------------------------------------------------------------- */
+.is-style-brooks-ghostcard {
+  position: relative;
+  background: linear-gradient(180deg, var(--u-umber-2), var(--u-umber));
+  border: 1px solid var(--u-umber-3);
+  border-radius: 10px;
+  padding: 4.6rem 1.3rem 1.3rem;
+  color: var(--u-cream);
+  box-shadow: 0 18px 38px -22px rgba(38, 32, 26, .6);
+  overflow: hidden;
+}
+.is-style-brooks-ghostcard::after {
+  content: "";
+  position: absolute;
+  top: -1px; right: -1px; bottom: -1px;
+  width: 9px;
+  background: var(--u-brick);
+}
+.is-style-brooks-ghostcard.is-alt::after { background: var(--u-olive); }
+.is-style-brooks-ghostcard .ghost-letters {
+  position: absolute;
+  top: -6px; left: 12px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 74px;
+  line-height: 1;
+  letter-spacing: .02em;
+  color: var(--u-parchment);
+  opacity: .1;
+  pointer-events: none;
+  user-select: none;
+}
+.is-style-brooks-ghostcard :where(h3, h4) { color: var(--u-cream-plate); margin: 0 0 .15rem; }
+.is-style-brooks-ghostcard .brooks-meta { border-bottom: 1px dashed var(--u-umber-3); padding-bottom: .55rem; }
+.is-style-brooks-ghostcard p { color: var(--u-cream); }
+.brooks-arrow { margin-top: auto; }
+.brooks-arrow a {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--u-ochre);
+  text-decoration: none;
+}
+.brooks-arrow a::after { content: " \2192"; }
+.brooks-arrow a:hover, .brooks-arrow a:focus-visible { color: var(--u-cream-plate); }
+
+/* --------------------------------------------------------------
+   Card carousel — a Group that scrolls sideways with snap, with
+   the live pages' "drag / scroll" hint beneath.
+----------------------------------------------------------------- */
+.is-style-brooks-carousel { position: relative; margin-block: 1.6rem 2.6rem; }
+.is-style-brooks-carousel > .wp-block-group__inner-container,
+.is-style-brooks-carousel.no-inner {
+  display: flex;
+  gap: 1.1rem;
+  overflow-x: auto;
+  padding-bottom: .8rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #c9bfa9 transparent;
+}
+.is-style-brooks-carousel .is-style-brooks-ghostcard,
+.is-style-brooks-carousel .is-style-brooks-card {
+  flex: 0 0 min(340px, 82%);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.is-style-brooks-carousel::after {
+  content: "drag / scroll \2192";
+  position: absolute;
+  right: 2px; bottom: -1.15rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--u-mute);
+}
+.is-style-brooks-carousel.is-dragging > .wp-block-group__inner-container { cursor: grabbing; scroll-snap-type: none; }
+
+/* --------------------------------------------------------------
+   Photo with caption — Cover style matching .photoblk: the mono
+   kicker top-left, the big serif caption bottom-left, warm scrim.
+----------------------------------------------------------------- */
+.wp-block-cover.is-style-brooks-photocap {
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: stretch;
+}
+.wp-block-cover.is-style-brooks-photocap .wp-block-cover__inner-container { width: 100%; }
+.wp-block-cover.is-style-brooks-photocap .wp-block-cover__background {
+  background: linear-gradient(180deg, rgba(38,32,26,.12) 30%, rgba(24,19,14,.78)) !important;
+  opacity: 1 !important;
+}
+.wp-block-cover.is-style-brooks-photocap .wp-block-cover__inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 1.1rem 1.4rem 1.2rem;
+}
+.wp-block-cover.is-style-brooks-photocap .brooks-meta { margin-bottom: auto; color: var(--u-mute-warm); }
+.wp-block-cover.is-style-brooks-photocap :where(h2, h3, p:not(.brooks-meta)) {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
+  color: var(--u-cream-hi);
+  margin: 0;
+  max-width: 30ch;
+  text-shadow: 0 2px 14px rgba(20, 16, 12, .5);
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-style-brooks-carousel > .wp-block-group__inner-container { scroll-behavior: auto; }
+}
+
+/* --------------------------------------------------------------
+   Container queries (v5.0)
+
+   Cards previously sized themselves from the viewport, which is the
+   wrong signal: the same card is wide in a full-width panel and
+   narrow inside a carousel or a sidebar. These respond to the space
+   they are actually given.
+
+   Wrapped in @supports so browsers without container query support
+   keep the previous viewport-based behaviour rather than losing it.
+----------------------------------------------------------------- */
+@supports (container-type: inline-size) {
+  /* Each card becomes a query container for its OWN contents. An element
+     cannot query the container it establishes, so these rules size the
+     children — headings, ghost letters, statement lines — and leave the
+     card's own padding to the viewport, which is the one thing a self
+     container genuinely cannot do. */
+  .is-style-brooks-card,
+  .is-style-brooks-panel,
+  .is-style-brooks-ghostcard,
+  .is-style-brooks-statement {
+    container-type: inline-size;
+    container-name: brookscard;
+  }
+
+  @container brookscard (max-width: 330px) {
+    .is-style-brooks-ghostcard .ghost-letters { font-size: 52px; }
+    .is-style-brooks-statement :where(h2, h3, p:not(.brooks-meta)) { font-size: 1.2rem; }
+    .is-style-brooks-panel > :where(h1, h2, h3, h4),
+    .is-style-brooks-card > :where(h1, h2, h3, h4) { font-size: 1rem; }
+    .brooks-meta { letter-spacing: .1em; }
+  }
+
+  @container brookscard (min-width: 620px) {
+    .is-style-brooks-statement :where(h2, h3, p:not(.brooks-meta)) { max-width: 22ch; }
+    .is-style-brooks-ghostcard .ghost-letters { font-size: 88px; }
+  }
+
+  /* The carousel is a container this theme owns outright, so cards inside it
+     can safely respond to the track rather than the window. */
+  .is-style-brooks-carousel { container-type: inline-size; container-name: brookstrack; }
+
+  @container brookstrack (max-width: 560px) {
+    .is-style-brooks-carousel .is-style-brooks-ghostcard,
+    .is-style-brooks-carousel .is-style-brooks-card { flex-basis: 88%; }
+  }
+}
+
+/* --------------------------------------------------------------
+   Skip rendering work for off-screen sections.
+
+   contain-intrinsic-size is supplied so the scrollbar does not jump
+   as sections come into view — without it this trades layout
+   stability for paint time, which is a bad bargain.
+----------------------------------------------------------------- */
+@supports (content-visibility: auto) {
+  .blf-defer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+}

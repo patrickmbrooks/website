@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<ruleset name="Docket Suite Pro">
+	<description>WordPress Coding Standards, security and correctness first. Cosmetic whitespace sniffs excluded to keep diffs reviewable; run phpcbf separately if a full reformat is ever wanted.</description>
+	<file>.</file>
+	<arg name="extensions" value="php"/>
+	<arg value="sp"/>
+	<config name="minimum_supported_wp_version" value="6.0"/>
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="WordPress">
+		<exclude name="Generic.WhiteSpace.ScopeIndent"/>
+		<exclude name="WordPress.Arrays.ArrayDeclarationSpacing"/>
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment"/>
+		<exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+		<exclude name="Squiz.Commenting.BlockComment"/>
+		<exclude name="Universal.Operators.DisallowStandalonePostIncrementDecrement"/>
+	</rule>
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="docket-suite"/>
+				<element value="brooks-essentials"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

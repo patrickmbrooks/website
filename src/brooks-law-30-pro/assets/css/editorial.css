@@ -1,0 +1,210 @@
+/* ==============================================================
+   Brooks Law 2.4 — editorial layer
+   --------------------------------------------------------------
+   Loaded AFTER style.css. Two jobs:
+
+     1. The background artwork: river, bluff, bridge, and the
+        Beale Street sign, drifting on scroll — the element from
+        the Probation Violation page, now site-wide.
+
+     2. The shared components used by the attorney-profile pages
+        (.pb-*) and the practice pages (.blf-*), mapped onto THIS
+        theme's own tokens (--court, --brass, --oxblood,
+        --limestone) so imported pages look native rather than
+        like a second design system.
+
+   Every selector is prefixed. Nothing here restyles the theme's
+   header, footer, ribbons, hero, or any Customizer-driven region.
+   ============================================================== */
+
+/* --------------------------------------------------------------
+   1. Background artwork
+----------------------------------------------------------------- */
+.blf-sky {
+  position: fixed;
+  top: 24vh;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 0;
+  pointer-events: none;
+}
+.blf-sky svg { display: block; width: 132%; min-width: 1200px; margin-left: -5%; height: auto; }
+.blf-sky .far  { opacity: .05; }
+.blf-sky .near { opacity: .075; margin-top: -23%; }
+.blf-sky path,
+.blf-sky line,
+.blf-sky rect,
+.blf-sky ellipse {
+  stroke: var(--ink, #222933);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blf-sky .water path { fill: #5F86A0; stroke: none; }
+.blf-sky .foam  path { stroke: #F7FBFD; fill: none; }
+
+/* Content regions ride above the artwork. The theme's dark bands
+   (hero, contact, footer) have their own backgrounds and cover it
+   naturally; light sections show it faintly behind them. */
+body.brooks-editorial #page,
+body.brooks-editorial .site,
+body.brooks-editorial .site-content,
+body.brooks-editorial .site-footer,
+body.brooks-editorial main {
+  position: relative;
+  z-index: 1;
+}
+
+/* The header (and topbar) must sit ABOVE the content layer, not equal
+   to it: giving .site-header a stacking context traps its dropdowns'
+   z-index:999 inside it, so the header itself needs the higher order
+   or submenus paint behind the hero. 30 clears content (1) with room,
+   and stays far below the theme's skip link and mobile call bar. */
+body.brooks-editorial .topbar,
+body.brooks-editorial .site-header {
+  position: relative;
+  z-index: 30;
+}
+
+/* Sections with a solid background keep it; sections without one
+   would otherwise be transparent to the artwork at full strength —
+   the low opacities above keep it a whisper either way. */
+
+@media (max-width: 820px) {
+  .blf-sky { top: 16vh; }
+  .blf-sky .far  { opacity: .038; }
+  .blf-sky .near { opacity: .055; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blf-sky { position: absolute; }
+  .blf-sky svg { transform: none !important; }
+}
+
+@media print {
+  .blf-sky { display: none; }
+}
+
+/* --------------------------------------------------------------
+   2. Shared components — profile pages (.pb-*)
+   Mapped onto the theme's tokens so imported profile pages read
+   as this theme, not a guest.
+----------------------------------------------------------------- */
+.pb-sec {
+  background: var(--paper, #fff);
+  color: var(--ink, #222933);
+  font-family: var(--sans, system-ui, sans-serif);
+  font-size: 1rem;
+  line-height: 1.65;
+  padding: var(--section-y, clamp(3.2rem, 8vw, 5.5rem)) var(--gutter, clamp(1.1rem, 4vw, 2rem));
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.pb-sec * { box-sizing: border-box; }
+.pb-sec img { max-width: 100%; height: auto; display: block; }
+.pb-sec--panel { background: var(--limestone, #f5f2ea); }
+.pb-wrap { max-width: 1060px; margin: 0 auto; }
+.pb-sec h1, .pb-sec h2, .pb-sec h3 { font-family: var(--serif, Georgia, serif); font-weight: 700; line-height: 1.2; margin: 0; }
+.pb-eyebrow {
+  font-family: var(--sans, sans-serif);
+  font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--oxblood, #7c2d2d); margin: 0 0 .7rem;
+}
+.pb-lede { font-size: 1.05rem; color: var(--muted, #4b5563); max-width: var(--measure, 66ch); margin: 0 0 1em; }
+.pb-rule { width: 64px; height: 3px; background: var(--brass, #b08d3e); margin: 1.1rem 0 1.25rem; }
+.pb-deck {
+  font-family: var(--sans, sans-serif); font-size: .8rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted, #4b5563); line-height: 1.9; margin: 0 0 1.3rem;
+}
+
+.pb-hero { max-width: 1060px; margin-left: auto; margin-right: auto; gap: clamp(24px, 4vw, 48px); }
+.pb-hero .wp-block-column { min-width: 0; }
+.pb-portrait { margin: 0 !important; }
+.pb-portrait img { width: 100%; border-radius: var(--radius, 3px); box-shadow: 0 18px 40px -22px rgba(18, 32, 46, .55); }
+.pb-portrait figcaption {
+  font-family: var(--sans, sans-serif); font-size: .74rem !important; line-height: 1.6;
+  color: var(--muted, #4b5563); margin-top: .75rem; padding-left: .75rem;
+  border-left: 3px solid var(--brass, #b08d3e); text-align: left;
+}
+.pb-portrait:not(:has(img))::before,
+.pb-portrait.pb-is-empty::before {
+  content: "Portrait \A 1200 \00D7 800 px";
+  white-space: pre;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; aspect-ratio: 3 / 2;
+  background: var(--limestone, #f5f2ea);
+  border: 2px dashed var(--brass, #b08d3e); border-radius: var(--radius, 3px);
+  color: var(--muted, #4b5563);
+  font-family: var(--sans, sans-serif); font-size: .78rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; text-align: center; line-height: 2.2;
+}
+
+.pb-stats { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 1.5rem; padding-top: 1.3rem; border-top: 1px solid var(--limestone, #f5f2ea); }
+.pb-stat { flex: 1 1 150px; min-width: 0; background: var(--limestone, #f5f2ea); border-left: 3px solid var(--brass, #b08d3e); border-radius: var(--radius, 3px); padding: .85rem 1rem; }
+.pb-stat b { display: block; font-family: var(--serif, Georgia, serif); font-size: 1.55rem; font-weight: 700; color: var(--court, #12202e); line-height: 1.1; }
+.pb-stat span { display: block; font-family: var(--sans, sans-serif); font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; color: var(--muted, #4b5563); margin-top: .35rem; }
+
+.pb-list { list-style: none; margin: 1.4rem 0 0; padding: 0; border-top: 1px solid var(--limestone, #f5f2ea); }
+.pb-list li { display: grid; grid-template-columns: 46px minmax(0, 220px) minmax(0, 1fr); gap: 8px 20px; padding: 1rem 0; border-bottom: 1px solid var(--limestone, #f5f2ea); align-items: baseline; }
+.pb-list .pb-n { font-family: var(--sans, sans-serif); font-size: .72rem; font-weight: 700; letter-spacing: .12em; color: var(--brass, #b08d3e); }
+.pb-list h3 { font-size: 1.05rem; color: var(--court, #12202e); }
+.pb-list p { margin: 0; font-size: .93rem; color: var(--muted, #4b5563); }
+
+.pb-quote { background: var(--court, #12202e); color: var(--limestone, #f5f2ea); }
+.pb-quote blockquote { margin: 0; font-family: var(--serif, Georgia, serif); font-size: clamp(1.2rem, 2.6vw, 1.7rem); line-height: 1.45; max-width: 30ch; }
+.pb-quote blockquote::before { content: ""; display: block; width: 52px; height: 3px; background: var(--brass-bright, #d9b45c); margin-bottom: 1.3rem; }
+.pb-quote .pb-attrib { display: block; font-family: var(--sans, sans-serif); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; margin-top: 1.3rem; color: var(--brass-bright, #d9b45c); }
+.pb-quote a { color: var(--link-dark, #e6c778); }
+
+.pb-figure-wide { margin: 0 auto !important; max-width: 1060px; padding: 0 var(--gutter, clamp(1.1rem, 4vw, 2rem)); }
+.pb-figure-wide img { width: 100%; border-radius: var(--radius, 3px); }
+.pb-figure-wide figcaption { font-family: var(--sans, sans-serif); font-size: .74rem !important; color: var(--muted, #4b5563); margin-top: .6rem; padding-left: .75rem; border-left: 3px solid var(--brass, #b08d3e); text-align: left; }
+.pb-figure-wide:not(:has(img))::before,
+.pb-figure-wide.pb-is-empty::before {
+  content: "Optional image \A 1600 \00D7 900 px \A delete this block if unused";
+  white-space: pre;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; aspect-ratio: 16 / 9;
+  background: var(--limestone, #f5f2ea);
+  border: 2px dashed var(--brass, #b08d3e); border-radius: var(--radius, 3px);
+  color: var(--muted, #4b5563);
+  font-family: var(--sans, sans-serif); font-size: .78rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase; text-align: center; line-height: 2.4;
+}
+
+.pb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.3rem; margin-top: 1.4rem; }
+.pb-card { background: var(--paper, #fff); border: 1px solid var(--limestone, #f5f2ea); border-top: 3px solid var(--brass, #b08d3e); border-radius: var(--radius, 3px); padding: 1.3rem; box-shadow: 0 12px 26px -20px rgba(18, 32, 46, .4); }
+.pb-card h3 { font-family: var(--sans, sans-serif) !important; font-size: .72rem; letter-spacing: .17em; text-transform: uppercase; color: var(--muted, #4b5563); margin-bottom: .7rem; }
+.pb-card ul { list-style: none; margin: 0; padding: 0; }
+.pb-card li { font-size: .93rem; padding: .42rem 0; border-bottom: 1px solid var(--limestone, #f5f2ea); color: var(--muted, #4b5563); }
+.pb-card li:last-child { border-bottom: none; }
+
+.pb-contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.3rem; margin-top: 1.4rem; }
+.pb-contact div { background: var(--limestone, #f5f2ea); border-radius: var(--radius, 3px); padding: 1.3rem; }
+.pb-contact h3 { font-family: var(--sans, sans-serif) !important; font-size: .68rem; letter-spacing: .17em; text-transform: uppercase; color: var(--muted, #4b5563); margin-bottom: .55rem; }
+.pb-contact .pb-big { font-family: var(--serif, Georgia, serif); font-size: 1.4rem; font-weight: 700; color: var(--court, #12202e); text-decoration: none; display: inline-block; word-break: break-word; }
+.pb-contact .pb-big:hover, .pb-contact .pb-big:focus-visible { color: var(--oxblood, #7c2d2d); }
+.pb-contact p { margin: .35rem 0 0; font-size: .93rem; color: var(--muted, #4b5563); }
+.pb-cta {
+  display: inline-block; margin-top: 1.5rem; background: var(--brass-btn, #c8a04a); color: var(--court, #12202e);
+  font-family: var(--sans, sans-serif); font-size: .82rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+  padding: .95rem 1.8rem; border-radius: var(--radius, 3px); transition: background .2s ease, color .2s ease;
+}
+.pb-cta:hover, .pb-cta:focus-visible { background: var(--court, #12202e); color: var(--brass-bright, #d9b45c); }
+.pb-disclaimer { font-family: var(--sans, sans-serif); font-size: .78rem; line-height: 1.75; color: var(--muted, #4b5563); max-width: 90ch; margin: 0; }
+
+.pb-sec a:focus-visible,
+.pb-cta:focus-visible { outline: 3px solid var(--focus-ring, #2f74c0); outline-offset: 3px; }
+
+@media (max-width: 820px) {
+  .pb-list li { grid-template-columns: 1fr; gap: 4px; }
+  .pb-quote blockquote { max-width: none; }
+  .pb-portrait { max-width: 340px; margin-left: auto !important; margin-right: auto !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pb-sec * { transition: none !important; animation: none !important; }
+}

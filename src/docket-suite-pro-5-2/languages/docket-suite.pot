@@ -1,0 +1,456 @@
+# Copyright (C) 2026 Brooks Law Firm
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Docket Suite Pro 5.2.3\n"
+"Report-Msgid-Bugs-To: https://patrickbrookslaw.com/\n"
+"POT-Creation-Date: 2026-09-03T16:53:26+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: docket-suite\n"
+
+#: includes/crawlers.php:61
+msgid "OpenAI — training and browsing"
+msgstr ""
+
+#: includes/crawlers.php:62
+msgid "OpenAI — ChatGPT search results"
+msgstr ""
+
+#: includes/crawlers.php:63
+msgid "OpenAI — user-initiated page fetches"
+msgstr ""
+
+#: includes/crawlers.php:64
+msgid "Anthropic — Claude training/index"
+msgstr ""
+
+#: includes/crawlers.php:65
+msgid "Anthropic — user-initiated page fetches"
+msgstr ""
+
+#: includes/crawlers.php:66
+msgid "Anthropic — Claude search results"
+msgstr ""
+
+#: includes/crawlers.php:67
+msgid "Perplexity — index"
+msgstr ""
+
+#: includes/crawlers.php:68
+msgid "Perplexity — user-initiated fetches"
+msgstr ""
+
+#: includes/crawlers.php:69
+msgid "Google — Gemini training"
+msgstr ""
+
+#: includes/crawlers.php:70
+msgid "Apple Intelligence"
+msgstr ""
+
+#: includes/crawlers.php:71
+msgid "ByteDance"
+msgstr ""
+
+#: includes/crawlers.php:72
+msgid "Meta AI"
+msgstr ""
+
+#: includes/crawlers.php:73
+msgid "Cohere"
+msgstr ""
+
+#: includes/crawlers.php:74
+msgid "Amazon — Alexa/Rufus"
+msgstr ""
+
+#: includes/redirects.php:220
+msgid "You do not have permission to do that."
+msgstr ""
+
+#. translators: 1: posts scanned, 2: posts affected, 3: fields to copy, 4: fields skipped
+#: includes/seo-migrate.php:237
+msgid "Preview only — nothing was written. Scanned %1$d posts and pages: %2$d would be updated, %3$d fields copied, %4$d skipped because a Docket value already exists."
+msgstr ""
+
+#. translators: 1: posts scanned, 2: posts updated, 3: fields copied, 4: fields skipped
+#: includes/seo-migrate.php:251
+msgid "Migration complete. Scanned %1$d posts and pages: %2$d updated, %3$d fields copied, %4$d skipped. Use Undo below to reverse this exactly."
+msgstr ""
+
+#. translators: %d: posts reverted
+#: includes/seo-migrate.php:265
+msgid "Migration reversed on %d posts and pages. Docket fields created by the migration were removed; Yoast values are untouched and the render-time fallback still applies."
+msgstr ""
+
+#: includes/seo-migrate.php:297
+msgid "Import fields from Yoast"
+msgstr ""
+
+#: includes/seo-migrate.php:299
+msgid "Optional. Docket SEO already falls back to Yoast\'s stored titles, descriptions and noindex flags when its own fields are empty, so your pages keep their metadata whether or not you run this. Importing copies those values into Docket\'s own fields so they appear in the editor and no longer depend on Yoast data being present."
+msgstr ""
+
+#: includes/seo-migrate.php:302
+msgid "Existing Docket values are never overwritten."
+msgstr ""
+
+#: includes/seo-migrate.php:303
+msgid "Yoast template values such as %%title%% %%sep%% %%sitename%% are skipped, as are focus keywords and readability scores."
+msgstr ""
+
+#. translators: %s: date and time of the last migration run
+#: includes/seo-migrate.php:310
+msgid "Last run: %s"
+msgstr ""
+
+#: includes/seo-migrate.php:320
+msgid "Preview (writes nothing)"
+msgstr ""
+
+#: includes/seo-migrate.php:323
+msgid "Import from Yoast"
+msgstr ""
+
+#: includes/seo-migrate.php:327
+msgid "Undo import"
+msgstr ""
+
+#: includes/settings.php:20 includes/settings.php:299
+msgid "Brooks Law Firm — Site Essentials"
+msgstr ""
+
+#: includes/settings.php:21
+msgid "Site Essentials"
+msgstr ""
+
+#: includes/settings.php:226
+msgid "no destination found — needs /old-page/ => /new-page/"
+msgstr ""
+
+#: includes/settings.php:234
+msgid "source normalises to the home page, which is never redirected"
+msgstr ""
+
+#: includes/settings.php:238
+msgid "empty destination"
+msgstr ""
+
+#. translators: %d: line number
+#: includes/settings.php:243
+msgid "same source as line %d after normalising — harmless, the later line wins"
+msgstr ""
+
+#: includes/settings.php:251
+msgid "source is a published page; fallback rules only fire on a 404, so this never runs"
+msgstr ""
+
+#: includes/settings.php:256
+msgid "destination does not resolve to a published page or post — visitors will land on a 404"
+msgstr ""
+
+#: includes/settings.php:302
+msgid "404 log cleared."
+msgstr ""
+
+#: includes/settings.php:308
+msgid "Fallback redirects"
+msgstr ""
+
+#: includes/settings.php:310
+msgid "One per line, old path first: /old-page/ => /new-page/. These fire only when a page would otherwise show \"not found,\" so they can never shadow a live page or conflict with a redirect plugin. Lines beginning with # are ignored."
+msgstr ""
+
+#: includes/settings.php:327
+msgid "No redirect rules are saved yet."
+msgstr ""
+
+#: includes/settings.php:327
+msgid "Gray text in the box above is only an example — it disappears when you type and is not a saved rule."
+msgstr ""
+
+#: includes/settings.php:340
+msgid "Malformed lines — these are NOT active rules"
+msgstr ""
+
+#: includes/settings.php:341
+msgid "Broken destinations — active rules that send visitors to a 404"
+msgstr ""
+
+#: includes/settings.php:342
+msgid "Duplicate sources — parsed fine, collapsed into one rule"
+msgstr ""
+
+#: includes/settings.php:343
+msgid "Dead weight — sources that are live pages, so the rule can never fire"
+msgstr ""
+
+#: includes/settings.php:346
+msgid "Keep a log of pages that were not found"
+msgstr ""
+
+#: includes/settings.php:346
+msgid "Capped at 50 entries. Scanner noise is filtered out."
+msgstr ""
+
+#: includes/settings.php:350
+msgid "Robots.txt"
+msgstr ""
+
+#: includes/settings.php:352
+msgid "v3 writes and maintains a real robots.txt file in the site root (recommended on this stack: a static file is served directly by the web server, so Cloudflare and plugin layers can never flatten or mangle it again). Every line passes a built-in syntax linter before it is written."
+msgstr ""
+
+#: includes/settings.php:361
+msgid "Mode"
+msgstr ""
+
+#: includes/settings.php:364
+msgid "Managed file — plugin writes & maintains a physical robots.txt (recommended)"
+msgstr ""
+
+#: includes/settings.php:365
+msgid "Virtual replace — clean WordPress-served robots.txt, no file written"
+msgstr ""
+
+#: includes/settings.php:366
+msgid "Virtual append — keep other output, add our rules after (legacy)"
+msgstr ""
+
+#: includes/settings.php:367
+msgid "Leave robots.txt alone"
+msgstr ""
+
+#: includes/settings.php:371
+msgid "A physical robots.txt exists that this plugin did not create (this is where the broken \"Disallow: Sitemap:\" line lives). Tick the box below and Save to let the plugin replace it with a clean, linted file."
+msgstr ""
+
+#: includes/settings.php:373
+msgid "Yes — replace the existing robots.txt with the managed version"
+msgstr ""
+
+#: includes/settings.php:376
+msgid "The site root is not writable, so the managed file cannot be created. Fix permissions or switch to Virtual replace mode."
+msgstr ""
+
+#: includes/settings.php:379
+msgid "Managed file is in place and self-heals daily if anything rewrites it."
+msgstr ""
+
+#: includes/settings.php:384
+msgid "AI crawlers"
+msgstr ""
+
+#: includes/settings.php:387
+msgid "Explicitly allow (firm stays quotable by AI assistants)"
+msgstr ""
+
+#: includes/settings.php:388
+msgid "Block (opt out of training and citation)"
+msgstr ""
+
+#: includes/settings.php:389
+msgid "No explicit rules (default-allow applies anyway)"
+msgstr ""
+
+#: includes/settings.php:394
+msgid "Sitemap URL"
+msgstr ""
+
+#: includes/settings.php:397
+msgid "Blank = auto-detect (your live /sitemap_index.xml is found automatically). The URL is verified once a day and dropped from robots.txt if it ever stops responding, so a dead sitemap is never advertised."
+msgstr ""
+
+#: includes/settings.php:401
+msgid "Extra rules (advanced)"
+msgstr ""
+
+#: includes/settings.php:404
+msgid "One directive per line. The linter silently drops anything invalid."
+msgstr ""
+
+#: includes/settings.php:409
+msgid "Preview — the exact file content"
+msgstr ""
+
+#. translators: %s: robots.txt link.
+#: includes/settings.php:415
+msgid "Verify live at %s after saving (hard-refresh; Cloudflare may cache the old copy for a few minutes — purge its cache to see the change immediately)."
+msgstr ""
+
+#: includes/settings.php:423
+msgid "Call & text tracking"
+msgstr ""
+
+#: includes/settings.php:424
+msgid "Send call/text link clicks to Google Analytics 4"
+msgstr ""
+
+#: includes/settings.php:424
+msgid "Fires call_click / text_click events with the number and page on every tel:/sms: link sitewide. Requires GA4 (gtag.js) already installed; silently inert otherwise. One tiny deferred listener, no vendor script."
+msgstr ""
+
+#: includes/settings.php:428
+msgid "Comments and hardening"
+msgstr ""
+
+#: includes/settings.php:430
+msgid "Turn off comments site-wide"
+msgstr ""
+
+#: includes/settings.php:430
+msgid "Existing comments are hidden, not deleted."
+msgstr ""
+
+#: includes/settings.php:431
+msgid "Block the built-in theme and plugin file editors"
+msgstr ""
+
+#: includes/settings.php:431
+msgid "You can still edit files over SFTP."
+msgstr ""
+
+#: includes/settings.php:432
+msgid "Turn off XML-RPC"
+msgstr ""
+
+#: includes/settings.php:432
+msgid "Reduces brute-force surface. Leave off if you use the WordPress mobile app or Jetpack."
+msgstr ""
+
+#: includes/settings.php:437
+msgid "Firm information"
+msgstr ""
+
+#: includes/settings.php:440
+msgid "The Brooks Law theme is active, so its Customizer values are used and these fields are ignored. They exist so the shortcodes keep working if you ever change themes — fill them in as a backup."
+msgstr ""
+
+#: includes/settings.php:445
+msgid "Firm name"
+msgstr ""
+
+#: includes/settings.php:446
+msgid "Office phone (display)"
+msgstr ""
+
+#: includes/settings.php:447
+msgid "Office phone (dial format)"
+msgstr ""
+
+#: includes/settings.php:448
+msgid "Criminal line (display)"
+msgstr ""
+
+#: includes/settings.php:449
+msgid "Criminal line (dial format)"
+msgstr ""
+
+#: includes/settings.php:450
+msgid "Email"
+msgstr ""
+
+#: includes/settings.php:451
+msgid "Street address"
+msgstr ""
+
+#: includes/settings.php:452
+msgid "City, state, ZIP"
+msgstr ""
+
+#: includes/settings.php:453 includes/settings.php:469
+msgid "Office hours"
+msgstr ""
+
+#: includes/settings.php:457
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/settings.php:458
+msgid "Paste these into any page or post instead of typing details by hand. Change the number once here and it updates everywhere."
+msgstr ""
+
+#: includes/settings.php:461
+msgid "Office number, click to call"
+msgstr ""
+
+#: includes/settings.php:462
+msgid "Criminal line"
+msgstr ""
+
+#: includes/settings.php:463
+msgid "Plain text, no link"
+msgstr ""
+
+#: includes/settings.php:464
+msgid "Call button"
+msgstr ""
+
+#: includes/settings.php:465
+msgid "Call button, custom label"
+msgstr ""
+
+#: includes/settings.php:466
+msgid "Address on two lines"
+msgstr ""
+
+#: includes/settings.php:467
+msgid "Address on one line"
+msgstr ""
+
+#: includes/settings.php:468
+msgid "Email, obfuscated against scrapers"
+msgstr ""
+
+#: includes/settings.php:470
+msgid "Current year, for disclaimers"
+msgstr ""
+
+#: includes/settings.php:476
+msgid "Delete these settings if the plugin is deleted"
+msgstr ""
+
+#: includes/settings.php:476
+msgid "Leave unchecked to keep your redirects if you ever reinstall."
+msgstr ""
+
+#: includes/settings.php:483
+msgid "Pages not found"
+msgstr ""
+
+#: includes/settings.php:496
+msgid "Nothing logged yet. Anything that shows up here is a candidate for a redirect above."
+msgstr ""
+
+#: includes/settings.php:512
+msgid "Path"
+msgstr ""
+
+#: includes/settings.php:513
+msgid "Hits"
+msgstr ""
+
+#: includes/settings.php:514
+msgid "Last seen"
+msgstr ""
+
+#: includes/settings.php:515
+msgid "Came from"
+msgstr ""
+
+#: includes/settings.php:540
+msgid "Clear log"
+msgstr ""
+
+#: includes/settings.php:555
+msgid "Settings"
+msgstr ""
+
+#. translators: %s: formatted phone number
+#: includes/shortcodes.php:110
+msgid "Call %s"
+msgstr ""

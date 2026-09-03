@@ -1,0 +1,104 @@
+/*!
+ * Brooks Law — Editorial design tokens (v5.0)
+ *
+ * One source for the umber palette used by the editorial components. Before
+ * this, the same colours were written as literals in three stylesheets — 125
+ * of them — which meant a palette change was a find-and-replace and the
+ * Customizer could not reach them at all.
+ *
+ * Values are declared twice on purpose:
+ *
+ *   1. sRGB hex, which every browser understands;
+ *   2. the same colours in OKLCH inside @supports, so browsers that have it
+ *      get perceptually uniform interpolation — gradients and color-mix()
+ *      hover states stay in gamut instead of drifting grey through the middle.
+ *
+ * Because the hex declarations come first and the OKLCH ones only apply where
+ * supported, there is no situation where a colour fails to resolve.
+ *
+ * The theme's own tokens in style.css (--court, --brass, --oxblood, and the
+ * rest) are untouched and remain authoritative for the classic design; these
+ * cover only the editorial layer.
+ */
+
+:root {
+  --u-umber: #26201a;   /* ground / card base */
+  --u-umber-2: #312a21;   /* card gradient top */
+  --u-umber-3: #3e362a;   /* hairline border */
+  --u-ink-deep: #211c17;   /* statement panel */
+  --u-ink-deepest: #161310;   /* statement panel foot */
+  --u-brick: #9c4a2f;   /* primary accent, spines, CTAs */
+  --u-ochre: #c98a3b;   /* links on dark, rules */
+  --u-olive: #6e6f52;   /* alternate spine */
+  --u-cream: #ede6d8;   /* body text on dark */
+  --u-cream-hi: #f7f1e5;   /* headings on dark */
+  --u-cream-plate: #fcf9f3;   /* heading plate */
+  --u-parchment: #f3ebdc;   /* ghost letters */
+  --u-paper: #f3efe7;   /* editorial ground */
+  --u-mute: #9c917b;   /* meta labels on dark */
+  --u-mute-warm: #ecd9c4;   /* meta on brick */
+  --u-ink: #2a241d;   /* text on paper */
+
+  /* Derived, so hover and edge states follow the palette instead of adding
+     new literals. */
+  --u-brick-hover: color-mix(in srgb, var(--u-brick) 82%, black);
+  --u-ochre-soft:  color-mix(in srgb, var(--u-ochre) 60%, transparent);
+  --u-rule:        color-mix(in srgb, var(--u-ink) 14%, transparent);
+  --u-shadow:      color-mix(in srgb, var(--u-umber) 55%, transparent);
+}
+
+@supports (color: oklch(50% 0.1 40)) {
+  :root {
+    --u-umber: oklch(24.8% 0.014 67.1);
+    --u-umber-2: oklch(29.0% 0.019 73.9);
+    --u-umber-3: oklch(33.8% 0.023 77.8);
+    --u-ink-deep: oklch(23.0% 0.012 67.2);
+    --u-ink-deepest: oklch(18.9% 0.008 67.3);
+    --u-brick: oklch(50.8% 0.117 38.7);
+    --u-ochre: oklch(68.2% 0.121 69.1);
+    --u-olive: oklch(53.3% 0.043 109.4);
+    --u-cream: oklch(92.7% 0.020 84.6);
+    --u-cream-hi: oklch(96.0% 0.017 84.6);
+    --u-cream-plate: oklch(98.3% 0.009 84.6);
+    --u-parchment: oklch(94.2% 0.022 83.3);
+    --u-paper: oklch(95.3% 0.011 84.6);
+    --u-mute: oklch(66.0% 0.034 84.6);
+    --u-mute-warm: oklch(89.5% 0.035 70.1);
+    --u-ink: oklch(26.5% 0.015 71.4);
+  }
+}
+
+/* Relative colour syntax landed later than oklch() itself — Safari 16.4 and
+   Chrome 119, versus Safari 15.4 and Chrome 111. Gating it separately keeps
+   the color-mix() versions of these two derived tokens in place on browsers
+   that have oklch() but not oklch(from ...), where they would otherwise
+   compute invalid and fall back to transparent. */
+@supports (color: oklch(from #000 l c h)) {
+  :root {
+    --u-brick-hover: oklch(from var(--u-brick) calc(l - 0.08) c h);
+    --u-ochre-soft:  oklch(from var(--u-ochre) l c h / 0.6);
+  }
+}
+
+/* --------------------------------------------------------------
+   Adaptive: honour a visitor's stated contrast preference. The
+   editorial palette already clears 4.5:1 everywhere, so this
+   raises the edges rather than repainting the design.
+----------------------------------------------------------------- */
+@media (prefers-contrast: more) {
+  :root {
+    --u-mute: #b7ad99;
+    --u-umber-3: #6b6051;
+    --u-rule: color-mix(in srgb, var(--u-ink) 34%, transparent);
+  }
+  .is-style-brooks-card,
+  .is-style-brooks-panel,
+  .is-style-brooks-ghostcard { border-width: 2px; }
+}
+
+
+/* --------------------------------------------------------------
+   Typography polish available on the platform now.
+----------------------------------------------------------------- */
+:where(h1, h2, h3) { text-wrap: balance; }
+:where(p, li, figcaption) { text-wrap: pretty; }

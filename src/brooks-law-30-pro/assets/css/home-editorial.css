@@ -1,0 +1,127 @@
+/*!
+ * Brooks Law — Editorial homepage (v4.11)
+ *
+ * Applied only when Customizer > Homepage Style is set to Editorial, via
+ * body.blf-home-ed. Every rule is scoped to that class, so Classic is
+ * untouched and switching back needs no cleanup.
+ *
+ * Ground: paper cream with the cloud scene faint behind (printed by
+ * inc/home-style.php, driven storm-to-clear by atmosphere.js). Sections go
+ * transparent so the paper reads through; dark work moves into the umber
+ * cards and the statement-style contact band. All colour pairs verified
+ * >= 4.5:1 (text) and >= 3:1 (edges).
+ */
+
+body.blf-home-ed { background: var(--u-paper); }
+body.blf-home-ed .blf-atmos-scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+body.blf-home-ed .blf-atmos-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+body.blf-home-ed .blf-atmos-scene .storm { opacity: calc((1 - var(--wx, 0)) * .14); }
+body.blf-home-ed .blf-atmos-scene .clear { opacity: calc(var(--wx, 0) * .18); }
+body.blf-home-ed .site-content,
+body.blf-home-ed main,
+body.blf-home-ed .site-footer { position: relative; z-index: 1; }
+
+/* ---------- sections: let the paper through ---------- */
+body.blf-home-ed .section { background: transparent; }
+body.blf-home-ed .band-limestone { background: transparent; }
+
+/* ---------- section headers: editorial serif + thin ochre rule ---------- */
+body.blf-home-ed .rule-header .kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .18em;
+  color: var(--u-brick);
+}
+body.blf-home-ed .rule-header h2 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: var(--u-ink);
+}
+body.blf-home-ed .rule-header h2::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 72px;
+  background: var(--u-ochre);
+  border-radius: 2px;
+  margin-top: .45rem;
+  opacity: .85;
+}
+body.blf-home-ed .subtitle { color: #57503f; }
+
+/* ---------- hero: umber statement over whatever media is set ---------- */
+body.blf-home-ed .hero {
+  background-color: var(--u-umber);
+  border-radius: 0 0 14px 14px;
+}
+body.blf-home-ed .hero::before { background: linear-gradient(165deg, rgba(33, 28, 23, .82), rgba(22, 19, 16, .9)); }
+body.blf-home-ed .hero .kicker { color: var(--u-ochre); }
+body.blf-home-ed .hero-heading { font-family: Georgia, "Times New Roman", Times, serif; color: var(--u-cream-hi); }
+body.blf-home-ed .hero-heading em, body.blf-home-ed .hero-heading i { color: #d98d5f; font-style: italic; }
+body.blf-home-ed .hero-lead { color: var(--u-cream); }
+body.blf-home-ed .hero a.btn,
+body.blf-home-ed .hero .hero-consult a {
+  background: var(--u-brick);
+  border-color: var(--u-brick);
+  color: var(--u-cream-plate);
+}
+body.blf-home-ed .hero a.btn:hover,
+body.blf-home-ed .hero .hero-consult a:hover { background: var(--u-umber); border-color: var(--u-umber); }
+
+/* ---------- action center: umber cards ---------- */
+body.blf-home-ed .ac-tile {
+  background: linear-gradient(180deg, var(--u-umber-2), var(--u-umber));
+  border: 1px solid var(--u-umber-3);
+  border-radius: 10px;
+  box-shadow: 0 18px 38px -22px rgba(38, 32, 26, .6);
+}
+body.blf-home-ed .ac-title { color: var(--u-cream-plate); }
+body.blf-home-ed .ac-sub { color: #b7ad99; }
+body.blf-home-ed .ac-disc { background: var(--u-ochre); color: var(--u-umber); }
+body.blf-home-ed .ac-tile:hover { border-color: var(--u-ochre); }
+body.blf-home-ed .ac-tile--hot {
+  background: linear-gradient(165deg, var(--u-ink-deep), #141110 70%);
+  border-color: #141110;
+}
+body.blf-home-ed .ac-tag { color: #d9b45c; }
+body.blf-home-ed .ac-more { color: var(--u-brick); }
+
+/* ---------- practice cards ---------- */
+body.blf-home-ed .practice-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--u-umber-2), var(--u-umber));
+  border: 1px solid var(--u-umber-3);
+  border-radius: 10px;
+  overflow: hidden;
+  color: var(--u-cream);
+  box-shadow: 0 18px 38px -22px rgba(38, 32, 26, .6);
+}
+body.blf-home-ed .practice-card::after {
+  content: "";
+  position: absolute;
+  top: -1px; right: -1px; bottom: -1px;
+  width: 8px;
+  background: var(--u-brick);
+}
+body.blf-home-ed .practice-card:nth-child(even)::after { background: var(--u-olive); }
+body.blf-home-ed .practice-card :where(h3, h3 a) { color: var(--u-cream-plate); }
+body.blf-home-ed .practice-card p { color: var(--u-cream); }
+body.blf-home-ed .practice-card .more { color: var(--u-ochre); }
+
+/* ---------- results / testimonials on paper ---------- */
+body.blf-home-ed .results-list .outcome { color: var(--u-brick); }
+body.blf-home-ed .numeral { color: var(--u-ochre); }
+
+/* ---------- contact band: the statement look ---------- */
+body.blf-home-ed .band-dark {
+  background: linear-gradient(165deg, var(--u-ink-deep), var(--u-ink-deepest) 70%);
+  border-radius: 14px 14px 0 0;
+}
+body.blf-home-ed .band-dark .rule-header h2 { color: var(--u-cream-hi); }
+body.blf-home-ed .band-dark .rule-header h2::after { background: var(--u-brick); }
+body.blf-home-ed .band-dark .kicker { color: #d9b45c; }
+body.blf-home-ed .band-dark a { color: var(--u-ochre); }
+
+@media (prefers-reduced-motion: reduce) {
+  body.blf-home-ed .blf-atmos-scene .drift1,
+  body.blf-home-ed .blf-atmos-scene .drift2,
+  body.blf-home-ed .blf-atmos-scene .sunspin { animation: none; }
+}

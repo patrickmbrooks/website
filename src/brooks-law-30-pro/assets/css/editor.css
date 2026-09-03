@@ -1,0 +1,7 @@
+/* Brooks Law 3.0 — editor-only adjustments so the editing canvas
+   matches the front end without the front end's fixed elements. */
+.editor-styles-wrapper { background: #fff; }
+.editor-styles-wrapper .blf-sky, .editor-styles-wrapper .mobile-call-bar { display: none; }
+.editor-styles-wrapper .wp-block { max-width: 760px; }
+.editor-styles-wrapper .wp-block[data-align="wide"] { max-width: 1160px; }
+.editor-styles-wrapper .wp-block[data-align="full"] { max-width: none; }

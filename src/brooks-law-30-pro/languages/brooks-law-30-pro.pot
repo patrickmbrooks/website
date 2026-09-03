@@ -1,0 +1,1908 @@
+# Copyright (C) 2026 Brooks Law Firm
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Brooks Law Pro 5.3.0\n"
+"Report-Msgid-Bugs-To: https://patrickbrookslaw.com/\n"
+"POT-Creation-Date: 2026-09-03T16:53:14+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: brooks-law-30-pro\n"
+
+#: 404.php:18
+msgid "Page not found"
+msgstr ""
+
+#: 404.php:19
+msgid "That page may have moved. Try a search, or start from one of the pages below — and if you need to talk to a lawyer, the phone is faster than the website."
+msgstr ""
+
+#: 404.php:23
+msgid "Frequently visited pages"
+msgstr ""
+
+#: 404.php:25 footer.php:44 search.php:49
+msgid "Criminal Defense"
+msgstr ""
+
+#: 404.php:26 footer.php:45 inc/block-editor.php:92 search.php:50
+msgid "DUI Defense"
+msgstr ""
+
+#: 404.php:27 footer.php:46 inc/block-editor.php:93
+msgid "Drug Charges"
+msgstr ""
+
+#: 404.php:28 footer.php:47 search.php:51
+msgid "Domestic Assault"
+msgstr ""
+
+#: 404.php:29
+msgid "Contact the Firm"
+msgstr ""
+
+#. translators: %s: office phone number as displayed.
+#: 404.php:37 header.php:34 inc/block-editor.php:58 inc/template-tags.php:82
+msgid "Call %s"
+msgstr ""
+
+#: footer.php:28
+msgid "(Office)"
+msgstr ""
+
+#: footer.php:29
+msgid "(Criminal line — call or text)"
+msgstr ""
+
+#: footer.php:33 inc/customizer.php:271
+msgid "Footer"
+msgstr ""
+
+#: footer.php:34 inc/schema-graph.php:133
+msgid "Practice Areas"
+msgstr ""
+
+#: footer.php:48
+msgid "Civil Litigation"
+msgstr ""
+
+#: footer.php:49
+msgid "Traffic Matters"
+msgstr ""
+
+#: footer.php:50 inc/block-editor.php:94
+msgid "Expungement"
+msgstr ""
+
+#: footer.php:51
+msgid "Contact"
+msgstr ""
+
+#: footer.php:67 front-page.php:267 front-page.php:276
+msgid "Office"
+msgstr ""
+
+#: front-page.php:106
+msgid "The Practice"
+msgstr ""
+
+#: front-page.php:107
+msgid "Areas of Practice"
+msgstr ""
+
+#: front-page.php:108
+msgid "A focused practice serving individuals, families, and businesses in Memphis, Shelby County, and the surrounding area."
+msgstr ""
+
+#: front-page.php:117 inc/block-editor.php:92 inc/block-editor.php:93 inc/block-editor.php:94
+msgid "Learn more →"
+msgstr ""
+
+#: front-page.php:129
+msgid "The Firm"
+msgstr ""
+
+#: front-page.php:156
+msgid "Client Voices"
+msgstr ""
+
+#: front-page.php:185
+msgid "On the Record"
+msgstr ""
+
+#: front-page.php:214
+msgid "Where We Appear"
+msgstr ""
+
+#: front-page.php:258
+msgid "Consultations"
+msgstr ""
+
+#: front-page.php:265
+msgid "Telephone"
+msgstr ""
+
+#: front-page.php:269
+msgid "Criminal line — call or text"
+msgstr ""
+
+#: front-page.php:272 inc/customizer.php:124
+msgid "Email"
+msgstr ""
+
+#: front-page.php:44
+msgid "Request a free consultation"
+msgstr ""
+
+#: functions.php:375
+msgid "Hero background video (MP4, optional)"
+msgstr ""
+
+#: functions.php:376
+msgid "Plays muted on loop behind the heading. Keep it short (10-20s) and under ~5MB so PageSpeed stays green. The hero photo is the fallback where video does not play, and your existing \"Photo darkening\" slider dims the video too."
+msgstr ""
+
+#: functions.php:383
+msgid "Header & Footer Ribbons"
+msgstr ""
+
+#: functions.php:385
+msgid "Optional photos behind the header and footer. The firm name, logo, and navigation always stay on top. Opacity is 0-100 (percent) — keep it subtle (10-25) so text stays readable."
+msgstr ""
+
+#: functions.php:389
+msgid "Header ribbon photo"
+msgstr ""
+
+#: functions.php:394
+msgid "Header ribbon opacity (0-100%)"
+msgstr ""
+
+#: functions.php:401
+msgid "Footer ribbon photo"
+msgstr ""
+
+#: functions.php:406
+msgid "Footer ribbon opacity (0-100%)"
+msgstr ""
+
+#: functions.php:43
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:44
+msgid "Footer Menu"
+msgstr ""
+
+#: header.php:26
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:53
+msgid "Menu"
+msgstr ""
+
+#: header.php:56
+msgid "Primary"
+msgstr ""
+
+#. translators: %d: tile slot number.
+#: inc/action-center.php:116
+msgid "Tile %d — Title"
+msgstr ""
+
+#. translators: %d: tile slot number.
+#: inc/action-center.php:127
+msgid "Tile %d — Subtitle"
+msgstr ""
+
+#. translators: %d: tile slot number.
+#: inc/action-center.php:138
+msgid "Tile %d — Icon"
+msgstr ""
+
+#. translators: %d: tile slot number.
+#: inc/action-center.php:150
+msgid "Tile %d — Link"
+msgstr ""
+
+#. translators: %d: tile slot number.
+#: inc/action-center.php:151
+msgid "Relative path or full URL."
+msgstr ""
+
+#. translators: %d: tile slot number.
+#: inc/action-center.php:162
+msgid "Tile %d — Urgent highlight"
+msgstr ""
+
+#: inc/action-center.php:46
+msgid "Action Center"
+msgstr ""
+
+#: inc/action-center.php:47
+msgid "Situation tiles between the hero and Areas of Practice. Leave a tile\'s title or link blank to hide it. \"Urgent highlight\" gives a tile the brass-tinted treatment for the panic-state entries."
+msgstr ""
+
+#: inc/action-center.php:57
+msgid "Show Action Center section"
+msgstr ""
+
+#: inc/action-center.php:62
+msgid "Kicker"
+msgstr ""
+
+#: inc/action-center.php:63 inc/service-areas.php:179
+msgid "Section heading"
+msgstr ""
+
+#: inc/action-center.php:64 inc/service-areas.php:189
+msgid "Section subheading"
+msgstr ""
+
+#: inc/action-center.php:65
+msgid "More link — label"
+msgstr ""
+
+#: inc/action-center.php:85
+msgid "Urgent tile tag"
+msgstr ""
+
+#: inc/action-center.php:86
+msgid "Small label on the urgent tiles so urgency is stated in text, not only shown in color. Leave blank to hide."
+msgstr ""
+
+#: inc/action-center.php:96
+msgid "More link — destination"
+msgstr ""
+
+#: inc/action-center.php:97
+msgid "Relative path like /criminal-defense-2/ or a full URL. Leave blank to hide the link."
+msgstr ""
+
+#: inc/block-editor.php:100
+msgid "Attorney profile (photo + bio)"
+msgstr ""
+
+#: inc/block-editor.php:103
+msgid "Attorney"
+msgstr ""
+
+#: inc/block-editor.php:104
+msgid "Attorney Name"
+msgstr ""
+
+#: inc/block-editor.php:105
+msgid "Two or three sentences: courts practiced in, years of experience, approach to client work. Replace the photo on the left with a portrait."
+msgstr ""
+
+#: inc/block-editor.php:110
+msgid "FAQ section"
+msgstr ""
+
+#: inc/block-editor.php:112
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: inc/block-editor.php:113
+msgid "What should I do after an arrest in Shelby County?"
+msgstr ""
+
+#: inc/block-editor.php:113
+msgid "Answer here. Keep it direct and specific to Tennessee practice."
+msgstr ""
+
+#: inc/block-editor.php:114
+msgid "How much does a criminal defense lawyer cost?"
+msgstr ""
+
+#: inc/block-editor.php:114
+msgid "Answer here."
+msgstr ""
+
+#. translators: %s: office phone number as displayed.
+#: inc/block-editor.php:119
+msgid "Call or text the criminal line, or call the office at %s."
+msgstr ""
+
+#: inc/block-editor.php:122
+msgid "Free consultation banner"
+msgstr ""
+
+#: inc/block-editor.php:126
+msgid "Free initial consultation."
+msgstr ""
+
+#: inc/block-editor.php:51 inc/customizer.php:71
+msgid "Brooks Law Firm"
+msgstr ""
+
+#: inc/block-editor.php:61
+msgid "Call-to-action band"
+msgstr ""
+
+#: inc/block-editor.php:63
+msgid "Full-width dark band with heading, line, and call button."
+msgstr ""
+
+#: inc/block-editor.php:67
+msgid "Charged in Shelby County? Talk to a lawyer first."
+msgstr ""
+
+#: inc/block-editor.php:70
+msgid "Free initial consultation · Se habla Español"
+msgstr ""
+
+#: inc/block-editor.php:89
+msgid "Practice-area card grid"
+msgstr ""
+
+#: inc/block-editor.php:92
+msgid "First-offense through felony DUI, implied consent, and license reinstatement."
+msgstr ""
+
+#: inc/block-editor.php:93
+msgid "Possession, casual exchange, and felony drug offenses in Shelby County."
+msgstr ""
+
+#: inc/block-editor.php:94
+msgid "Clearing eligible Tennessee charges from your record."
+msgstr ""
+
+#: inc/contact-toggle.php:714
+msgid "Text / Call Buttons"
+msgstr ""
+
+#: inc/contact-toggle.php:716
+msgid "The split text/call button in the hero and the sticky bar at the bottom of every page on phones."
+msgstr ""
+
+#: inc/contact-toggle.php:746
+msgid "Show the text/call buttons"
+msgstr ""
+
+#: inc/contact-toggle.php:749
+msgid "Also show them on criminal, traffic, and CDL pages"
+msgstr ""
+
+#: inc/contact-toggle.php:751
+msgid "Adds the buttons under the heading on those pages. Civil, family, and profile pages are never affected."
+msgstr ""
+
+#: inc/contact-toggle.php:756
+msgid "Text number (display)"
+msgstr ""
+
+#: inc/contact-toggle.php:758
+msgid "Leave blank to use the criminal line from Firm Info. This must be a line that can receive texts."
+msgstr ""
+
+#: inc/contact-toggle.php:762
+msgid "Call number (display)"
+msgstr ""
+
+#: inc/contact-toggle.php:764
+msgid "Leave blank to use the office phone from Firm Info."
+msgstr ""
+
+#: inc/contact-toggle.php:767
+msgid "Question above the chips"
+msgstr ""
+
+#: inc/contact-toggle.php:768
+msgid "Call button label (criminal and traffic pages)"
+msgstr ""
+
+#: inc/contact-toggle.php:769
+msgid "Text button label"
+msgstr ""
+
+#. translators: %d: chip number.
+#: inc/contact-toggle.php:775
+msgid "Chip %d — label"
+msgstr ""
+
+#: inc/contact-toggle.php:777
+msgid "Leave a chip blank to hide it. Chip 1 is the one a page opens on unless the page is about another matter."
+msgstr ""
+
+#. translators: %d: chip number.
+#: inc/contact-toggle.php:782
+msgid "Chip %d — prefilled message"
+msgstr ""
+
+#: inc/contact-toggle.php:784
+msgid "What the text message already says when it opens on their phone."
+msgstr ""
+
+#: inc/contact-toggle.php:788
+msgid "Line under the buttons (criminal and traffic)"
+msgstr ""
+
+#: inc/contact-toggle.php:793
+msgid "Civil email address"
+msgstr ""
+
+#: inc/contact-toggle.php:795
+msgid "Shown on civil pages in place of the text button. Civil calls always go to the office number."
+msgstr ""
+
+#: inc/contact-toggle.php:797
+msgid "Name shown on the email button"
+msgstr ""
+
+#: inc/contact-toggle.php:798
+msgid "Subject line the email opens with"
+msgstr ""
+
+#: inc/contact-toggle.php:799
+msgid "Email button label"
+msgstr ""
+
+#: inc/contact-toggle.php:800
+msgid "Call button label (civil pages)"
+msgstr ""
+
+#: inc/contact-toggle.php:803
+msgid "Consultation-fee line (civil pages)"
+msgstr ""
+
+#: inc/contact-toggle.php:805
+msgid "Shown under the buttons on every civil page except the no-fee ones below."
+msgstr ""
+
+#: inc/contact-toggle.php:809
+msgid "Line for matters with no consultation fee"
+msgstr ""
+
+#: inc/contact-toggle.php:811
+msgid "Used on the wrongful death and personal injury pages."
+msgstr ""
+
+#: inc/contact-toggle.php:813
+msgid "Sticky bar — email label"
+msgstr ""
+
+#: inc/contact-toggle.php:814
+msgid "Sticky bar — call label on civil pages"
+msgstr ""
+
+#: inc/contact-toggle.php:817
+msgid "Prefilled message on other pages"
+msgstr ""
+
+#: inc/contact-toggle.php:819
+msgid "Used by the sticky bar on pages that are not about a criminal or traffic matter."
+msgstr ""
+
+#: inc/contact-toggle.php:821
+msgid "Sticky bar — text label"
+msgstr ""
+
+#: inc/contact-toggle.php:822
+msgid "Sticky bar — call label"
+msgstr ""
+
+#: inc/customizer.php:114
+msgid "Firm Info"
+msgstr ""
+
+#: inc/customizer.php:118
+msgid "Firm short name (footer / copyright)"
+msgstr ""
+
+#: inc/customizer.php:119
+msgid "Header tagline"
+msgstr ""
+
+#: inc/customizer.php:120
+msgid "Office phone (display)"
+msgstr ""
+
+#: inc/customizer.php:121
+msgid "Office phone (dial format, e.g. +19013245000)"
+msgstr ""
+
+#: inc/customizer.php:122
+msgid "Criminal line (display)"
+msgstr ""
+
+#: inc/customizer.php:123
+msgid "Criminal line (dial format)"
+msgstr ""
+
+#: inc/customizer.php:125
+msgid "Street address"
+msgstr ""
+
+#: inc/customizer.php:126
+msgid "City, state, ZIP"
+msgstr ""
+
+#: inc/customizer.php:127
+msgid "Office hours"
+msgstr ""
+
+#: inc/customizer.php:128
+msgid "Facebook page URL"
+msgstr ""
+
+#: inc/customizer.php:129
+msgid "Top bar note"
+msgstr ""
+
+#: inc/customizer.php:133
+msgid "Homepage: Hero"
+msgstr ""
+
+#: inc/customizer.php:137
+msgid "Small label above the heading"
+msgstr ""
+
+#: inc/customizer.php:138
+msgid "Heading (the page H1)"
+msgstr ""
+
+#: inc/customizer.php:139
+msgid "Lead paragraph"
+msgstr ""
+
+#: inc/customizer.php:140
+msgid "Trust point 1"
+msgstr ""
+
+#: inc/customizer.php:141
+msgid "Trust point 2"
+msgstr ""
+
+#: inc/customizer.php:142
+msgid "Trust point 3"
+msgstr ""
+
+#: inc/customizer.php:150
+msgid "Hero photo (optional)"
+msgstr ""
+
+#: inc/customizer.php:151
+msgid "Sits behind the heading and phone numbers. Use a wide, uncluttered shot — around 2000px wide, saved under 250KB. Leave empty for the plain dark hero."
+msgstr ""
+
+#: inc/customizer.php:161
+msgid "Photo darkening"
+msgstr ""
+
+#: inc/customizer.php:162
+msgid "How much the photo is dimmed so text stays readable. Higher is darker and safer. Below 0.6, check a busy photo carefully."
+msgstr ""
+
+#: inc/customizer.php:177
+msgid "Photo focal point"
+msgstr ""
+
+#: inc/customizer.php:178
+msgid "Which part of the photo to keep in frame when it is cropped."
+msgstr ""
+
+#: inc/customizer.php:182 inc/ui-components.php:136
+msgid "Top"
+msgstr ""
+
+#: inc/customizer.php:183
+msgid "Middle"
+msgstr ""
+
+#: inc/customizer.php:184
+msgid "Bottom"
+msgstr ""
+
+#: inc/customizer.php:191
+msgid "Homepage: Practice Areas"
+msgstr ""
+
+#: inc/customizer.php:193
+msgid "The three cards under the hero. Links accept a full URL or a relative path like /criminal-defense-2/."
+msgstr ""
+
+#. translators: %d: practice-area card number, 1 to 3.
+#: inc/customizer.php:198
+msgid "Card %d — title"
+msgstr ""
+
+#: inc/customizer.php:199
+msgid "Card %d — description"
+msgstr ""
+
+#: inc/customizer.php:200
+msgid "Card %d — link"
+msgstr ""
+
+#: inc/customizer.php:205
+msgid "Homepage: About"
+msgstr ""
+
+#: inc/customizer.php:209 inc/customizer.php:232 inc/customizer.php:250 inc/customizer.php:260
+msgid "Heading"
+msgstr ""
+
+#: inc/customizer.php:210
+msgid "Text (blank line = new paragraph)"
+msgstr ""
+
+#: inc/customizer.php:211
+msgid "Attorney line"
+msgstr ""
+
+#: inc/customizer.php:218
+msgid "Firm photo (optional)"
+msgstr ""
+
+#: inc/customizer.php:219
+msgid "Shown beside the About text. Around 1200px wide is plenty."
+msgstr ""
+
+#: inc/customizer.php:226
+msgid "Homepage: Testimonials"
+msgstr ""
+
+#: inc/customizer.php:228
+msgid "Shown only when enabled and at least one quote is filled in."
+msgstr ""
+
+#: inc/customizer.php:231
+msgid "Show the testimonials section"
+msgstr ""
+
+#. translators: %d: testimonial slot number, 1 to 4.
+#: inc/customizer.php:236
+msgid "Testimonial %d — quote"
+msgstr ""
+
+#: inc/customizer.php:237
+msgid "Testimonial %d — attribution (e.g. “D.M., DUI client”)"
+msgstr ""
+
+#: inc/customizer.php:240 inc/customizer.php:252
+msgid "Fine-print note under the section"
+msgstr ""
+
+#: inc/customizer.php:244
+msgid "Homepage: Case Results"
+msgstr ""
+
+#: inc/customizer.php:246
+msgid "One result per line. Use a pipe to split charge from outcome, e.g. “Felony drug possession | Reduced to misdemeanor”."
+msgstr ""
+
+#: inc/customizer.php:249
+msgid "Show the case results section"
+msgstr ""
+
+#: inc/customizer.php:251
+msgid "Results (one per line)"
+msgstr ""
+
+#: inc/customizer.php:256
+msgid "Homepage: Contact"
+msgstr ""
+
+#: inc/customizer.php:261
+msgid "Intro line"
+msgstr ""
+
+#: inc/customizer.php:262
+msgid "Confidentiality note"
+msgstr ""
+
+#: inc/customizer.php:264
+msgid "Contact form shortcode (optional)"
+msgstr ""
+
+#: inc/customizer.php:265
+msgid "Paste a form plugin shortcode, e.g. [contact-form-7 id=\"123\"]. Leave blank for call/email only."
+msgstr ""
+
+#: inc/customizer.php:275
+msgid "Attorney advertising disclaimer"
+msgstr ""
+
+#: inc/customizer.php:279
+msgid "SEO & Schema"
+msgstr ""
+
+#: inc/customizer.php:281
+msgid "Outputs LegalService structured data built from Firm Info. Safe alongside Yoast."
+msgstr ""
+
+#: inc/customizer.php:284
+msgid "Output LegalService schema (JSON-LD)"
+msgstr ""
+
+#: inc/design-studio.php:104
+msgid "Body font"
+msgstr ""
+
+#: inc/design-studio.php:108
+msgid "All stacks are locally installed fonts: zero download, zero layout shift, best PageSpeed."
+msgstr ""
+
+#: inc/design-studio.php:113
+msgid "Base text size (px)"
+msgstr ""
+
+#: inc/design-studio.php:121
+msgid "Heading size scale (%)"
+msgstr ""
+
+#: inc/design-studio.php:129
+msgid "Body line height (%)"
+msgstr ""
+
+#: inc/design-studio.php:138
+msgid "Section spacing (%)"
+msgstr ""
+
+#: inc/design-studio.php:142
+msgid "100 = shipped rhythm. Lower is denser, higher is airier."
+msgstr ""
+
+#: inc/design-studio.php:147
+msgid "Corner radius (px)"
+msgstr ""
+
+#: inc/design-studio.php:155
+msgid "Reading column width (characters)"
+msgstr ""
+
+#: inc/design-studio.php:163
+msgid "Button style"
+msgstr ""
+
+#: inc/design-studio.php:167
+msgid "Solid brass (default)"
+msgstr ""
+
+#: inc/design-studio.php:168
+msgid "Outlined"
+msgstr ""
+
+#: inc/design-studio.php:169
+msgid "Solid, pill-shaped"
+msgstr ""
+
+#: inc/design-studio.php:27
+msgid "Primary dark (hero, footer)"
+msgstr ""
+
+#: inc/design-studio.php:28
+msgid "Raised panels on dark"
+msgstr ""
+
+#: inc/design-studio.php:29
+msgid "Page background"
+msgstr ""
+
+#: inc/design-studio.php:298
+msgid "Court (deep slate)"
+msgstr ""
+
+#: inc/design-studio.php:299
+msgid "Court panel"
+msgstr ""
+
+#: inc/design-studio.php:30
+msgid "Alternating section band"
+msgstr ""
+
+#: inc/design-studio.php:300
+msgid "Paper"
+msgstr ""
+
+#: inc/design-studio.php:301
+msgid "Limestone"
+msgstr ""
+
+#: inc/design-studio.php:302
+msgid "Ink"
+msgstr ""
+
+#: inc/design-studio.php:303
+msgid "Muted"
+msgstr ""
+
+#: inc/design-studio.php:304
+msgid "Brass"
+msgstr ""
+
+#: inc/design-studio.php:305
+msgid "Brass bright"
+msgstr ""
+
+#: inc/design-studio.php:306
+msgid "Oxblood"
+msgstr ""
+
+#: inc/design-studio.php:307
+msgid "Link blue"
+msgstr ""
+
+#: inc/design-studio.php:31
+msgid "Body text"
+msgstr ""
+
+#: inc/design-studio.php:32
+msgid "Secondary text"
+msgstr ""
+
+#: inc/design-studio.php:33
+msgid "Accent (rules, numerals)"
+msgstr ""
+
+#: inc/design-studio.php:330
+msgid "Serif (headings)"
+msgstr ""
+
+#: inc/design-studio.php:335
+msgid "Sans (body)"
+msgstr ""
+
+#: inc/design-studio.php:34
+msgid "Accent text on dark"
+msgstr ""
+
+#: inc/design-studio.php:340
+msgid "Mono"
+msgstr ""
+
+#: inc/design-studio.php:35
+msgid "Button fill"
+msgstr ""
+
+#: inc/design-studio.php:36
+msgid "Eyebrow labels"
+msgstr ""
+
+#: inc/design-studio.php:37
+msgid "Links on light"
+msgstr ""
+
+#: inc/design-studio.php:38
+msgid "Links on dark"
+msgstr ""
+
+#: inc/design-studio.php:39
+msgid "Keyboard focus ring"
+msgstr ""
+
+#: inc/design-studio.php:50
+msgid "Georgia (classic serif) — default"
+msgstr ""
+
+#: inc/design-studio.php:51
+msgid "Palatino (bookish serif)"
+msgstr ""
+
+#: inc/design-studio.php:52
+msgid "Charter / Bitstream (editorial serif)"
+msgstr ""
+
+#: inc/design-studio.php:53
+msgid "Didot / Bodoni (high-contrast serif)"
+msgstr ""
+
+#: inc/design-studio.php:54
+msgid "System sans (modern)"
+msgstr ""
+
+#: inc/design-studio.php:55
+msgid "Helvetica / Arial (neutral sans)"
+msgstr ""
+
+#: inc/design-studio.php:56
+msgid "Avenir / Futura (geometric sans)"
+msgstr ""
+
+#: inc/design-studio.php:68
+msgid "Design Studio"
+msgstr ""
+
+#: inc/design-studio.php:71
+msgid "Site-wide colors, typography, and spacing. Changes apply everywhere instantly — no code. \"Reset\" any field by restoring its default value."
+msgstr ""
+
+#: inc/design-studio.php:96
+msgid "Heading font"
+msgstr ""
+
+#: inc/editorial-atmosphere.php:149
+msgid "Allow the atmosphere option"
+msgstr ""
+
+#: inc/editorial-atmosphere.php:150
+msgid "Lets individual pages switch on the mocha ground with the drifting cloud scene. Turn each page on in the Atmosphere box on its edit screen."
+msgstr ""
+
+#: inc/editorial-atmosphere.php:162
+msgid "Atmosphere"
+msgstr ""
+
+#: inc/editorial-atmosphere.php:176
+msgid "This page already has its own background scene, so the atmosphere is not offered here."
+msgstr ""
+
+#: inc/editorial-atmosphere.php:183
+msgid "Mocha ground with drifting clouds"
+msgstr ""
+
+#: inc/editorial-atmosphere.php:184
+msgid "The scene clears from storm to sun as the visitor scrolls. Pair it with the Editorial block styles for the floating boxes."
+msgstr ""
+
+#: inc/editorial-blocks.php:33 inc/editorial-blocks.php:44 inc/editorial-blocks.php:59
+msgid "Editorial panel"
+msgstr ""
+
+#: inc/editorial-blocks.php:34 inc/editorial-blocks.php:41
+msgid "Editorial card"
+msgstr ""
+
+#: inc/editorial-blocks.php:35 inc/editorial-blocks.php:38
+msgid "Editorial statement"
+msgstr ""
+
+#: inc/editorial-blocks.php:47
+msgid "Editorial quote"
+msgstr ""
+
+#: inc/editorial-blocks.php:50
+msgid "Editorial button"
+msgstr ""
+
+#: inc/editorial-blocks.php:53
+msgid "Case file bar"
+msgstr ""
+
+#: inc/editorial-blocks.php:56
+msgid "Editorial heading"
+msgstr ""
+
+#: inc/editorial-pages.php:281 inc/editorial-pages.php:378
+msgid "Editorial Layout"
+msgstr ""
+
+#: inc/editorial-pages.php:282
+msgid "The richer layout used on the probation violation, alcohol, and drug court pages. Its stylesheet now lives in the theme and is cached once. Switch it on for any page in the Editorial Layout box on the edit screen."
+msgstr ""
+
+#: inc/editorial-pages.php:298
+msgid "Enable editorial layout"
+msgstr ""
+
+#: inc/editorial-pages.php:299
+msgid "Unticking this returns every page to the standard layout, including the six that currently use it."
+msgstr ""
+
+#: inc/editorial-pages.php:315
+msgid "Serve shared CSS from the theme"
+msgstr ""
+
+#: inc/editorial-pages.php:316
+msgid "Nine older pages still hold a copy of their stylesheet inside their content. With this on, that copy is not printed and the theme serves the same CSS from a cached file instead. Nothing in the database changes, so unticking this puts it straight back."
+msgstr ""
+
+#: inc/editorial-pages.php:332
+msgid "Serve the scene artwork from the theme"
+msgstr ""
+
+#: inc/editorial-pages.php:333
+msgid "The seven older pages each hold their own copy of the parallax scene. With this on, the theme substitutes its copy at render, so changing the artwork once changes it everywhere. Page size is unchanged — the scene has to stay inline for the weather effect to work."
+msgstr ""
+
+#: inc/editorial-pages.php:349
+msgid "Typeface"
+msgstr ""
+
+#: inc/editorial-pages.php:350
+msgid "Editorial keeps Fraunces and IBM Plex, matching how these pages look today, at the cost of one webfont request. System uses Georgia and the system sans, which is how the rest of the site works and costs nothing."
+msgstr ""
+
+#: inc/editorial-pages.php:353
+msgid "Editorial (Fraunces + IBM Plex)"
+msgstr ""
+
+#: inc/editorial-pages.php:354
+msgid "System (no webfont request)"
+msgstr ""
+
+#: inc/editorial-pages.php:401
+msgid "This page uses the attorney profile layout, which has its own typography and is served from the theme. The editorial layout is not offered here, because applying both would override the profile styling."
+msgstr ""
+
+#: inc/editorial-pages.php:406
+msgid "Automatic — Editorial (built into this page)"
+msgstr ""
+
+#: inc/editorial-pages.php:407
+msgid "Automatic — Standard"
+msgstr ""
+
+#: inc/editorial-pages.php:409
+msgid "Layout"
+msgstr ""
+
+#: inc/editorial-pages.php:412
+msgid "Editorial"
+msgstr ""
+
+#: inc/editorial-pages.php:413
+msgid "Standard"
+msgstr ""
+
+#: inc/editorial-pages.php:417
+msgid "This page has the editorial markup in its own content. Choosing Standard drops the stylesheet and the artwork, leaving the text in the ordinary site layout. Nothing is deleted — switch back any time."
+msgstr ""
+
+#: inc/editorial-pages.php:419
+msgid "Editorial adds the umber palette, display typography, and the parallax scene. Set the typeface site-wide in Customizer → Editorial Layout."
+msgstr ""
+
+#: inc/editorial-patterns.php:49
+msgid "Editorial ghost card"
+msgstr ""
+
+#: inc/editorial-patterns.php:54
+msgid "Suburban courts: Germantown, Bartlett, Collierville"
+msgstr ""
+
+#: inc/editorial-patterns.php:55
+msgid "Municipal courts · compliance stings"
+msgstr ""
+
+#: inc/editorial-patterns.php:56
+msgid "How these cases actually run in the three suburban courts, and what a first offense costs there."
+msgstr ""
+
+#: inc/editorial-patterns.php:57 inc/editorial-patterns.php:69
+msgid "Suburb guide"
+msgstr ""
+
+#: inc/editorial-patterns.php:65
+msgid "Editorial card carousel"
+msgstr ""
+
+#: inc/editorial-patterns.php:69
+msgid "Suburban courts"
+msgstr ""
+
+#: inc/editorial-patterns.php:69
+msgid "Municipal courts · stings"
+msgstr ""
+
+#: inc/editorial-patterns.php:69
+msgid "How these cases run in Germantown, Bartlett, and Collierville."
+msgstr ""
+
+#: inc/editorial-patterns.php:70
+msgid "Beer board &amp; liquor license"
+msgstr ""
+
+#: inc/editorial-patterns.php:70
+msgid "Local beer board · ABC · civil penalties"
+msgstr ""
+
+#: inc/editorial-patterns.php:70
+msgid "The other track: outcomes and penalties when the permit itself is at stake."
+msgstr ""
+
+#: inc/editorial-patterns.php:70
+msgid "Licensing defense"
+msgstr ""
+
+#: inc/editorial-patterns.php:71
+msgid "Clearing the record"
+msgstr ""
+
+#: inc/editorial-patterns.php:71
+msgid "Diversion · expungement"
+msgstr ""
+
+#: inc/editorial-patterns.php:71
+msgid "What can come off a record after a dismissal or diversion, and how long it takes."
+msgstr ""
+
+#: inc/editorial-patterns.php:71
+msgid "Expungement guide"
+msgstr ""
+
+#: inc/editorial-patterns.php:80
+msgid "Editorial photo with caption"
+msgstr ""
+
+#: inc/editorial-patterns.php:84
+msgid "Compliance checks"
+msgstr ""
+
+#: inc/editorial-patterns.php:86
+msgid "One sale. Two separate cases."
+msgstr ""
+
+#: inc/faq-schema.php:158
+msgid "FAQ schema"
+msgstr ""
+
+#: inc/faq-schema.php:159
+msgid "Marks up any heading that ends in a question mark, with the paragraphs under it as the answer. Needs at least two on a page."
+msgstr ""
+
+#: inc/home-style.php:145
+msgid "Homepage Style"
+msgstr ""
+
+#: inc/home-style.php:146
+msgid "Switches the whole front page between looks. Purely visual: no content, template, or settings change, so moving between them is instant and lossless."
+msgstr ""
+
+#: inc/home-style.php:162
+msgid "Style"
+msgstr ""
+
+#: inc/home-style.php:33
+msgid "Classic (navy and limestone)"
+msgstr ""
+
+#: inc/home-style.php:34
+msgid "Editorial (paper, umber, cloud scene)"
+msgstr ""
+
+#: inc/page-ribbon.php:109
+msgid "Page Ribbon"
+msgstr ""
+
+#: inc/page-ribbon.php:125
+msgid "Hide ribbon on this page"
+msgstr ""
+
+#: inc/page-ribbon.php:127
+msgid "Title"
+msgstr ""
+
+#: inc/page-ribbon.php:129
+msgid "Blank = automatic title shown above."
+msgstr ""
+
+#: inc/page-ribbon.php:131
+msgid "Left icon"
+msgstr ""
+
+#: inc/page-ribbon.php:131
+msgid "Right icon"
+msgstr ""
+
+#: inc/page-ribbon.php:136
+msgid "none"
+msgstr ""
+
+#. translators: %s: icon name.
+#: inc/page-ribbon.php:137
+msgid "Automatic (%s)"
+msgstr ""
+
+#: inc/page-ribbon.php:152
+msgid "Background artwork"
+msgstr ""
+
+#. translators: %s: motif name.
+#: inc/page-ribbon.php:156
+msgid "Site default (%s)"
+msgstr ""
+
+#. translators: %s: motif name.
+#: inc/page-ribbon.php:157
+msgid "Site default (none)"
+msgstr ""
+
+#: inc/page-ribbon.php:159
+msgid "— No artwork —"
+msgstr ""
+
+#: inc/page-ribbon.php:164
+msgid "Ignored when a background photo is set."
+msgstr ""
+
+#: inc/page-ribbon.php:166
+msgid "Artwork side"
+msgstr ""
+
+#: inc/page-ribbon.php:168
+msgid "Automatic"
+msgstr ""
+
+#: inc/page-ribbon.php:169
+msgid "Left (text sits right)"
+msgstr ""
+
+#: inc/page-ribbon.php:170
+msgid "Right (text sits left)"
+msgstr ""
+
+#: inc/page-ribbon.php:173
+msgid "Artwork opacity"
+msgstr ""
+
+#: inc/page-ribbon.php:175
+msgid "Blank uses the site default. 8 to 45."
+msgstr ""
+
+#: inc/page-ribbon.php:178
+msgid "Background photo"
+msgstr ""
+
+#: inc/page-ribbon.php:179
+msgid "Replaces the navy band. Leave empty for the standard blue ribbon."
+msgstr ""
+
+#: inc/page-ribbon.php:186
+msgid "Choose photo"
+msgstr ""
+
+#: inc/page-ribbon.php:187
+msgid "Remove"
+msgstr ""
+
+#: inc/page-ribbon.php:195
+msgid "Ribbon photo"
+msgstr ""
+
+#: inc/page-ribbon.php:77
+msgid "Page Title Ribbons"
+msgstr ""
+
+#: inc/page-ribbon.php:78
+msgid "A navy title band with brass icons shown at the top of every page and post. Each page has its own Page Ribbon box in the editor to change the title, icons, or photo — or hide the ribbon on that page."
+msgstr ""
+
+#: inc/page-ribbon.php:88
+msgid "Show page title ribbons site-wide"
+msgstr ""
+
+#: inc/page-ribbon.php:98
+msgid "Also show on blog posts"
+msgstr ""
+
+#: inc/page-tiles.php:293
+msgid "Show tile rows on interior pages"
+msgstr ""
+
+#: inc/page-tiles.php:294
+msgid "A compact, page-relevant row under the hero on criminal, traffic, personal injury, and wrongful death pages."
+msgstr ""
+
+#: inc/page-tiles.php:304
+msgid "Interior row heading"
+msgstr ""
+
+#: inc/performance.php:103
+msgid "Page cache lifetime (hours)"
+msgstr ""
+
+#: inc/performance.php:111
+msgid "Safety net only — every content, menu, or Customizer change invalidates the cache immediately."
+msgstr ""
+
+#: inc/performance.php:62
+msgid "Performance"
+msgstr ""
+
+#: inc/performance.php:64
+msgid "Built-in speed layer. If you also run a caching plugin (WP Rocket, LiteSpeed, Super Page Cache) or a CDN that caches HTML, leave Page cache OFF here and let that layer handle it — never run two page caches at once."
+msgstr ""
+
+#: inc/performance.php:69
+msgid "Page cache (anonymous visitors)"
+msgstr ""
+
+#: inc/performance.php:70
+msgid "Minify theme CSS & JS"
+msgstr ""
+
+#: inc/performance.php:71
+msgid "Minify HTML output"
+msgstr ""
+
+#: inc/performance.php:72
+msgid "Preload the LCP image"
+msgstr ""
+
+#: inc/ribbon-art.php:102
+msgid "Columned house"
+msgstr ""
+
+#: inc/ribbon-art.php:107
+msgid "Pyramid"
+msgstr ""
+
+#: inc/ribbon-art.php:231
+msgid "Ribbon Artwork"
+msgstr ""
+
+#: inc/ribbon-art.php:232
+msgid "Line-art motifs behind the page-title ribbon. Set the default here; any page can override it in the Page Ribbon box on the edit screen. Pages that use a ribbon photo keep the photo."
+msgstr ""
+
+#: inc/ribbon-art.php:248
+msgid "Show ribbon artwork"
+msgstr ""
+
+#: inc/ribbon-art.php:253
+msgid "— None —"
+msgstr ""
+
+#: inc/ribbon-art.php:269
+msgid "Default motif"
+msgstr ""
+
+#: inc/ribbon-art.php:270
+msgid "Used on any page that has not chosen its own."
+msgstr ""
+
+#: inc/ribbon-art.php:287
+msgid "Default opacity (%)"
+msgstr ""
+
+#: inc/ribbon-art.php:288
+msgid "Between 8 and 45. Around 20 to 26 reads as a wash without competing with the title."
+msgstr ""
+
+#: inc/ribbon-art.php:309
+msgid "Drift on scroll"
+msgstr ""
+
+#: inc/ribbon-art.php:310
+msgid "The motif shifts slightly as the ribbon passes through the viewport. Always disabled for visitors who ask for reduced motion."
+msgstr ""
+
+#: inc/ribbon-art.php:37
+msgid "Steamboat"
+msgstr ""
+
+#: inc/ribbon-art.php:42
+msgid "River boat"
+msgstr ""
+
+#: inc/ribbon-art.php:47
+msgid "M bridge"
+msgstr ""
+
+#: inc/ribbon-art.php:52
+msgid "Downtown skyline"
+msgstr ""
+
+#: inc/ribbon-art.php:57
+msgid "Bar sign"
+msgstr ""
+
+#: inc/ribbon-art.php:62
+msgid "Bar sign — Open 2 AM"
+msgstr ""
+
+#: inc/ribbon-art.php:67
+msgid "Bar sign — Live Music"
+msgstr ""
+
+#: inc/ribbon-art.php:72 inc/service-areas.php:133
+msgid "Trolley car"
+msgstr ""
+
+#: inc/ribbon-art.php:77
+msgid "Iron gate with note"
+msgstr ""
+
+#: inc/ribbon-art.php:82 inc/service-areas.php:103
+msgid "Steel guitar"
+msgstr ""
+
+#: inc/ribbon-art.php:87
+msgid "Blues guitar"
+msgstr ""
+
+#: inc/ribbon-art.php:92 inc/service-areas.php:123
+msgid "Buffalo"
+msgstr ""
+
+#: inc/ribbon-art.php:97
+msgid "Oak tree"
+msgstr ""
+
+#: inc/schema-graph.php:433 inc/template-tags.php:41
+msgid "Home"
+msgstr ""
+
+#: inc/schema-graph.php:551
+msgid "Firm profile URLs (one per line)"
+msgstr ""
+
+#: inc/schema-graph.php:552
+msgid "Google Business Profile, Avvo, Justia, LinkedIn, Martindale, State Bar listing. Each one strengthens entity authority (sameAs)."
+msgstr ""
+
+#: inc/schema-graph.php:568
+msgid "Languages spoken (comma separated codes)"
+msgstr ""
+
+#: inc/schema-graph.php:569
+msgid "Two-letter codes, e.g. “en, es”."
+msgstr ""
+
+#: inc/schema-identity.php:357
+msgid "Attorney 1 — full name"
+msgstr ""
+
+#: inc/schema-identity.php:358
+msgid "Attorney 1 — job title"
+msgstr ""
+
+#: inc/schema-identity.php:359
+msgid "Attorney 1 — profile page path"
+msgstr ""
+
+#: inc/schema-identity.php:360
+msgid "Attorney 1 — law school"
+msgstr ""
+
+#: inc/schema-identity.php:361
+msgid "Attorney 1 — focus areas (comma separated)"
+msgstr ""
+
+#: inc/schema-identity.php:362
+msgid "Attorney 2 — full name"
+msgstr ""
+
+#: inc/schema-identity.php:363
+msgid "Attorney 2 — job title"
+msgstr ""
+
+#: inc/schema-identity.php:364
+msgid "Attorney 2 — profile page path"
+msgstr ""
+
+#: inc/schema-identity.php:365
+msgid "Attorney 2 — law school"
+msgstr ""
+
+#: inc/schema-identity.php:366
+msgid "Attorney 2 — focus areas (comma separated)"
+msgstr ""
+
+#: inc/schema-identity.php:397
+msgid "Areas served (comma separated)"
+msgstr ""
+
+#: inc/schema-identity.php:398
+msgid "Cities and counties the firm appears in. Used for the areaServed claim in structured data."
+msgstr ""
+
+#: inc/service-areas.php:100
+msgid "Bald eagle"
+msgstr ""
+
+#: inc/service-areas.php:101
+msgid "Cypress tree"
+msgstr ""
+
+#: inc/service-areas.php:102
+msgid "Banjo"
+msgstr ""
+
+#: inc/service-areas.php:104
+msgid "Country music (fiddle)"
+msgstr ""
+
+#: inc/service-areas.php:105
+msgid "Cowboy hat"
+msgstr ""
+
+#: inc/service-areas.php:106
+msgid "Horse"
+msgstr ""
+
+#: inc/service-areas.php:107
+msgid "Waterfall"
+msgstr ""
+
+#: inc/service-areas.php:108
+msgid "Largemouth bass"
+msgstr ""
+
+#: inc/service-areas.php:109
+msgid "Catfish"
+msgstr ""
+
+#: inc/service-areas.php:110
+msgid "Mockingbird"
+msgstr ""
+
+#: inc/service-areas.php:111
+msgid "Sailboat"
+msgstr ""
+
+#: inc/service-areas.php:112
+msgid "18-wheeler"
+msgstr ""
+
+#: inc/service-areas.php:113
+msgid "Stoplight"
+msgstr ""
+
+#: inc/service-areas.php:114
+msgid "Firearm"
+msgstr ""
+
+#: inc/service-areas.php:115
+msgid "Prescription bottle"
+msgstr ""
+
+#: inc/service-areas.php:116
+msgid "Fountain pen"
+msgstr ""
+
+#: inc/service-areas.php:117
+msgid "Declaration scroll"
+msgstr ""
+
+#: inc/service-areas.php:118
+msgid "Liberty Bell"
+msgstr ""
+
+#: inc/service-areas.php:119
+msgid "Hot rod"
+msgstr ""
+
+#: inc/service-areas.php:120
+msgid "Old Cadillac"
+msgstr ""
+
+#: inc/service-areas.php:121
+msgid "Old pickup truck"
+msgstr ""
+
+#: inc/service-areas.php:122
+msgid "Horse carriage"
+msgstr ""
+
+#: inc/service-areas.php:124
+msgid "Pyramid (Memphis)"
+msgstr ""
+
+#: inc/service-areas.php:125
+msgid "Beale St neon sign"
+msgstr ""
+
+#: inc/service-areas.php:126
+msgid "Handcuffs"
+msgstr ""
+
+#: inc/service-areas.php:127
+msgid "Prison bars"
+msgstr ""
+
+#: inc/service-areas.php:128
+msgid "Neon bar sign"
+msgstr ""
+
+#: inc/service-areas.php:129
+msgid "Purple Heart medal"
+msgstr ""
+
+#: inc/service-areas.php:130
+msgid "House"
+msgstr ""
+
+#: inc/service-areas.php:131
+msgid "Office building"
+msgstr ""
+
+#: inc/service-areas.php:132
+msgid "Tow truck"
+msgstr ""
+
+#: inc/service-areas.php:134
+msgid "Main street"
+msgstr ""
+
+#: inc/service-areas.php:158
+msgid "Service Area Bubbles"
+msgstr ""
+
+#: inc/service-areas.php:159
+msgid "Clickable community bubbles near the bottom of the front page. Leave a bubble\'s label or link blank to hide it. Add a photo to replace the default marker."
+msgstr ""
+
+#: inc/service-areas.php:169
+msgid "Show service area section"
+msgstr ""
+
+#. translators: %d: bubble slot number.
+#: inc/service-areas.php:203
+msgid "Bubble %d — Label"
+msgstr ""
+
+#. translators: %d: bubble slot number.
+#: inc/service-areas.php:214
+msgid "Bubble %d — Link"
+msgstr ""
+
+#. translators: %d: bubble slot number.
+#: inc/service-areas.php:215
+msgid "Relative path like /bartlett-criminal-defense/ or a full URL."
+msgstr ""
+
+#. translators: %d: bubble slot number.
+#: inc/service-areas.php:230
+msgid "Bubble %d — Icon"
+msgstr ""
+
+#. translators: %d: bubble slot number.
+#: inc/service-areas.php:242
+msgid "Bubble %d — Photo (optional)"
+msgstr ""
+
+#: inc/service-areas.php:76
+msgid "Location pin"
+msgstr ""
+
+#: inc/service-areas.php:77
+msgid "Courthouse"
+msgstr ""
+
+#: inc/service-areas.php:78
+msgid "Scales of justice"
+msgstr ""
+
+#: inc/service-areas.php:79
+msgid "Gavel"
+msgstr ""
+
+#: inc/service-areas.php:80
+msgid "Shield"
+msgstr ""
+
+#: inc/service-areas.php:81
+msgid "Pillar"
+msgstr ""
+
+#: inc/service-areas.php:82
+msgid "Map"
+msgstr ""
+
+#: inc/service-areas.php:83
+msgid "Star"
+msgstr ""
+
+#: inc/service-areas.php:84
+msgid "Document"
+msgstr ""
+
+#: inc/service-areas.php:85
+msgid "Compass"
+msgstr ""
+
+#: inc/service-areas.php:86
+msgid "Truck"
+msgstr ""
+
+#: inc/service-areas.php:87
+msgid "Tractor (farming)"
+msgstr ""
+
+#: inc/service-areas.php:88
+msgid "Tree"
+msgstr ""
+
+#: inc/service-areas.php:89
+msgid "City skyline"
+msgstr ""
+
+#: inc/service-areas.php:90
+msgid "Musical note"
+msgstr ""
+
+#: inc/service-areas.php:91
+msgid "River"
+msgstr ""
+
+#: inc/service-areas.php:92
+msgid "Corn field"
+msgstr ""
+
+#: inc/service-areas.php:93
+msgid "Wheat field"
+msgstr ""
+
+#: inc/service-areas.php:94
+msgid "Cotton field"
+msgstr ""
+
+#: inc/service-areas.php:95
+msgid "Paddlewheel riverboat"
+msgstr ""
+
+#: inc/service-areas.php:96
+msgid "Barge"
+msgstr ""
+
+#: inc/service-areas.php:97
+msgid "Beale Street (guitar)"
+msgstr ""
+
+#: inc/service-areas.php:98
+msgid "Magnolia blossom"
+msgstr ""
+
+#: inc/service-areas.php:99
+msgid "Tomato (Ripley)"
+msgstr ""
+
+#: inc/site-tuning.php:190
+msgid "Site Tuning"
+msgstr ""
+
+#: inc/site-tuning.php:191
+msgid "Security headers and cleanup that would otherwise need another plugin. Nothing here changes what a visitor sees."
+msgstr ""
+
+#: inc/site-tuning.php:198
+msgid "Send security headers"
+msgstr ""
+
+#: inc/site-tuning.php:199
+msgid "nosniff, frame protection, referrer policy, and a permissions policy that declines camera, microphone, location, and payment APIs the site never uses. Transport security (HSTS) is left to Cloudflare, which owns it."
+msgstr ""
+
+#: inc/site-tuning.php:202
+msgid "Hide the user list from the public API"
+msgstr ""
+
+#: inc/site-tuning.php:203
+msgid "Logged-out requests to /wp-json/wp/v2/users stop revealing account usernames. Editing and admin screens are unaffected."
+msgstr ""
+
+#: inc/site-tuning.php:206
+msgid "Trim unused head links"
+msgstr ""
+
+#: inc/site-tuning.php:207
+msgid "Removes RSD, shortlink, oEmbed discovery, and the extra feed links, including comment feeds for a site with comments closed. The main content feed stays."
+msgstr ""
+
+#: inc/site-tuning.php:210
+msgid "Disable XML-RPC"
+msgstr ""
+
+#: inc/site-tuning.php:211
+msgid "XML-RPC lets one request carry many login attempts, which is why it is a favourite of brute-force tools. Turn this OFF only if you use the WordPress mobile app or Jetpack. If Docket Suite is already disabling XML-RPC, this stands down automatically rather than doing it twice."
+msgstr ""
+
+#: inc/speculation.php:109
+msgid "Prefetch links on hover"
+msgstr ""
+
+#: inc/speculation.php:110
+msgid "Loads the next page in the background once a visitor hovers a link, so it appears immediately when clicked. Prefetch only — pages are never executed in advance, so analytics stay accurate. Ignored automatically if WordPress is handling this itself."
+msgstr ""
+
+#: inc/template-tags.php:114
+msgid "Related pages"
+msgstr ""
+
+#: inc/template-tags.php:115
+msgid "Related Pages"
+msgstr ""
+
+#: inc/template-tags.php:225
+msgid "All rights reserved."
+msgstr ""
+
+#: inc/template-tags.php:39
+msgid "Breadcrumb"
+msgstr ""
+
+#: inc/template-tags.php:79
+msgid "Contact the firm"
+msgstr ""
+
+#: inc/template-tags.php:80
+msgid "Talk to a Lawyer"
+msgstr ""
+
+#. translators: %s: mobile/criminal-line number as displayed.
+#: inc/template-tags.php:84
+msgid "Call or text %s"
+msgstr ""
+
+#: inc/ui-components.php:108
+msgid "More reading"
+msgstr ""
+
+#: inc/ui-components.php:111
+msgid "Previous"
+msgstr ""
+
+#: inc/ui-components.php:116
+msgid "Next"
+msgstr ""
+
+#: inc/ui-components.php:173
+msgid "Content Extras"
+msgstr ""
+
+#: inc/ui-components.php:174
+msgid "Two small additions borrowed from federal agency sites. Both are off until switched on here."
+msgstr ""
+
+#: inc/ui-components.php:190
+msgid "Previous / next links on posts"
+msgstr ""
+
+#: inc/ui-components.php:191
+msgid "Adds two contextual internal links to the bottom of every post. Pages are unaffected."
+msgstr ""
+
+#: inc/ui-components.php:207
+msgid "Return-to-top button"
+msgstr ""
+
+#: inc/ui-components.php:208
+msgid "Appears after the visitor scrolls. Sits above the sticky contact bar on phones."
+msgstr ""
+
+#: inc/ui-components.php:39 inc/ui-components.php:41
+msgid "Numbered steps"
+msgstr ""
+
+#: inc/ui-components.php:42 inc/ui-components.php:44
+msgid "Callout"
+msgstr ""
+
+#: index.php:25
+msgid "Legal Updates"
+msgstr ""
+
+#: index.php:44
+msgid "Posts"
+msgstr ""
+
+#: index.php:48
+msgid "No posts to show yet."
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:22
+msgid "Search results for “%s”"
+msgstr ""
+
+#: search.php:43
+msgid "Search results"
+msgstr ""
+
+#: search.php:47
+msgid "Nothing matched that search. Try different words, or start from one of the practice areas below."
+msgstr ""
+
+#: searchform.php:15
+msgid "Search this site"
+msgstr ""
+
+#: searchform.php:16
+msgid "Search…"
+msgstr ""
+
+#: searchform.php:17
+msgid "Search"
+msgstr ""
+
+#. translators: %s: publish date.
+#: single.php:34
+msgid "Published %s"
+msgstr ""

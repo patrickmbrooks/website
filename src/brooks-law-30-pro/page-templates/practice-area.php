@@ -1,0 +1,54 @@
+<?php
+/**
+ * Template Name: Practice Area
+ *
+ * Brooks Law v2 — practice-area pages. Keeps the v1 file path
+ * (page-templates/practice-area.php) so existing page assignments carry
+ * over untouched. Adds the contact box and related-pages box beside the
+ * content.
+ *
+ * @package Brooks_Law
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+get_header();
+?>
+
+<main id="content" class="site-main">
+	<?php while ( have_posts() ) : the_post(); ?>
+
+		<?php $brooks_hero = brooks_law_page_hero_media(); ?>
+		<div class="page-hero<?php echo esc_attr( $brooks_hero['class'] ); ?>"<?php echo $brooks_hero['style']; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in helper. ?>>
+			<?php echo $brooks_hero['media']; // phpcs:ignore WordPress.Security.EscapeOutput -- wp_get_attachment_image() output. ?>
+			<div class="wrap">
+				<?php brooks_law_breadcrumb(); ?>
+				<h1><?php the_title(); ?></h1>
+				<?php brooks_law_page_contact_toggle(); ?>
+			</div>
+		</div>
+
+		<?php brooks_law_page_action_row(); ?>
+
+		<div class="wrap section">
+			<div class="content-layout">
+				<article <?php post_class(); ?>>
+					<div class="entry-content">
+						<?php the_content(); ?>
+					</div>
+				</article>
+
+				<div class="content-sidebar">
+					<?php brooks_law_contact_box(); ?>
+					<?php brooks_law_related_practices(); ?>
+				</div>
+			</div>
+		</div>
+
+	<?php endwhile; ?>
+</main>
+
+<?php
+get_footer();
