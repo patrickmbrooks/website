@@ -241,8 +241,25 @@ function brooks_law_migrate_settings() {
 	$candidates = array();
 
 	/*
-	 * Known predecessors first, in the order they shipped, so a site that has
-	 * several of them still lands on the most recent.
+	 * WordPress records the theme being switched away from in the
+	 * `theme_switched` option, so the previous slug is knowable rather than
+	 * guessable. It goes first and wins.
+	 *
+	 * The earlier version had no such source and picked whichever sibling row
+	 * held the most keys, on the reasoning that the richest set was the one in
+	 * use. On a site carrying five theme_mods_brooks-law* rows that is simply
+	 * a guess, and it lost the hero photo and the header/footer ribbon photos
+	 * on a real migration: an older row held more keys and won, and it
+	 * predated those images being set.
+	 */
+	$previous = (string) get_option( 'theme_switched' );
+
+	if ( '' !== $previous && $previous !== $stylesheet ) {
+		$candidates[] = 'theme_mods_' . $previous;
+	}
+
+	/*
+	 * Then known predecessors, in the order they shipped.
 	 */
 	foreach ( array( 'brooks-law-30-pro', 'brooks-law-30-pro-5', 'brooks-law-24-editorial', 'brooks-law-23', 'brooks-law' ) as $slug ) {
 		if ( $slug !== $stylesheet ) {
@@ -268,27 +285,69 @@ function brooks_law_migrate_settings() {
 		}
 	}
 
-	$best      = null;
-	$best_size = 0;
+	$rows = array();
 
 	foreach ( $candidates as $option_name ) {
 		$source = get_option( $option_name );
 
-		if ( ! is_array( $source ) || empty( $source ) ) {
-			continue;
-		}
-
-		// The richest set of saved values is the one that was actually in use.
-		$size = count( $source );
-
-		if ( $size > $best_size ) {
-			$best      = $source;
-			$best_size = $size;
+		if ( is_array( $source ) && count( $source ) > 1 ) {
+			$rows[ $option_name ] = $source;
 		}
 	}
 
-	if ( null === $best || $best_size < 2 ) {
+	if ( empty( $rows ) ) {
 		return;
+	}
+
+	/*
+	 * The authoritative previous theme if we have it; otherwise the richest
+	 * row, which is the best guess available.
+	 */
+	$primary_key = null;
+
+	if ( '' !== $previous && isset( $rows[ 'theme_mods_' . $previous ] ) ) {
+		$primary_key = 'theme_mods_' . $previous;
+	} else {
+		$largest = 0;
+		foreach ( $rows as $key => $row ) {
+			if ( count( $row ) > $largest ) {
+				$largest     = count( $row );
+				$primary_key = $key;
+			}
+		}
+	}
+
+	$best = $rows[ $primary_key ];
+
+	/*
+	 * Fill any key the primary row does not carry from the other siblings,
+	 * richest first. Existing values are never overwritten, so the previous
+	 * theme's settings always win where it has an opinion; this only recovers
+	 * keys it has none for. That is what rescues an image whose ID lives in a
+	 * row other than the one being migrated from.
+	 *
+	 * The trade-off, stated plainly: a setting deliberately cleared on the
+	 * previous theme but still present on an older one comes back. On a
+	 * first-activation-only pass into an empty slate, silently resurrecting a
+	 * stale value is a far smaller harm than silently losing a current one.
+	 */
+	uasort(
+		$rows,
+		static function ( $a, $b ) {
+			return count( $b ) <=> count( $a );
+		}
+	);
+
+	foreach ( $rows as $key => $row ) {
+		if ( $key === $primary_key ) {
+			continue;
+		}
+
+		foreach ( $row as $setting => $value ) {
+			if ( ! array_key_exists( $setting, $best ) ) {
+				$best[ $setting ] = $value;
+			}
+		}
 	}
 
 	// Preserve any sidebar/widget mapping WP has already set for this slug.

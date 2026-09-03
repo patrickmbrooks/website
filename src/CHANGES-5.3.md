@@ -322,3 +322,50 @@ which exists in 5.2.2 and is `function_exists`-guarded.
 
 Uploading the theme alone therefore changes the structured-data layer and
 nothing else.
+
+---
+
+# 5.3.3 — settings migration picked the wrong source row
+
+On the live migration the text settings carried over but the **hero photo and
+the header/footer ribbon photos did not**.
+
+Not a WordPress quirk — a weakness in the 5.3.0 migration. It chose between
+sibling `theme_mods_brooks-law*` rows with this rule:
+
+```php
+// The richest set of saved values is the one that was actually in use.
+$size = count( $source );
+```
+
+That is a guess, and on a site carrying five such rows it guessed wrong: an
+older row held more keys and won, and it predated those images being set.
+
+WordPress already records the answer. `switch_theme()` writes the outgoing
+slug to the **`theme_switched`** option before `after_switch_theme` fires, so
+the previous theme is knowable rather than guessable. It is now the first
+candidate and wins outright.
+
+A second layer closes the case where that option is unavailable: after the
+primary row is chosen, any key it does **not** carry is filled from the other
+siblings, richest first. Existing values are never overwritten, so the previous
+theme always wins where it has an opinion; this only recovers keys it has none
+for.
+
+The trade-off, stated in the code: a setting deliberately cleared on the
+previous theme but still present on an older one comes back. On a
+first-activation-only pass into an empty slate, resurrecting a stale value is a
+far smaller harm than silently losing a current one.
+
+Verified against a reconstruction of the live site — five sibling rows, the
+active one deliberately *not* the richest:
+
+| Scenario | hero_image, ribbons, logo, menus |
+|---|---|
+| `theme_switched` present (what WordPress does) | all present |
+| `theme_switched` absent, gap-fill only | all present |
+| target already has settings | untouched, migration correctly does nothing |
+| source rows after migrating | unchanged, still available as rollback |
+
+**No action needed if the photos have already been re-set by hand** — this is
+insurance for the next theme change, not a fix to re-apply.
