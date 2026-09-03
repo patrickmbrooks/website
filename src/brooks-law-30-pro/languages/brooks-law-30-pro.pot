@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Brooks Law Pro 5.3.0\n"
 "Report-Msgid-Bugs-To: https://patrickbrookslaw.com/\n"
-"POT-Creation-Date: 2026-09-03T16:53:14+00:00\n"
+"POT-Creation-Date: 2026-09-03T19:31:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -137,35 +137,35 @@ msgstr ""
 msgid "Request a free consultation"
 msgstr ""
 
-#: functions.php:375
+#: functions.php:380
 msgid "Hero background video (MP4, optional)"
 msgstr ""
 
-#: functions.php:376
+#: functions.php:381
 msgid "Plays muted on loop behind the heading. Keep it short (10-20s) and under ~5MB so PageSpeed stays green. The hero photo is the fallback where video does not play, and your existing \"Photo darkening\" slider dims the video too."
 msgstr ""
 
-#: functions.php:383
+#: functions.php:388
 msgid "Header & Footer Ribbons"
 msgstr ""
 
-#: functions.php:385
+#: functions.php:390
 msgid "Optional photos behind the header and footer. The firm name, logo, and navigation always stay on top. Opacity is 0-100 (percent) — keep it subtle (10-25) so text stays readable."
 msgstr ""
 
-#: functions.php:389
+#: functions.php:394
 msgid "Header ribbon photo"
 msgstr ""
 
-#: functions.php:394
+#: functions.php:399
 msgid "Header ribbon opacity (0-100%)"
 msgstr ""
 
-#: functions.php:401
+#: functions.php:406
 msgid "Footer ribbon photo"
 msgstr ""
 
-#: functions.php:406
+#: functions.php:411
 msgid "Footer ribbon opacity (0-100%)"
 msgstr ""
 
@@ -1128,11 +1128,11 @@ msgstr ""
 msgid "One sale. Two separate cases."
 msgstr ""
 
-#: inc/faq-schema.php:158
+#: inc/faq-schema.php:194
 msgid "FAQ schema"
 msgstr ""
 
-#: inc/faq-schema.php:159
+#: inc/faq-schema.php:195
 msgid "Marks up any heading that ends in a question mark, with the paragraphs under it as the answer. Needs at least two on a page."
 msgstr ""
 
@@ -1415,23 +1415,23 @@ msgstr ""
 msgid "Oak tree"
 msgstr ""
 
-#: inc/schema-graph.php:433 inc/template-tags.php:41
+#: inc/schema-graph.php:487 inc/template-tags.php:41
 msgid "Home"
 msgstr ""
 
-#: inc/schema-graph.php:551
+#: inc/schema-graph.php:605
 msgid "Firm profile URLs (one per line)"
 msgstr ""
 
-#: inc/schema-graph.php:552
+#: inc/schema-graph.php:606
 msgid "Google Business Profile, Avvo, Justia, LinkedIn, Martindale, State Bar listing. Each one strengthens entity authority (sameAs)."
 msgstr ""
 
-#: inc/schema-graph.php:568
+#: inc/schema-graph.php:622
 msgid "Languages spoken (comma separated codes)"
 msgstr ""
 
-#: inc/schema-graph.php:569
+#: inc/schema-graph.php:623
 msgid "Two-letter codes, e.g. “en, es”."
 msgstr ""
 

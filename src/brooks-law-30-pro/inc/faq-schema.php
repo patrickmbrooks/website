@@ -101,6 +101,23 @@ function brooks_law_add_faq_schema( $graph ) {
 		return $graph;
 	}
 
+	/*
+	 * Stand down when the page already carries its own FAQPage block.
+	 *
+	 * Measured against the live export: 80 pages have hand-pasted FAQPage
+	 * JSON-LD in their content and this extractor finds two or more Q/A pairs
+	 * on 72, overlapping on 49. Those 49 were publishing two FAQPage entities
+	 * describing the same questions — the duplicate-markup case Google warns
+	 * about, and one this theme is otherwise careful to avoid.
+	 *
+	 * The hand-written block wins because it is the one an editor can see and
+	 * correct. Delete it from the content and this extractor takes over on the
+	 * next render, with no setting to change.
+	 */
+	if ( brooks_law_content_has_faq_schema( (string) $post->post_content ) ) {
+		return $graph;
+	}
+
 	$faqs = brooks_law_extract_faqs( $post->post_content );
 
 	/**
@@ -137,6 +154,25 @@ function brooks_law_add_faq_schema( $graph ) {
 	return $graph;
 }
 add_filter( 'brooks_law_schema_graph', 'brooks_law_add_faq_schema' );
+
+/**
+ * Does the content already declare its own FAQPage?
+ *
+ * Deliberately a cheap string test rather than a JSON parse: the blocks this
+ * has to detect are frequently the ones broken by wpautop — which is why
+ * inc/schema-repair.php exists — so a parser would miss exactly the cases
+ * that matter and emit a second entity beside a repaired first one.
+ *
+ * @param string $content Raw post content.
+ * @return bool
+ */
+function brooks_law_content_has_faq_schema( $content ) {
+	if ( false === stripos( $content, 'ld+json' ) ) {
+		return false;
+	}
+
+	return 1 === preg_match( '/"@type"\s*:\s*(?:<br\s*\/?>)?\s*"FAQPage"/i', $content );
+}
 
 /**
  * Customizer switch, filed with the other schema controls.

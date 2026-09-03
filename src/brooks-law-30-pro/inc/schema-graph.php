@@ -396,16 +396,70 @@ function brooks_law_graph_webpage( $ids ) {
 				}
 			}
 
-			$slug = (string) $post->post_name;
-			if ( false !== strpos( $slug, 'contact' ) ) {
-				$page['@type'] = 'ContactPage';
-			} elseif ( false !== strpos( $slug, 'about' ) || false !== strpos( $slug, 'attorney' ) ) {
-				$page['@type'] = 'AboutPage';
-			}
+			brooks_law_graph_type_page( $page, $post, $ids );
 		}
 	}
 
 	return $page;
+}
+
+/**
+ * Refine a WebPage's @type from what the page actually is.
+ *
+ * The previous rule matched "about" or "attorney" anywhere in the slug. Run
+ * against the live site that scored nothing but mistakes: it typed
+ * germantown-dui-attorney, collierville-dui-attorney and
+ * bartlett-dui-attorney — three DUI location pages — as AboutPage, while
+ * missing patrick-brooks-profile and beth-brooks-profile, the two pages that
+ * genuinely are attorney profiles.
+ *
+ * So: a profile is recognised by the profile LAYOUT rather than by a word in
+ * its slug, and matched to its Person entity where the names line up, which
+ * is what makes a ProfilePage worth declaring at all. Slug matching is
+ * anchored to the start rather than searched anywhere in the string.
+ *
+ * @param array   $page Page entity, by reference.
+ * @param WP_Post $post Current post.
+ * @param array   $ids  Entity IDs.
+ */
+function brooks_law_graph_type_page( &$page, $post, $ids ) {
+	$slug    = (string) $post->post_name;
+	$content = (string) $post->post_content;
+
+	// An attorney profile: identified by the layout the profile pages use.
+	$is_profile = ( false !== strpos( $content, 'class="pb-sec' ) )
+		|| ( false !== strpos( $content, 'pb-portrait' ) );
+
+	if ( $is_profile ) {
+		$page['@type'] = 'ProfilePage';
+
+		// Anchor it to the Person already in the graph where the names match,
+		// so the profile page and the attorney entity are one thing.
+		foreach ( brooks_law_attorneys() as $person ) {
+			$key = 'attorney:' . $person['slug'];
+			if ( isset( $ids[ $key ] ) && false !== strpos( $slug, $person['slug'] ) ) {
+				$page['mainEntity'] = array( '@id' => $ids[ $key ] );
+				break;
+			}
+		}
+	} elseif ( 0 === strpos( $slug, 'contact' ) ) {
+		$page['@type'] = 'ContactPage';
+	} elseif ( 0 === strpos( $slug, 'about' ) || 0 === strpos( $slug, 'our-team' ) || 0 === strpos( $slug, 'meet-' ) ) {
+		$page['@type'] = 'AboutPage';
+	}
+
+	/**
+	 * Filter the resolved WebPage @type.
+	 *
+	 * The escape hatch for a site whose slugs do not follow these shapes:
+	 * map them explicitly rather than widening the rules above.
+	 *
+	 * @since 5.3.0
+	 *
+	 * @param array   $page Page entity.
+	 * @param WP_Post $post Current post.
+	 */
+	$page = apply_filters( 'brooks_law_graph_webpage_type', $page, $post );
 }
 
 /**

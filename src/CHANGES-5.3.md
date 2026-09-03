@@ -80,3 +80,56 @@ be wrong about the other.
   page, edited-settings and hostile-title cases.
 - Not installed on WordPress. Runtime behaviour under real plugin load, the Customizer
   UI, and block-editor rendering remain unverified.
+
+---
+
+# Validated against the live export (687 items, 170 published pages)
+
+The WordPress export was checked against the shipped code by running the real
+functions over the real content. Two defects that only live content could
+reveal were found and fixed.
+
+## Fixed after export review
+
+**Duplicate FAQPage markup on 49 pages.** 80 published pages carry hand-pasted
+FAQPage JSON-LD in their content; `brooks_law_extract_faqs()` independently
+finds two or more Q/A pairs on 72; the two sets overlap on 49. Those 49 pages
+were publishing two FAQPage entities describing the same questions.
+`brooks_law_add_faq_schema()` now stands down when the content already
+declares a FAQPage — the hand-written block wins because it is the one an
+editor can see and correct. Verified: 49 stand-downs, 23 pages where the
+extractor still adds value, zero duplicates.
+
+**The page-type heuristic scored 0/3 on real slugs, and missed both real
+profiles.** Matching "about" or "attorney" anywhere in the slug typed
+`germantown-dui-attorney`, `collierville-dui-attorney` and
+`bartlett-dui-attorney` as `AboutPage` — three DUI location pages — while
+`patrick-brooks-profile` and `beth-brooks-profile`, the two genuine attorney
+profiles, fell through as plain `WebPage`. A profile is now recognised by the
+profile *layout* (`pb-sec` / `pb-portrait`) and linked to its `Person` entity
+via `mainEntity`; slug matches are anchored to the start. Result across 170
+pages: 2 `ProfilePage` (both correctly anchored), 1 `ContactPage`, 167
+`WebPage`, no false positives.
+
+## Confirmed working against real content
+
+| Check | Result |
+|---|---|
+| HTML minifier over all 170 pages (2.3 MB) | 0 tag-inventory differences, 0 protected-block corruption, 12% smaller |
+| `inc/schema-repair.php` | 83 inline JSON-LD blocks; 15 broken by `<br>` injection, **15/15 repaired**, 0 left broken |
+| Component-loader conditional loading | only 2 of 170 pages need component CSS — and both are caught **only** by the `pb-` marker added in 5.3 |
+| Editorial layout detection | 7 pages carry `class="blfE`, 7 carry their own `class="sky"` (artwork correctly suppressed) |
+| V1 placeholder forgery | 0 pages contain `<!--BLFPROTECT` |
+| Nav menu | 53 items, all `post_type` — no custom URLs to go stale |
+
+## Observations worth acting on separately
+
+- **1,415 absolute internal links** in page content (`https://patrickbrookslaw.com/...`)
+  against 2 root-relative ones. A staging copy will link back to production.
+- **323 raster images** in the library (271 JPG, 36 PNG, 16 JPEG) against only
+  22 WebP — the optimiser converts on upload, so the existing library is a
+  backlog. Bulk-optimise, and see R6 re: AVIF.
+- The uploaded zips unpack to `brooks-law-30-pro-5/` and
+  `docket-suite-pro-5-2-2/`. **Installing from those folder names would orphan
+  every Customizer setting** — the theme slug must stay `brooks-law-30-pro`.
+  The packages in `dist/` use the correct folder names.
