@@ -443,11 +443,27 @@ unset( $blf_purge_hook );
 /**
  * Minify CSS.
  *
- * Quoted strings and unquoted url() payloads are lifted out before any
- * whitespace pass, so punctuation inside them is never mistaken for syntax:
- * `content: "Note: one, two"` keeps its spaces, and an escape sequence that
- * depends on a trailing space to terminate — `content: "\00D7 800"` — keeps
- * working. `/*! *​/` licence comments are preserved.
+ * A single left-to-right scan, because the two things a CSS minifier must not
+ * confuse — comments and string literals — can each contain the other's
+ * opening sequence. Handling them in separate regex passes is what broke this
+ * function before: strings were protected first, so the apostrophe in a
+ * comment reading "the firm's world" opened a string literal that ran to the
+ * next apostrophe 15 KB later and swallowed the entire :root token block. The
+ * site rendered with no custom properties at all.
+ *
+ * Rules the scan enforces, each one learned from a real failure:
+ *
+ *   - Comments are skipped, except a leading /*! licence block.
+ *   - Quoted strings and unquoted url() payloads are lifted out whole and
+ *     restored at the end, so punctuation inside them is never syntax.
+ *   - Whitespace is only removed around { } ; and around : INSIDE a
+ *     declaration block. It is never removed around + - > ~ or around : in a
+ *     selector or at-rule, because "calc(64px + env(safe-area-inset-bottom))"
+ *     and "@media (width >= 700px)" both depend on that whitespace, and
+ *     ".foo :hover" does not mean the same thing as ".foo:hover".
+ *
+ * The saving from squeezing combinators is a few hundred bytes. The cost of
+ * getting it wrong is the whole stylesheet.
  *
  * @param string $css Stylesheet source.
  * @return string
@@ -457,40 +473,156 @@ function brooks_law_minify_css( $css ) {
 		return $css;
 	}
 
-	$original = $css;
-	$strings  = array();
+	$length  = strlen( $css );
+	$out     = '';
+	$strings = array();
+	$i       = 0;
 
 	/*
-	 * Unrolled-loop form: a run of "neither quote nor backslash", then any
-	 * number of (escape + another such run). The naive (?:[^"\\]|\\.)* spelling
-	 * is equivalent but lets the engine try both branches at every character,
-	 * which exhausts the PCRE JIT stack on a stylesheet this size — the
-	 * function then returned the input unminified, silently, on exactly the
-	 * two largest sheets.
+	 * Brace depth alone cannot tell a declaration block from a rule list:
+	 * inside @supports { @container { ... } } the depth is 2 while the parser
+	 * is still reading SELECTORS. Treating depth > 0 as "in declarations"
+	 * turned ".statement :where(h2)" into ".statement:where(h2)" — a
+	 * descendant combinator silently becoming a compound selector, which
+	 * matches nothing. The stack records what kind of block each brace
+	 * opened, so ":" is only ever squeezed inside real declarations.
 	 */
-	$css = preg_replace_callback(
-		'/"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'|url\([^)\'"]*\)/s',
-		static function ( $matches ) use ( &$strings ) {
-			$key             = "\0BLFCSS" . count( $strings ) . "\0";
-			$strings[ $key ] = $matches[0];
-			return $key;
-		},
-		$css
-	);
-	if ( ! is_string( $css ) ) {
-		return $original;
+	$stack   = array();  // true = rule list (at-rule body), false = declarations.
+	$in_at   = false;    // Currently reading an at-rule prelude.
+	$in_decl = false;    // Innermost open block is a declaration block.
+
+	while ( $i < $length ) {
+		$char = $css[ $i ];
+
+		// Comment: skip it, unless it is a /*! licence block.
+		if ( '/' === $char && $i + 1 < $length && '*' === $css[ $i + 1 ] ) {
+			$end = strpos( $css, '*/', $i + 2 );
+
+			if ( false === $end ) {
+				break; // Unterminated: the rest of the file is comment.
+			}
+
+			if ( $i + 2 < $length && '!' === $css[ $i + 2 ] ) {
+				$out .= substr( $css, $i, $end + 2 - $i );
+			}
+
+			$i = $end + 2;
+			continue;
+		}
+
+		// Quoted string: lift out verbatim, honouring backslash escapes.
+		if ( '"' === $char || "'" === $char ) {
+			$j = $i + 1;
+
+			while ( $j < $length ) {
+				if ( '\\' === $css[ $j ] ) {
+					$j += 2;
+					continue;
+				}
+				if ( $css[ $j ] === $char ) {
+					break;
+				}
+				$j++;
+			}
+
+			$key             = "\x01" . count( $strings ) . "\x01";
+			$strings[ $key ] = substr( $css, $i, min( $j, $length - 1 ) + 1 - $i );
+			$out            .= $key;
+			$i               = $j + 1;
+			continue;
+		}
+
+		// Unquoted url( ... ): opaque payload, may contain anything but a quote.
+		if ( ( 'u' === $char || 'U' === $char ) && 0 === substr_compare( $css, 'url(', $i, 4, true ) ) {
+			$end = strpos( $css, ')', $i + 4 );
+
+			if ( false !== $end ) {
+				$inner = substr( $css, $i + 4, $end - ( $i + 4 ) );
+
+				if ( false === strpos( $inner, '"' ) && false === strpos( $inner, "'" ) ) {
+					$key             = "\x01" . count( $strings ) . "\x01";
+					$strings[ $key ] = substr( $css, $i, $end + 1 - $i );
+					$out            .= $key;
+					$i               = $end + 1;
+					continue;
+				}
+			}
+		}
+
+		// Whitespace run: at most one space, and none next to a brace or semicolon.
+		if ( ' ' === $char || "\t" === $char || "\n" === $char || "\r" === $char || "\f" === $char || "\v" === $char ) {
+			while ( $i < $length && preg_match( '/\s/', $css[ $i ] ) ) {
+				$i++;
+			}
+
+			$last = '' === $out ? '' : substr( $out, -1 );
+			$next = $i < $length ? $css[ $i ] : '';
+
+			if ( '' !== $last
+				&& false === strpos( '{};', $last )
+				&& '' !== $next
+				&& false === strpos( '{};', $next )
+				&& ! ( $in_decl && ! $in_at && ':' === $next ) ) {
+				$out .= ' ';
+			}
+
+			continue;
+		}
+
+		if ( '@' === $char ) {
+			$in_at = true;
+			$out  .= '@';
+			$i++;
+			continue;
+		}
+
+		if ( '{' === $char ) {
+			$out     = rtrim( $out, " " );
+			$stack[] = $in_at;
+			$in_at   = false;
+			$in_decl = ( false === end( $stack ) );
+			$out    .= '{';
+			$i++;
+			continue;
+		}
+
+		if ( '}' === $char ) {
+			$out = rtrim( $out, " ;" );
+			array_pop( $stack );
+			$in_decl = ! empty( $stack ) && ( false === end( $stack ) );
+			$out    .= '}';
+			$i++;
+			continue;
+		}
+
+		if ( ';' === $char ) {
+			$out   = rtrim( $out, " " );
+			$in_at = false;
+			$out  .= ';';
+			$i++;
+			continue;
+		}
+
+		// Only inside a real declaration block: "color: red" -> "color:red".
+		// Never in a selector, where the space is a descendant combinator, and
+		// never in an at-rule prelude such as "@container x (max-width: 330px)".
+		if ( ':' === $char && $in_decl && ! $in_at ) {
+			$out  = rtrim( $out, " " );
+			$out .= ':';
+			$i++;
+
+			while ( $i < $length && ( ' ' === $css[ $i ] || "\t" === $css[ $i ] ) ) {
+				$i++;
+			}
+
+			continue;
+		}
+
+		$out .= $char;
+		$i++;
 	}
 
-	$css = preg_replace( '#/\*(?!!).*?\*/#s', '', $css );
-	$css = preg_replace( '/\s+/', ' ', $css );
-	$css = preg_replace( '/\s*([{};:,>+~])\s*/', '$1', $css );
-	if ( ! is_string( $css ) ) {
-		return $original;
-	}
-
-	$css = str_replace( ';}', '}', $css );
-
-	return trim( strtr( $css, $strings ) );
+	return trim( strtr( $out, $strings ) );
 }
 
 /**

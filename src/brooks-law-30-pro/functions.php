@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BROOKS_LAW_VERSION', '5.3.0' );
+define( 'BROOKS_LAW_VERSION', '5.3.1' );
 
 /* -------------------------------------------------------------------------
  * Setup

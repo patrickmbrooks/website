@@ -199,3 +199,66 @@ never clobbered; the source row is left intact as a rollback.
 
 **Plugin settings were never at risk** — `brooks_ess_options`,
 `brooks_ess_404_log` and `brooks_llms_txt` are folder-independent option keys.
+
+---
+
+# 5.3.1 — CSS minifier rewritten (regression fix)
+
+**5.3.0 broke the live site.** Pages rendered white with no colours, and a large
+blue shape appeared mid-page. Both symptoms had one cause.
+
+The Customizer preview skips minification (`is_customize_preview()` returns
+early in both minifiers), which is why the site looked correct where it was
+being edited and wrong to every visitor.
+
+## What happened
+
+5.3.0 protected string literals *before* stripping comments. `style.css` line 20
+contains the comment `Palette drawn from the firm's world`. That apostrophe
+opened a string literal which ran to the next apostrophe on line 378 — a
+**15,131-byte "string"** containing the entire `:root` block. Rule count fell
+from 317 to 120; every design token vanished, so every `var(--court)`,
+`var(--paper)`, `var(--ink)` resolved to nothing.
+
+`editorial.css` lost 5 rules the same way, including the sizing and `opacity:.05`
+on `.blf-sky`. Its `.blf-sky .water path { fill: #5F86A0 }` then rendered
+full-size and fully opaque — the blue shape.
+
+## The fix
+
+Rewritten as a single left-to-right tokenizer. Comments and string literals are
+resolved in one pass, so neither can be mistaken for the other. Two further
+defects were found and fixed while verifying it — **both of which also existed
+in the original 5.2.3 minifier**:
+
+| Defect | Effect |
+|---|---|
+| `\s*([{};:,>+~])\s*` collapsed around `+` | `calc(64px + env(safe-area-inset-bottom))` became `calc(64px+env(...))`, invalid CSS — the mobile sticky-bar padding |
+| `:` squeezed wherever brace depth > 0 | `.statement :where(h2)` became `.statement:where(h2)` — a descendant combinator turning into a compound selector, matching nothing. Depth is a bad proxy for "in declarations": nested at-rules (`@supports { @container { … } }`) are at depth 2 while still reading selectors. Replaced with a stack recording what kind of block each brace opened. |
+
+Whitespace is now removed only around `{`, `}`, `;`, and around `:` inside a
+real declaration block. Never around `+ - > ~`, never in a selector, never in an
+at-rule prelude. The saving from squeezing combinators is a few hundred bytes;
+the cost of getting it wrong is the whole stylesheet.
+
+## Verification
+
+- **`tests/test-minifiers.php`** — 31 assertions, no WordPress required, run with
+  `php tests/test-minifiers.php`. Every case is something that actually broke or
+  is one character from breaking. This is the regression guard that should have
+  existed before 5.3.0 shipped.
+- All 9 stylesheets parsed before and after and compared rule-by-rule and
+  declaration-by-declaration: **semantically identical**, 118,535 → 85,715 bytes
+  (28% saved).
+- Spot-checked: `:root` present, `--court` / `--paper` / `--brass-btn` present,
+  `calc()` spacing intact, `.blf-sky` rules present.
+- HTML minifier re-run over all 170 real pages: 0 differences.
+- All 8 scripts re-checked; 58 PHP files lint clean on 8.4.
+
+Version bumped to 5.3.1 so the content hash in `/uploads/brooks-law-cache/`
+changes and the broken 5.3.0 files cannot be reused. Superseded builds are
+pruned automatically.
+
+**Immediate mitigation if a build ever misbehaves again:** Customizer →
+Brooks Law Firm → Performance → untick *Minify theme CSS & JS*. The original
+stylesheets are served and the site is restored without touching any files.
