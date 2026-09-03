@@ -187,6 +187,135 @@ final class Docket_SEO {
 	 * Pure helper (testable): strips tags/shortcodes, collapses
 	 * whitespace, cuts at a word boundary.
 	 */
+	/**
+	 * Report which pages will have their meta description truncated.
+	 *
+	 * Google cuts the description at roughly 155-160 characters on desktop and
+	 * around 120 on mobile. Truncation is not a penalty, but it decides WHICH
+	 * part of the sentence a searcher sees — and when the house style ends with
+	 * "Call (901) 324-5000", the phone number is the part that disappears.
+	 *
+	 * This reads the EFFECTIVE description for each page — the same
+	 * seo_desc_for() chain the front end uses, so a page inheriting a value
+	 * from Yoast meta or from an auto-trim is measured as it will actually be
+	 * published, not as the edit box appears.
+	 */
+	public function render_length_report() {
+		$limit  = 160;
+		$mobile = 120;
+
+		$ids = get_posts(
+			array(
+				'post_type'        => array( 'page', 'post' ),
+				'post_status'      => 'publish',
+				'numberposts'      => -1,
+				'fields'           => 'ids',
+				'suppress_filters' => true,
+			)
+		);
+
+		$rows = array();
+
+		foreach ( $ids as $id ) {
+			$desc = trim( (string) $this->seo_desc_for( $id ) );
+			$len  = function_exists( 'mb_strlen' ) ? mb_strlen( $desc ) : strlen( $desc );
+
+			if ( $len <= $limit ) {
+				continue;
+			}
+
+			// Where does the call to action begin? A phone number, or the word
+			// "Call". If that position is past the cut, it is being lost.
+			$cta = false;
+			if ( preg_match( '/(\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}|\bCall\b)/i', $desc, $m, PREG_OFFSET_CAPTURE ) ) {
+				$cta = (int) $m[0][1];
+			}
+
+			$rows[] = array(
+				'id'   => $id,
+				'len'  => $len,
+				'cta'  => $cta,
+				'desc' => $desc,
+			);
+		}
+
+		if ( empty( $rows ) ) {
+			echo '<hr><h2>Meta description lengths</h2><p><strong>All good.</strong> No published page has a description long enough to be truncated.</p>';
+			return;
+		}
+
+		usort(
+			$rows,
+			static function ( $a, $b ) {
+				return $b['len'] <=> $a['len'];
+			}
+		);
+
+		$lost = 0;
+		foreach ( $rows as $r ) {
+			if ( false !== $r['cta'] && $r['cta'] >= $limit ) {
+				$lost++;
+			}
+		}
+
+		$show = array_slice( $rows, 0, 40 );
+		?>
+		<hr>
+		<h2>Meta description lengths</h2>
+		<p style="max-width:46em">
+			<strong><?php echo (int) count( $rows ); ?></strong> published
+			<?php echo 1 === count( $rows ) ? 'page has a description' : 'pages have descriptions'; ?>
+			longer than <?php echo (int) $limit; ?> characters, so
+			<?php echo 1 === count( $rows ) ? 'it will be' : 'they will be'; ?>
+			cut short in search results.
+			<?php if ( $lost ) : ?>
+				On <strong><?php echo (int) $lost; ?></strong> of them the phone number sits past the cut and never appears.
+			<?php endif; ?>
+			Longest first — the ones at the top lose the most.
+		</p>
+		<table class="widefat striped" style="max-width:60em">
+			<thead>
+				<tr>
+					<th style="width:22em">Page</th>
+					<th style="width:5em">Length</th>
+					<th style="width:6em">Trim by</th>
+					<th style="width:8em">Phone shown?</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach ( $show as $r ) : ?>
+				<tr>
+					<td><strong><?php echo esc_html( get_the_title( $r['id'] ) ); ?></strong><br>
+						<span class="description"><?php echo esc_html( mb_substr( $r['desc'], 0, 90 ) ); ?>&hellip;</span></td>
+					<td><?php echo (int) $r['len']; ?></td>
+					<td>&minus;<?php echo (int) ( $r['len'] - $limit ); ?></td>
+					<td>
+						<?php if ( false === $r['cta'] ) : ?>
+							<span style="color:#646970">none</span>
+						<?php elseif ( $r['cta'] >= $limit ) : ?>
+							<strong style="color:#b32d2e">cut off</strong>
+						<?php elseif ( $r['cta'] >= $mobile ) : ?>
+							<span style="color:#996800">desktop only</span>
+						<?php else : ?>
+							<span style="color:#007017">yes</span>
+						<?php endif; ?>
+					</td>
+					<td><a href="<?php echo esc_url( get_edit_post_link( $r['id'] ) ); ?>">Edit</a></td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php if ( count( $rows ) > count( $show ) ) : ?>
+			<p class="description"><?php echo (int) ( count( $rows ) - count( $show ) ); ?> more not listed. Fix the ones above and reload.</p>
+		<?php endif; ?>
+		<p class="description" style="max-width:46em">
+			Aim for 140&ndash;155 characters, and put the phone number before
+			character <?php echo (int) $mobile; ?> if you want it visible on a phone.
+		</p>
+		<?php
+	}
+
 	public static function trim_desc( $text, $max = 160 ) {
 		$text = strip_shortcodes( (string) $text );
 		$text = str_replace( '<', ' <', $text ); // Keep words apart when block tags are stripped.
@@ -730,6 +859,8 @@ final class Docket_SEO {
 				</table>
 				<?php submit_button(); ?>
 			</form>
+
+			<?php $this->render_length_report(); ?>
 			<?php
 			// Suite Pro 5: optional one-shot import of Yoast's stored fields.
 			if ( function_exists( 'docket_seo_migrate_panel' ) ) {

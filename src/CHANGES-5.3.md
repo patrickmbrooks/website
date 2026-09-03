@@ -419,3 +419,50 @@ The one-shot migration on the Docket SEO settings screen copies those values
 into `_docket_seo_*` keys. It never overwrites an existing value, skips Yoast
 template patterns such as `%%title%%`, and writes a per-post backup so a single
 Undo restores the previous state. It should be run before Yoast is deleted.
+
+---
+
+# Docket Suite 5.2.4 — verification fields + description-length report
+
+Two additions, both driven by the live site.
+
+## Meta description lengths
+
+Measured from the 3 September export: **109 of 169 published descriptions exceed
+160 characters** and are truncated in search results. The house style ends with
+"Call (901) 324-5000", so the phone number is the part that disappears.
+
+But "109 pages are too long" is not a worklist. The report added to the Docket
+SEO settings screen measures what actually matters:
+
+| | Pages |
+|---|---|
+| Over 160 characters | 109 |
+| **Phone number cut off entirely** | **44** |
+| Phone visible on desktop only | 47 |
+| No phone in the description | 17 |
+
+So the job is 44 pages, not 109 — a median of 39 characters each, 1,834 in
+total.
+
+The report reads the **effective** description through the same
+`seo_desc_for()` chain the front end uses, so a page inheriting its value from
+Yoast meta or from an auto-trim is measured as it will actually be published,
+not as the edit box appears. It sorts longest-first, shows how many characters
+to cut, flags whether the phone survives the cut on desktop and on mobile, and
+links straight to the editor.
+
+`reports/phone-truncated-pages.csv` is the same 44 pages as a spreadsheet,
+generated from the export for working offline.
+
+## Search-engine verification
+
+`includes/verification.php` — Bing, Google Search Console, Yandex and
+Pinterest, under **Settings → Site Essentials → Search-engine verification**.
+Removing Yoast removed the only field on the site where a verification code
+could be entered without touching the filesystem.
+
+It does not stand down for other SEO plugins, unlike `seo.php`: titles and
+canonicals genuinely conflict, verification tags do not, and standing down is
+exactly how this site lost its Bing field. The field accepts the whole `<meta>`
+tag or just the token, verified against eight paste shapes.
