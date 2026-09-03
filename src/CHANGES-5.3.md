@@ -133,3 +133,69 @@ pages: 2 `ProfilePage` (both correctly anchored), 1 `ContactPage`, 167
   `docket-suite-pro-5-2-2/`. **Installing from those folder names would orphan
   every Customizer setting** — the theme slug must stay `brooks-law-30-pro`.
   The packages in `dist/` use the correct folder names.
+
+---
+
+# Handoff safety (found while checking the upgrade path)
+
+## A "cannot redeclare" fatal when two copies coexist
+
+Simulating the upload — the installed 5.2.2 plugin and this build loaded in the
+same request — produced a **white screen**:
+
+```
+PHP Fatal error: Cannot redeclare function docket_suite_conflicting_plugins()
+```
+
+The dormancy guard was structurally unable to prevent it. PHP early-binds
+unconditional top-level function declarations when a file is compiled, before
+any statement in it runs, so the `return` at line 216 could not stop the four
+`docket_suite_*` functions declared at lines 95–196 from being bound. Confirmed
+directly: a top-level `return` above a declaration does not prevent it; a
+`function_exists()`-wrapped declaration binds at runtime and survives a double
+include.
+
+`includes/core.php` has always documented this exact rule for the shared
+`brooks_ess_*` modules — *"PHP binds top-level function declarations at compile
+time, so shared functions must live in a runtime-required include, never in the
+main plugin file"* — and the bootstrap helpers broke it. The guard only checked
+for `brooks_ess_*` symbols, which correctly live in a runtime include and so
+were absent; it never got the chance to matter.
+
+**Two fixes, because one alone is not enough:**
+
+1. All eight bootstrap functions moved to `includes/bootstrap.php`, behind a
+   `function_exists()` return in the main file. The main file now contains zero
+   top-level declarations.
+2. They are renamed to a `docket_suite_boot_` prefix. This is load-bearing and
+   not cosmetic: the *installed* 5.2.2 file cannot be patched from here, and it
+   declares the old `docket_suite_*` names unconditionally. Not sharing those
+   names is the only way this build can be loaded alongside one without a fatal.
+
+Verified in both load orders, zero fatals:
+
+| Load order | Before | After |
+|---|---|---|
+| old 5.2.2 folder first | no fatal (old wins silently) | no fatal |
+| new folder first | **FATAL — white screen** | no fatal |
+
+Duplicate resolution is now by **version**, not load order — load order is a
+string sort of folder names, which would let an older build in a
+lower-sorting folder defeat a newer one. A strictly newer copy causes this one
+to retire itself; otherwise this one retires the older copies.
+
+## Theme settings survive a folder-name change
+
+WordPress keys Customizer settings to `theme_mods_<folder name>`, and the
+migration only listed three predecessors by name — so activating from a zip
+whose folder differed from the installed one silently started with an empty
+Customizer. The two `after_switch_theme` migrations (which raced each other on
+the same hook) are replaced by one that searches the options table for any
+`theme_mods_brooks-law*` sibling and takes the richest.
+
+Verified: settings carry from `brooks-law-30-pro-5`, from an arbitrary folder
+name, and from several old copies (richest wins); an existing settings set is
+never clobbered; the source row is left intact as a rollback.
+
+**Plugin settings were never at risk** — `brooks_ess_options`,
+`brooks_ess_404_log` and `brooks_llms_txt` are folder-independent option keys.

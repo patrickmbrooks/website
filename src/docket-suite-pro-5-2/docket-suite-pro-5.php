@@ -60,177 +60,62 @@ if ( ! defined( 'ABSPATH' ) ) {
  * SELF-HANDOFF BOOTSTRAP
  *
  * The Suite carries the same operational modules as Brooks Law Essentials and
- * therefore declares the same brooks_ess_* functions. Running both at once
- * would be a "cannot redeclare" fatal, so:
+ * therefore declares the same brooks_ess_* functions. More than one copy
+ * running at once would be a "cannot redeclare" fatal, so:
  *
- *   1. On activation, every other active plugin whose path contains
- *      "brooks-law-essentials" is silently deactivated. Settings, redirect
- *      rules, the 404 log and the llms.txt body all live in shared options
- *      and are NOT touched by deactivation — they carry straight over.
- *   2. If an Essentials copy is already loaded in this same request, this
- *      file stays dormant for that one request and takes over on the next
- *      page load.
+ *   1. If ANY copy of this bootstrap, or of Essentials, has already loaded in
+ *      this request, this file declares nothing at all and returns. That
+ *      dormancy check has to come before the require below, because PHP
+ *      early-binds top-level function declarations at compile time: a `return`
+ *      cannot protect a function declared later in the same file, which is
+ *      why the takeover helpers live in includes/bootstrap.php and not here.
+ *   2. Whichever copy does load resolves the duplicate by VERSION on the next
+ *      admin request — the newest survives, the rest are silently deactivated.
+ *      Settings, redirect rules, the 404 log and the llms.txt body all live in
+ *      folder-independent options and are never touched by deactivation, so
+ *      they carry over whatever the winning folder is called.
  *
- * Helpers use the unique docket_suite_ prefix so they cannot collide.
+ * Helpers use a docket_suite_boot_ prefix, distinct from the docket_suite_
+ * names a 5.2.2-or-earlier main file declares unconditionally at compile time.
+ * That separation is load-bearing: those older declarations cannot be guarded
+ * from here, so the only way this build can be loaded alongside one without a
+ * "cannot redeclare" fatal is to not share their names.
  * -------------------------------------------------------------------------
  */
 
-/**
- * Find every active plugin that ships the shared brooks_ess_* modules.
- *
- * Detection is by symbol: any active plugin whose main file or
- * includes/core.php declares brooks_ess_defaults() is a copy of Brooks Law
- * Essentials, whatever the directory is called. Folder names only decide
- * WHICH files are worth opening, never whether a plugin is a match — an
- * earlier version short-circuited on a folder-name substring, and one of the
- * substrings was generic enough ("site-essentials") to match an unrelated
- * third-party plugin and silently deactivate it.
- *
- * The scan reads plugin source from disk, so the result is cached against a
- * fingerprint of the active-plugin list. In steady state this is one
- * autoloaded option read per request and no filesystem access.
- *
- * @return string[] Plugin basenames, e.g. brooks-law-essentials/plugin.php.
- */
-function docket_suite_conflicting_plugins() {
-	static $memo = null;
-	if ( null !== $memo ) {
-		return $memo;
-	}
-
-	$self   = plugin_basename( __FILE__ );
-	$active = (array) get_option( 'active_plugins', array() );
-	$others = array_values( array_diff( $active, array( $self ) ) );
-
-	$fingerprint = md5( wp_json_encode( $others ) );
-	$cache       = get_option( 'docket_suite_conflict_cache', array() );
-	if ( is_array( $cache ) && isset( $cache['key'], $cache['hits'] ) && $cache['key'] === $fingerprint ) {
-		$memo = (array) $cache['hits'];
-		return $memo;
-	}
-
-	$plugin_dir = defined( 'WP_PLUGIN_DIR' ) ? WP_PLUGIN_DIR : '';
-	$hits       = array();
-
-	foreach ( $others as $path ) {
-		$path = (string) $path;
-
-		if ( '' === $plugin_dir ) {
-			continue;
-		}
-
-		/*
-		 * The folder names Essentials has shipped under are checked first
-		 * only to order the work: an exact folder match is confirmed by the
-		 * same symbol check as anything else, never accepted on its own.
-		 */
-		$folder     = dirname( $path );
-		$candidates = array( $plugin_dir . '/' . $path );
-		if ( '.' !== $folder ) {
-			$candidates[] = $plugin_dir . '/' . $folder . '/includes/core.php';
-			$candidates[] = $plugin_dir . '/' . $folder . '/inc/core.php';
-		}
-
-		foreach ( $candidates as $file ) {
-			if ( ! is_readable( $file ) ) {
-				continue;
-			}
-			// Reading a sibling plugin's own source; WP_Filesystem is not warranted here.
-			$source = file_get_contents( $file, false, null, 0, 262144 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-			if ( is_string( $source ) && false !== strpos( $source, 'function brooks_ess_defaults' ) ) {
-				$hits[] = $path;
-				break;
-			}
-		}
-	}
-
-	$memo = array_values( array_unique( $hits ) );
-	update_option( 'docket_suite_conflict_cache', array( 'key' => $fingerprint, 'hits' => $memo ), true );
-
-	return $memo;
-}
-
-/**
- * Deactivate any conflicting copy of Brooks Law Essentials.
- *
- * Silent deactivation: no hooks fire and no options are touched, so the
- * shared settings, redirect rules, 404 log and llms.txt body carry over.
- */
-function docket_suite_takeover_on_activation() {
-	if ( ! function_exists( 'deactivate_plugins' ) ) {
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	}
-
-	$others = docket_suite_conflicting_plugins();
-	if ( ! $others ) {
-		return;
-	}
-
-	deactivate_plugins( $others, true );
-	delete_option( 'docket_suite_conflict_cache' );
-	update_option( 'docket_suite_handoff_done', implode( ', ', $others ), false );
-}
-
-/**
- * Self-heal on admin requests.
- *
- * Covers the cases the activation hook cannot: a conflicting copy re-enabled
- * by hand, a renamed folder, or an activation whose hook never fired. Gated
- * on the cached conflict list, so it is a single option read when clean.
- */
-function docket_suite_takeover_self_heal() {
-	if ( ! is_admin() || ! current_user_can( 'activate_plugins' ) ) {
-		return;
-	}
-	if ( docket_suite_conflicting_plugins() ) {
-		docket_suite_takeover_on_activation();
-	}
-}
-add_action( 'admin_init', 'docket_suite_takeover_self_heal', 1 );
-
-register_activation_hook( __FILE__, 'docket_suite_takeover_on_activation' );
-
-/**
- * One-time notice confirming the handoff from Essentials.
- */
-function docket_suite_handoff_notice() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
-
-	$done = get_option( 'docket_suite_handoff_done' );
-	if ( ! $done ) {
-		return;
-	}
-	delete_option( 'docket_suite_handoff_done' );
-
-	echo '<div class="notice notice-success is-dismissible"><p><strong>Docket Suite Pro 5:</strong> took over from ' . esc_html( $done ) . ', which was deactivated. Settings, redirect rules, the 404 log and your llms.txt carried over unchanged. Leave the old plugin deactivated as a rollback — do NOT use the WordPress &ldquo;Delete&rdquo; link on it, as that would erase the shared settings.</p></div>';
-}
-add_action( 'admin_notices', 'docket_suite_handoff_notice' );
-
 /*
- * Dormancy guard: if an Essentials copy is loaded in this same request,
- * define nothing further. The takeover above has already deactivated it, so
- * the next request belongs to this copy alone.
+ * Hard dormancy. Any of these means another copy of the suite, or of
+ * Essentials, owns this request.
  */
-if ( function_exists( 'brooks_ess_defaults' )
+if ( function_exists( 'docket_suite_boot_conflicts' )      // another copy of THIS build
+	|| function_exists( 'docket_suite_conflicting_plugins' ) // a 5.2.2-or-earlier build
+	|| function_exists( 'brooks_ess_defaults' )
 	|| function_exists( 'brooks_ess_get' )
 	|| defined( 'BROOKS_LLMS_OPTION' )
 	|| ( defined( 'BROOKS_ESS_VERSION' ) && ! defined( 'DOCKET_SUITE_VERSION' ) ) ) {
 	return;
 }
 
+/** Absolute path to this plugin's main file, for the bootstrap helpers. */
+define( 'DOCKET_SUITE_MAIN_FILE', __FILE__ );
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/bootstrap.php';
+
 /*
- * Load-order guard. The check above only catches an Essentials copy that has
- * already been loaded this request. When this plugin's folder sorts first,
- * Essentials loads *after* us and it is Essentials that hits the redeclare
- * fatal — a fatal WordPress attributes to whichever plugin is being
- * activated. So: if a conflicting copy is still on the active list at all,
- * stay dormant for this one request. docket_suite_takeover_self_heal() runs
- * on admin_init and stands the other copy down, and the next page load
- * belongs to this plugin alone.
+ * Registered before the load-order guard below, so that even a copy which
+ * then goes dormant still schedules the self-heal that resolves the
+ * duplicate. Without this a two-copy install could sit unresolved.
  */
-if ( docket_suite_conflicting_plugins() ) {
+add_action( 'admin_init', 'docket_suite_boot_self_heal', 1 );
+add_action( 'admin_notices', 'docket_suite_boot_notice' );
+register_activation_hook( __FILE__, 'docket_suite_boot_resolve' );
+
+/*
+ * Load-order guard: another copy is still on the active list. Stand down for
+ * this one request; the self-heal above stands the loser down for good, and
+ * the next page load belongs to a single copy.
+ */
+if ( docket_suite_boot_conflicts() ) {
 	return;
 }
 
@@ -281,17 +166,7 @@ if ( class_exists( 'Docket_SEO' ) ) {
 	register_deactivation_hook( __FILE__, array( 'Docket_SEO', 'deactivate' ) );
 }
 
-/**
- * One-shot rewrite flush so /sitemap.xml resolves without re-activating.
- */
-function docket_suite_maybe_flush_rewrites() {
-	if ( get_option( 'docket_suite_rw_flushed_v50' ) ) {
-		return;
-	}
-	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) ) {
-		return; // Another SEO plugin owns sitemaps; do not claim the URL yet.
-	}
-	flush_rewrite_rules();
-	update_option( 'docket_suite_rw_flushed_v50', 1, false );
-}
-add_action( 'admin_init', 'docket_suite_maybe_flush_rewrites', 99 );
+// docket_suite_boot_flush_rewrites() lives in includes/bootstrap.php: like the
+// takeover helpers it must not be early-bound in this file, or a second copy
+// of the plugin would fatal on it before the dormancy guard above could run.
+add_action( 'admin_init', 'docket_suite_boot_flush_rewrites', 99 );

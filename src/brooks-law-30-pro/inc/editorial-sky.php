@@ -201,38 +201,101 @@ function brooks_law_editorial_render_sky() {
 add_action( 'wp_body_open', 'brooks_law_editorial_render_sky' );
 
 /**
- * Settings migration for 2.4: prefer the 2.3 slug, then the original.
+ * Carry Customizer settings across a folder-name change on first activation.
  *
- * Same contract as brooks_law_23_migrate_settings(): only ever fills an
- * empty slate, never modifies the source theme's settings. Hooked at
- * priority 9 so it runs before the 2.3 migration; whichever fills the
- * settings first wins, and the other returns without writing.
+ * WordPress stores theme mods in `theme_mods_<stylesheet>`, keyed by the
+ * theme's FOLDER NAME. So a build installed to a different folder — a zip that
+ * unpacked as brooks-law-30-pro-5 rather than brooks-law-30-pro, say — starts
+ * with an empty Customizer even though the previous settings are still sitting
+ * in the options table under the old key.
+ *
+ * The earlier version listed three known predecessors by name, which meant it
+ * only rescued a site upgrading along the exact path its author anticipated.
+ * This one searches the options table for any theme_mods_ row belonging to a
+ * sibling of this theme and takes the richest one, so a settings carry-over no
+ * longer depends on guessing what the previous folder was called.
+ *
+ * The contract is unchanged and deliberately conservative:
+ *
+ *   - It only ever fills an EMPTY slate. Settings that already exist for this
+ *     folder are never touched, so re-activating is safe and repeatable.
+ *   - The source is read, never written. The old theme stays intact as a
+ *     rollback, exactly as it was.
+ *   - Any sidebar/widget mapping WordPress has already assigned to this
+ *     stylesheet survives the copy.
+ *
+ * @return void
  */
-function brooks_law_24_migrate_settings() {
+function brooks_law_migrate_settings() {
+	global $wpdb;
 
-	$current = get_option( 'theme_mods_' . get_option( 'stylesheet' ) );
+	$stylesheet = (string) get_option( 'stylesheet' );
+	$current    = get_option( 'theme_mods_' . $stylesheet );
 
 	// Only migrate into an empty slate: never clobber settings that exist.
+	// WordPress seeds a lone 0 => false entry, hence "more than one".
 	if ( is_array( $current ) && count( $current ) > 1 ) {
 		return;
 	}
 
-	$sources = array( 'theme_mods_brooks-law-24-editorial', 'theme_mods_brooks-law-23', 'theme_mods_brooks-law' );
+	$candidates = array();
 
-	foreach ( $sources as $option_name ) {
+	/*
+	 * Known predecessors first, in the order they shipped, so a site that has
+	 * several of them still lands on the most recent.
+	 */
+	foreach ( array( 'brooks-law-30-pro', 'brooks-law-30-pro-5', 'brooks-law-24-editorial', 'brooks-law-23', 'brooks-law' ) as $slug ) {
+		if ( $slug !== $stylesheet ) {
+			$candidates[] = 'theme_mods_' . $slug;
+		}
+	}
 
+	/*
+	 * Then anything else that looks like a sibling of this theme. This is what
+	 * makes the migration independent of the folder name a zip happened to
+	 * unpack as.
+	 */
+	$found = $wpdb->get_col(
+		$wpdb->prepare(
+			"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
+			$wpdb->esc_like( 'theme_mods_brooks-law' ) . '%'
+		)
+	); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- One read, once, on theme activation; there is no core API for "options matching a prefix".
+
+	foreach ( (array) $found as $option_name ) {
+		if ( 'theme_mods_' . $stylesheet !== $option_name && ! in_array( $option_name, $candidates, true ) ) {
+			$candidates[] = $option_name;
+		}
+	}
+
+	$best      = null;
+	$best_size = 0;
+
+	foreach ( $candidates as $option_name ) {
 		$source = get_option( $option_name );
+
 		if ( ! is_array( $source ) || empty( $source ) ) {
 			continue;
 		}
 
-		// Preserve sidebar/widget mapping WP may have already set for this slug.
-		if ( is_array( $current ) && isset( $current['sidebars_widgets'] ) && ! isset( $source['sidebars_widgets'] ) ) {
-			$source['sidebars_widgets'] = $current['sidebars_widgets'];
-		}
+		// The richest set of saved values is the one that was actually in use.
+		$size = count( $source );
 
-		update_option( 'theme_mods_' . get_option( 'stylesheet' ), $source );
+		if ( $size > $best_size ) {
+			$best      = $source;
+			$best_size = $size;
+		}
+	}
+
+	if ( null === $best || $best_size < 2 ) {
 		return;
 	}
+
+	// Preserve any sidebar/widget mapping WP has already set for this slug.
+	if ( is_array( $current ) && isset( $current['sidebars_widgets'] ) && ! isset( $best['sidebars_widgets'] ) ) {
+		$best['sidebars_widgets'] = $current['sidebars_widgets'];
+	}
+
+	update_option( 'theme_mods_' . $stylesheet, $best );
 }
-add_action( 'after_switch_theme', 'brooks_law_24_migrate_settings', 9 );
+add_action( 'after_switch_theme', 'brooks_law_migrate_settings' );

@@ -463,34 +463,9 @@ function brooks_law_hero_video_render( $url ) {
 	echo '><source src="' . esc_url( $url ) . '" type="video/mp4"></video></div>';
 }
 
-/**
- * One-time settings migration (v2.3 side-by-side install).
- *
- * This theme lives at a different slug than the original "brooks-law",
- * and WordPress stores Customizer settings per-slug. On first activation,
- * if this theme has no settings of its own yet, copy everything —
- * Customizer values, menu locations, custom logo — from the original
- * theme so nothing has to be re-entered. The original theme's settings
- * are read-only here and never modified.
+/*
+ * Settings migration lives in inc/editorial-sky.php as
+ * brooks_law_migrate_settings(). The v2.3-era copy that used to sit here
+ * searched only for theme_mods_brooks-law and raced the 2.4 one on the same
+ * hook; there is a single implementation now.
  */
-function brooks_law_23_migrate_settings() {
-	$current = get_option( 'theme_mods_' . get_option( 'stylesheet' ) );
-
-	// Only migrate into an empty slate: never clobber settings that exist.
-	if ( is_array( $current ) && count( $current ) > 1 ) {
-		return;
-	}
-
-	$source = get_option( 'theme_mods_brooks-law' );
-	if ( ! is_array( $source ) || empty( $source ) ) {
-		return;
-	}
-
-	// Preserve sidebar/widget mapping WP may have already set for this slug.
-	if ( is_array( $current ) && isset( $current['sidebars_widgets'] ) && ! isset( $source['sidebars_widgets'] ) ) {
-		$source['sidebars_widgets'] = $current['sidebars_widgets'];
-	}
-
-	update_option( 'theme_mods_' . get_option( 'stylesheet' ), $source );
-}
-add_action( 'after_switch_theme', 'brooks_law_23_migrate_settings' );
