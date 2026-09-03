@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Brooks Law Firm — Website Assessment</title>
+<style>
+@font-face { font-family:'Fraunces'; font-style:normal; font-weight:600; font-display:block;
+  src:url(fraunces-static.woff2) format('woff2'); }
+@font-face { font-family:'IBM Plex Sans'; font-style:normal; font-weight:400; font-display:block;
+  src:url(plexsans-static.woff2) format('woff2'); }
+@font-face { font-family:'IBM Plex Mono'; font-style:normal; font-weight:400; font-display:block;
+  src:url(ibmplexmono-400-latin.woff2) format('woff2'); }
+@font-face { font-family:'IBM Plex Mono'; font-style:normal; font-weight:500; font-display:block;
+  src:url(ibmplexmono-500-latin.woff2) format('woff2'); }
+
+:root{
+  --court:#12202e; --ink:#1c2430; --soft:#4b5563; --mute:#6b7280;
+  --rule:#d8dce2; --hair:#e8ebef; --band:#f5f4f0;
+  --brass:#9a7724; --oxblood:#7c2d2d; --green:#2c6350;
+}
+
+@page { size: Letter; margin: 13mm 15mm 12mm 15mm; }
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:'IBM Plex Sans', -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+  color:var(--ink); font-size:9.6pt; line-height:1.46;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+h1,h2,h3{ font-family:'Fraunces', Charter, 'Bitstream Charter', Georgia, serif; font-weight:600; margin:0; }
+
+/* ---------- masthead ---------- */
+.mast{ border-bottom:2.5pt solid var(--court); padding-bottom:8pt; margin-bottom:12pt; }
+.kicker{
+  font-family:'IBM Plex Mono', monospace; font-size:6.9pt; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--brass); margin:0 0 6pt;
+}
+h1{ font-size:23pt; line-height:1.08; letter-spacing:-.01em; }
+.sub{ color:var(--soft); font-size:10.2pt; margin:5pt 0 0; max-width:74%; }
+
+/* ---------- verdict ---------- */
+.verdict{ display:flex; gap:14pt; align-items:stretch; margin-bottom:12pt; break-inside:avoid; }
+.score{
+  flex:0 0 92pt; background:var(--court); color:#fff; border-radius:3pt;
+  padding:11pt 8pt; text-align:center;
+}
+.score .n{ font-family:'Fraunces',Charter,Georgia,serif; font-size:34pt; line-height:1; }
+.score .d{ font-family:'IBM Plex Mono',monospace; font-size:7.6pt; opacity:.75; margin-top:2pt; }
+.score .l{
+  font-family:'IBM Plex Mono',monospace; font-size:6.6pt; letter-spacing:.13em;
+  text-transform:uppercase; margin-top:7pt; padding-top:6pt;
+  border-top:.5pt solid rgba(255,255,255,.28); opacity:.9; line-height:1.45;
+}
+.verdict-body{ flex:1; }
+.verdict-body p{ margin:0 0 6pt; }
+.verdict-body p:last-child{ margin-bottom:0; }
+
+/* ---------- scorecard ---------- */
+h2{
+  font-size:12.6pt; margin:0 0 2pt; letter-spacing:-.005em;
+  break-after:avoid; page-break-after:avoid;
+}
+.sec{ margin-bottom:10.5pt; }
+.sec > .note{
+  color:var(--mute); font-size:8.8pt; margin:0 0 7pt; padding-bottom:5pt;
+  border-bottom:.5pt solid var(--rule);
+  break-after:avoid; page-break-after:avoid;
+}
+/* A section heading must never sit alone at the foot of a page. */
+ol.recs > li:first-child{ break-before:avoid; page-break-before:avoid; }
+table{ width:100%; border-collapse:collapse; font-size:9.1pt; }
+th{
+  font-family:'IBM Plex Mono',monospace; font-size:6.8pt; font-weight:500;
+  letter-spacing:.11em; text-transform:uppercase; color:var(--mute);
+  text-align:left; padding:0 6pt 4pt 0; border-bottom:.5pt solid var(--rule);
+}
+th.num, td.num{ text-align:center; width:38pt; }
+td{ padding:4.6pt 6pt 4.6pt 0; border-bottom:.5pt solid var(--hair); vertical-align:top; }
+td.dim{ font-weight:500; width:112pt; }
+td.num{ font-family:'IBM Plex Mono',monospace; font-size:11pt; font-weight:500; }
+tr.weak td{ background:#fbf1ef; }
+tr.weak td.num{ color:var(--oxblood); }
+tr.strong td.num{ color:var(--green); }
+td.ev{ color:var(--soft); font-size:8.7pt; line-height:1.45; }
+
+/* ---------- callout ---------- */
+.callout{
+  background:var(--band); border-left:2.5pt solid var(--oxblood);
+  padding:8pt 10pt; margin:0 0 10.5pt; break-inside:avoid;
+}
+.callout h3{ font-size:10.6pt; margin-bottom:4pt; }
+.callout p{ margin:0 0 5pt; font-size:9.3pt; }
+.callout p:last-child{ margin-bottom:0; }
+
+/* ---------- recommendations ---------- */
+ol.recs{ list-style:none; counter-reset:r; margin:0; padding:0; }
+ol.recs > li{
+  counter-increment:r; display:grid; grid-template-columns:17pt 1fr;
+  gap:8pt; padding:5.5pt 0; border-bottom:.5pt solid var(--hair); break-inside:avoid;
+}
+ol.recs > li:last-child{ border-bottom:0; }
+ol.recs > li::before{
+  content:counter(r); font-family:'IBM Plex Mono',monospace; font-size:8pt; font-weight:500;
+  color:#fff; background:var(--court); width:15pt; height:15pt; border-radius:2pt;
+  display:flex; align-items:center; justify-content:center; margin-top:1pt;
+}
+.rec-h{ font-weight:500; font-size:10pt; display:block; margin-bottom:1.5pt; grid-column:2; }
+.rec-h .eff{
+  font-family:'IBM Plex Mono',monospace; font-size:6.6pt; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--brass); margin-left:5pt; font-weight:400;
+}
+.rec-b{ color:var(--soft); font-size:8.9pt; line-height:1.48; display:block; grid-column:2; }
+.rec-b em{ color:var(--ink); font-style:normal; font-weight:500; }
+
+/* ---------- less ---------- */
+.less{ background:var(--band); padding:8pt 10pt; border-radius:2pt; break-inside:avoid; }
+.less p{ margin:0 0 3pt; font-size:8.8pt; }
+.less p:last-child{ margin:0; }
+.less b{ font-weight:500; }
+
+.scope{ font-size:8.5pt; color:var(--soft); border-top:.5pt solid var(--rule); padding-top:7pt; }
+.scope b{ color:var(--ink); font-weight:500; }
+
+footer{
+  margin-top:11pt; padding-top:6pt; border-top:.5pt solid var(--rule);
+  font-family:'IBM Plex Mono',monospace; font-size:6.8pt; color:var(--mute);
+  letter-spacing:.03em; display:flex; justify-content:space-between;
+}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <p class="kicker">Independent assessment · 3 September 2026</p>
+  <h1>Brooks Law Firm — Website Assessment</h1>
+  <p class="sub">Where the site stands against other law firm websites, what is holding the score down, and what to do about it — measured from the live content export and the theme source.</p>
+</div>
+
+<div class="verdict">
+  <div class="score">
+    <div class="n">7.5</div>
+    <div class="d">out of 10</div>
+    <div class="l">Top ~5%<br>of law firm<br>websites</div>
+  </div>
+  <div class="verdict-body">
+    <p>The site is genuinely strong where most law firm websites are weak: <strong>231,509 words</strong> of jurisdiction-specific content across 170 published pages, actively maintained, on a technical foundation that now outperforms most agency work.</p>
+    <p>It is not an 8.5 for one specific and fixable reason. Of 170 pages, <strong>exactly one</strong> mentions a client review or testimonial, ten mention credentials or bar admission, and the structured-data field for professional profile links is empty. The content proves expertise; almost nothing on the site <em>signals</em> it.</p>
+  </div>
+</div>
+
+<div class="sec">
+  <h2>Scorecard</h2>
+  <p class="note">Each score is grounded in a measurement from the 3 September content export, not an impression.</p>
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th class="num">Score</th><th>Evidence</th></tr>
+    </thead>
+    <tbody>
+      <tr class="strong">
+        <td class="dim">Content depth</td><td class="num">9</td>
+        <td class="ev">231,509 words over 170 pages. Median 1,261 words per page; 31% exceed 1,500. Exactly one page falls under 300 words.</td>
+      </tr>
+      <tr class="strong">
+        <td class="dim">Content freshness</td><td class="num">9</td>
+        <td class="ev">145 of 170 pages modified within the last three months. Nothing is stale.</td>
+      </tr>
+      <tr class="strong">
+        <td class="dim">Local SEO architecture</td><td class="num">8</td>
+        <td class="ev">67 location-targeted pages across 8 municipalities — Memphis, Germantown, Bartlett, Collierville, Shelby County and others. A genuine practice × geography matrix.</td>
+      </tr>
+      <tr class="strong">
+        <td class="dim">Technical foundation</td><td class="num">8.5</td>
+        <td class="ev">Zero third-party requests, self-hosted typefaces, security headers, conditional asset loading, connected structured data, and a regression test suite.</td>
+      </tr>
+      <tr class="weak">
+        <td class="dim">Trust &amp; authority signals</td><td class="num">3</td>
+        <td class="ev">1 page of 170 references reviews or testimonials. 10 reference credentials or bar admission. The <span style="font-family:'IBM Plex Mono',monospace;font-size:8pt">sameAs</span> profile-link field is empty.</td>
+      </tr>
+      <tr>
+        <td class="dim">Measurement</td><td class="num">—</td>
+        <td class="ev">No analytics instrumentation visible in the export. Conversion performance is currently unknowable.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout">
+  <h3>Why one row holds the whole score down</h3>
+  <p>Someone arrested last night, sitting in a parking lot at 11pm, is not evaluating a DUI page's word count. They are deciding whether to trust a stranger with the next two years of their life. They look at reviews, and then they call.</p>
+  <p>Reviews are also among the strongest ranking factors for local search results, and legal sits squarely in what Google classifies as <em>Your Money or Your Life</em> — a category held to a demonstrably higher bar for proven expertise. This site has 231,000 words of genuine authority and almost none of the signals that corroborate it. That gap is the difference between a 7.5 and a 9.</p>
+</div>
+
+<div class="sec">
+  <h2>Recommendations, in priority order</h2>
+  <p class="note">Ranked by impact against effort. The first three are not engineering work.</p>
+  <ol class="recs">
+    <li>
+      <span class="rec-h">Build a client review pipeline <span class="eff">highest impact · not a code change</span></span>
+      <span class="rec-b">Ask every client at matter resolution for a Google review. Then switch on the testimonials section — it is <em>already built into the theme and currently disabled</em>, disclaimer included, drafted to satisfy Tennessee RPC 7.1. This is the single highest-leverage item on the list and it requires no development.</span>
+    </li>
+    <li>
+      <span class="rec-h">Fill in the professional profile links <span class="eff">ten minutes</span></span>
+      <span class="rec-b">Customizer → SEO &amp; Schema → one text field. Google Business Profile, Avvo, Justia, Martindale, Tennessee Bar listing, LinkedIn. This is how Google resolves “Brooks Law Firm” from a string of text into an entity it is confident about. <em>The field is currently blank.</em></span>
+    </li>
+    <li>
+      <span class="rec-h">Publish attorney credentials properly <span class="eff">an afternoon</span></span>
+      <span class="rec-b">Bar admission dates, courts admitted to, years in practice, representative matter types, any publications or speaking. Add author bylines on the 44 posts linking back to the profile pages. <em>The structured-data plumbing already exists and is going unused</em> — the theme publishes ProfilePage entities for both attorneys, and they currently carry almost nothing.</span>
+    </li>
+    <li>
+      <span class="rec-h">Link the 18 orphaned pages <span class="eff">an hour</span></span>
+      <span class="rec-b">Median internal linking is a healthy 6 links per page, but 18 pages carry none at all. They receive less crawl priority and pass no authority to the rest of the site.</span>
+    </li>
+    <li>
+      <span class="rec-h">Modernise the image library <span class="eff">moderate</span></span>
+      <span class="rec-b">323 raster images, only 22 converted to WebP. AVIF is now supported across every major browser and is typically 20–30% smaller again. Worth doing — but honestly smaller in effect than the four items above, now that everything else is fast.</span>
+    </li>
+    <li>
+      <span class="rec-h">Install measurement <span class="eff">an afternoon</span></span>
+      <span class="rec-b">There are 67 location-targeted pages and currently no way to know which of them produce telephone calls. Without this, every decision above — including which pages deserve more work — remains guesswork.</span>
+    </li>
+  </ol>
+</div>
+
+<div class="sec">
+  <h2>What matters less than expected</h2>
+  <div class="less">
+    <p><b>More content is not the bottleneck.</b> At 231,000 words the marginal new page is worth considerably less than making the existing ones convert.</p>
+    <p><b>Further performance tuning is past the point of return.</b> Load time is no longer a limiting factor on this site.</p>
+    <p><b>llms.txt is cheap insurance, not a ranking factor.</b> No major crawler has publicly documented consuming it. Keep it; do not invest further in it.</p>
+    <p><b>The theme's built-in page cache should be removed, not tuned.</b> Cloudflare already provides that layer, and the theme's own companion plugin warns against running both.</p>
+  </div>
+</div>
+
+<div class="scope">
+  <b>Scope and method.</b> This assessment draws on the WordPress content export of 3 September 2026 (170 published pages and posts, 459 media attachments) and a full read of the active theme and companion plugin source. Scores for content, freshness, local architecture and technical foundation are computed from that data. <b>Not assessed:</b> visual design quality, analytics, search rankings, and actual conversion rate — any of which could move the composite by roughly a point in either direction. The rendered site was not reviewed in a browser.
+</div>
+
+<footer>
+  <span>Brooks Law Firm · patrickbrookslaw.com</span>
+  <span>Assessed 3 September 2026</span>
+</footer>
+
+</body>
+</html>
