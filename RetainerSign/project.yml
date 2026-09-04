@@ -29,6 +29,7 @@ targets:
       properties:
         CFBundleDisplayName: RetainerSign
         UILaunchScreen: {}
+        NSCameraUsageDescription: RetainerSign uses the camera to scan paper retainer agreements.
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
         UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
         # OAuth redirect for DocuSign sign-in (must match the redirect URI registered on the integration key)

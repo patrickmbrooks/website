@@ -6,6 +6,11 @@ struct RetainerEditorView: View {
     @Environment(\.dismiss) private var dismiss
     @State var retainer: Retainer
     @State private var showPreview = false
+    @State private var showFields = false
+    @State private var showSend = false
+    @State private var scanPDF: Data?
+    @State private var dsMessage: String?
+    @State private var checking = false
 
     var body: some View {
         Form {
@@ -19,6 +24,19 @@ struct RetainerEditorView: View {
                 TextField("Address", text: $retainer.clientAddress, axis: .vertical)
                     .textContentType(.fullStreetAddress)
             }
+            if retainer.source == .scanned {
+                Section("Scanned document") {
+                    TextField("Matter (for your records)", text: $retainer.matterDescription)
+                    if let name = retainer.scannedPDFFileName {
+                        ShareLink(item: RetainerStore.scansFolder.appendingPathComponent(name)) {
+                            Label("View / share scan", systemImage: "doc.text.magnifyingglass")
+                        }
+                    }
+                    Button { showFields = true } label: {
+                        Label(retainer.fields.isEmpty ? "Place signature fields" : "Edit signature fields (\(retainer.fields.count))", systemImage: "signature")
+                    }
+                }
+            } else {
             Section("Matter") {
                 TextField("Matter (e.g. I-130 petition for spouse)", text: $retainer.matterDescription, axis: .vertical)
                 TextField("Scope of work (optional)", text: $retainer.scopeOfWork, axis: .vertical)
@@ -38,11 +56,19 @@ struct RetainerEditorView: View {
                 money("Retainer deposit", value: $retainer.retainerDeposit)
                 TextField("Payment terms", text: $retainer.paymentTerms, axis: .vertical)
             }
+            }
             if retainer.status != .draft {
                 Section("Status") {
                     LabeledContent("Status", value: retainer.status.rawValue)
                     if let id = retainer.docusignEnvelopeId {
                         LabeledContent("DocuSign envelope", value: id).font(.caption)
+                        Button {
+                            Task { await checkDocuSign(id) }
+                        } label: {
+                            Label(checking ? "Checking…" : "Check status / download signed copy", systemImage: "arrow.down.doc")
+                        }
+                        .disabled(checking)
+                        if let dsMessage { Text(dsMessage).font(.footnote).foregroundStyle(.secondary) }
                     }
                     if let d = retainer.signedAt {
                         LabeledContent("Signed", value: d.formatted(date: .abbreviated, time: .shortened))
@@ -64,18 +90,61 @@ struct RetainerEditorView: View {
                     .disabled(retainer.clientName.isEmpty)
             }
             ToolbarItem(placement: .bottomBar) {
-                Button {
-                    store.upsert(retainer)
-                    showPreview = true
-                } label: {
-                    Label("Preview & Send", systemImage: "doc.richtext")
+                if retainer.source == .scanned {
+                    Button {
+                        store.upsert(retainer)
+                        scanPDF = store.sourcePDF(for: retainer, firm: settings.firm)
+                        showSend = true
+                    } label: { Label("Send / Sign", systemImage: "signature") }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(retainer.clientName.isEmpty || !retainer.fields.contains { $0.kind == .clientSignature })
+                } else {
+                    Button {
+                        store.upsert(retainer)
+                        showPreview = true
+                    } label: { Label("Preview & Send", systemImage: "doc.richtext") }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(retainer.clientName.isEmpty || retainer.matterDescription.isEmpty)
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(retainer.clientName.isEmpty || retainer.matterDescription.isEmpty)
             }
         }
         .navigationDestination(isPresented: $showPreview) {
             PDFPreviewView(retainer: $retainer)
+        }
+        .navigationDestination(isPresented: $showFields) {
+            FieldPlacementView(pdf: store.sourcePDF(for: retainer, firm: settings.firm), fields: $retainer.fields) {
+                store.upsert(retainer)
+                showFields = false
+            }
+        }
+        .sheet(isPresented: $showSend) {
+            if let scanPDF {
+                NavigationStack { SendView(retainer: $retainer, pdf: scanPDF) }
+            }
+        }
+    }
+
+    /// Polls DocuSign; when the envelope is completed, downloads the signed PDF (with
+    /// DocuSign's certificate of completion) into the Signed folder.
+    private func checkDocuSign(_ envelopeId: String) async {
+        checking = true; defer { checking = false }
+        let client = DocuSignClient(config: settings.docusign)
+        do {
+            let status = try await client.envelopeStatus(envelopeId)
+            if status == "completed" {
+                let data = try await client.downloadCompleted(envelopeId)
+                let name = "Retainer-\(retainer.clientName.replacingOccurrences(of: " ", with: "_"))-docusign-\(envelopeId.prefix(8)).pdf"
+                try data.write(to: RetainerStore.signedFolder.appendingPathComponent(name), options: [.atomic, .completeFileProtection])
+                retainer.signedPDFFileName = name
+                retainer.signedAt = Date()
+                retainer.status = .completed
+                store.upsert(retainer)
+                dsMessage = "Completed. Signed copy saved; DocuSign also emailed it to you and the client."
+            } else {
+                dsMessage = "DocuSign status: \(status)"
+            }
+        } catch {
+            dsMessage = error.localizedDescription
         }
     }
 

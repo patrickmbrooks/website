@@ -14,6 +14,22 @@ final class RetainerStore: ObservableObject {
         return url
     }()
 
+    static let scansFolder: URL = {
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let url = docs.appendingPathComponent("Scans", isDirectory: true)
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
+    }()
+
+    /// Loads the PDF the retainer is based on: the scan, or a freshly generated one.
+    func sourcePDF(for r: Retainer, firm: FirmProfile) -> Data {
+        if r.source == .scanned, let name = r.scannedPDFFileName,
+           let d = try? Data(contentsOf: Self.scansFolder.appendingPathComponent(name)) {
+            return d
+        }
+        return PDFGenerator(firm: firm, retainer: r).makePDF()
+    }
+
     init() {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         fileURL = docs.appendingPathComponent("retainers.json")
@@ -32,6 +48,9 @@ final class RetainerStore: ObservableObject {
         for i in offsets {
             if let name = retainers[i].signedPDFFileName {
                 try? FileManager.default.removeItem(at: Self.signedFolder.appendingPathComponent(name))
+            }
+            if let name = retainers[i].scannedPDFFileName {
+                try? FileManager.default.removeItem(at: Self.scansFolder.appendingPathComponent(name))
             }
         }
         retainers.remove(atOffsets: offsets)

@@ -5,6 +5,7 @@ struct RetainerListView: View {
     @EnvironmentObject var settings: SettingsStore
     @State private var editing: Retainer?
     @State private var showSettings = false
+    @State private var showScan = false
 
     var body: some View {
         NavigationStack {
@@ -28,11 +29,17 @@ struct RetainerListView: View {
                     Button { showSettings = true } label: { Image(systemName: "gearshape") }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { editing = Retainer() } label: { Image(systemName: "plus") }
+                    Menu {
+                        Button { editing = Retainer() } label: { Label("New from template", systemImage: "doc.text") }
+                        Button { showScan = true } label: { Label("Scan paper retainer", systemImage: "doc.viewfinder") }
+                    } label: { Image(systemName: "plus") }
                 }
             }
             .sheet(item: $editing) { r in
                 NavigationStack { RetainerEditorView(retainer: r) }
+            }
+            .sheet(isPresented: $showScan) {
+                NavigationStack { ScanFlowView() }
             }
             .sheet(isPresented: $showSettings) {
                 NavigationStack { SettingsView() }
@@ -43,7 +50,10 @@ struct RetainerListView: View {
     private func row(_ r: Retainer) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                Text(r.displayName).font(.headline)
+                HStack(spacing: 6) {
+                    Text(r.displayName).font(.headline)
+                    if r.source == .scanned { Image(systemName: "doc.viewfinder").font(.caption).foregroundStyle(.secondary) }
+                }
                 Text(r.matterDescription.isEmpty ? "No matter description" : r.matterDescription)
                     .font(.subheadline).foregroundStyle(.secondary).lineLimit(1)
             }

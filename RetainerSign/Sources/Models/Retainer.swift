@@ -15,6 +15,35 @@ enum RetainerStatus: String, Codable {
     case completed = "Completed"
 }
 
+enum DocumentSource: String, Codable { case generated, scanned }
+
+enum FieldKind: String, Codable, CaseIterable, Identifiable {
+    case clientSignature = "Client signature"
+    case clientDate = "Client date"
+    case clientInitials = "Client initials"
+    case attorneySignature = "Attorney signature"
+    var id: String { rawValue }
+    var isClient: Bool { self != .attorneySignature }
+    /// Default size in PDF points.
+    var size: CGSize {
+        switch self {
+        case .clientSignature, .attorneySignature: return CGSize(width: 160, height: 36)
+        case .clientDate: return CGSize(width: 90, height: 22)
+        case .clientInitials: return CGSize(width: 50, height: 22)
+        }
+    }
+}
+
+/// A field placed on a scanned document. Position is normalized (0…1) to the page,
+/// measured from the top-left corner, so it survives any display scale.
+struct SignatureField: Identifiable, Codable, Equatable {
+    var id = UUID()
+    var kind: FieldKind
+    var pageIndex: Int
+    var x: Double
+    var y: Double
+}
+
 struct Retainer: Identifiable, Codable, Equatable {
     var id = UUID()
     var createdAt = Date()
@@ -34,6 +63,11 @@ struct Retainer: Identifiable, Codable, Equatable {
     var retainerDeposit: Decimal = 0
     var paymentTerms = "Due upon signing."
     var agreementDate = Date()
+
+    // Scanned paper retainer (instead of the generated template)
+    var source: DocumentSource = .generated
+    var scannedPDFFileName: String?   // relative to Documents/Scans
+    var fields: [SignatureField] = []
 
     // Tracking
     var status: RetainerStatus = .draft

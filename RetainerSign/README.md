@@ -18,7 +18,15 @@ agreements as PDFs and getting them signed. Built for a solo/small law practice.
      signature is stamped on the PDF along with a certificate page (signer, time, device,
      SHA-256 of the unsigned document). The signed PDF is saved on device and shareable.
    * **Email the PDF** – attaches the unsigned PDF to a Mail message.
-4. **Track** – each retainer shows Draft / Sent / Signed status and the DocuSign envelope id.
+4. **Scan a paper retainer instead** – tap + → *Scan paper retainer*. The system document
+   camera captures each page (edge detection, de-skew). You then tap where the client
+   signs, dates, or initials (and optionally where you sign), and send it the same three
+   ways. DocuSign places its fields exactly at your taps; in-person signing stamps the
+   signature there.
+5. **Track** – each retainer shows Draft / Sent / Signed status and the DocuSign envelope id.
+   For DocuSign envelopes, *Check status / download signed copy* pulls the completed PDF
+   with DocuSign's certificate of completion. DocuSign also emails the completed copy to
+   you and the client automatically.
 
 Data stays on the device (JSON in the app's Documents folder, file-protected). DocuSign
 tokens are stored in the Keychain.
@@ -34,8 +42,10 @@ RetainerSign/
     Services/PDFGenerator     PDF layout + template filling
     Services/DocuSignClient   OAuth PKCE, create envelope, status, download
     Services/MailComposer     Mail sheet wrapper
+    Services/DocumentScanner  camera scan → PDF, and stamping signatures onto a scan
     Services/Keychain         token storage
-    Views/                    list, editor, preview, send, signature pad, settings
+    Views/                    list, editor, preview, send, signature pad, settings,
+                              scan flow, signature-field placement
     Resources/DefaultTemplate.txt   default agreement text
 ```
 

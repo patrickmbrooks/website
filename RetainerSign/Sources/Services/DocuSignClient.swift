@@ -2,6 +2,7 @@ import Foundation
 import AuthenticationServices
 import CryptoKit
 import UIKit
+import PDFKit
 
 /// Minimal DocuSign eSignature client: OAuth Authorization Code + PKCE (no backend or
 /// client secret needed) and envelope creation with anchor-placed signature tabs.
@@ -136,23 +137,50 @@ final class DocuSignClient: NSObject, ObservableObject {
     // MARK: Envelopes
 
     /// Sends the PDF for signature and returns the envelope id.
-    func sendForSignature(pdf: Data, retainer: Retainer, firm: FirmProfile) async throws -> String {
+    /// - fields: for scanned documents, tab positions placed by the attorney. When empty,
+    ///   the generated template's hidden anchor strings are used instead.
+    func sendForSignature(pdf: Data, retainer: Retainer, firm: FirmProfile, fields: [SignatureField] = []) async throws -> String {
         let s = try await validSession()
 
-        func tabs(sig: String, date: String) -> [String: Any] {
+        func anchorTabs(sig: String, date: String) -> [String: Any] {
             ["signHereTabs": [["anchorString": sig, "anchorUnits": "pixels", "anchorXOffset": "0", "anchorYOffset": "-10"]],
              "dateSignedTabs": [["anchorString": date, "anchorUnits": "pixels", "anchorXOffset": "0", "anchorYOffset": "0"]]]
         }
+        /// DocuSign positions are in pixels at 72 dpi from the page's top-left, i.e. PDF points.
+        func positioned(_ fs: [SignatureField]) -> [String: Any] {
+            let pageSize = PDFPageSizes.sizes(of: pdf)
+            func tab(_ f: SignatureField) -> [String: Any] {
+                let page = pageSize.indices.contains(f.pageIndex) ? pageSize[f.pageIndex] : CGSize(width: 612, height: 792)
+                let r = f.rect(in: CGRect(origin: .zero, size: page))
+                return ["documentId": "1", "pageNumber": "\(f.pageIndex + 1)",
+                        "xPosition": "\(Int(r.minX))", "yPosition": "\(Int(r.minY))"]
+            }
+            var t: [String: Any] = [:]
+            let sig = fs.filter { $0.kind == .clientSignature || $0.kind == .attorneySignature }.map(tab)
+            let dates = fs.filter { $0.kind == .clientDate }.map(tab)
+            let initials = fs.filter { $0.kind == .clientInitials }.map(tab)
+            if !sig.isEmpty { t["signHereTabs"] = sig }
+            if !dates.isEmpty { t["dateSignedTabs"] = dates }
+            if !initials.isEmpty { t["initialHereTabs"] = initials }
+            return t
+        }
+
+        let clientTabs = fields.isEmpty
+            ? anchorTabs(sig: PDFGenerator.clientSigAnchor, date: PDFGenerator.clientDateAnchor)
+            : positioned(fields.filter { $0.kind.isClient })
         var signers: [[String: Any]] = [[
             "email": retainer.clientEmail, "name": retainer.clientName,
             "recipientId": "1", "routingOrder": "1",
-            "tabs": tabs(sig: PDFGenerator.clientSigAnchor, date: PDFGenerator.clientDateAnchor)
+            "tabs": clientTabs
         ]]
-        if config.attorneySignsToo, !firm.email.isEmpty {
+        let attorneyFields = fields.filter { $0.kind == .attorneySignature }
+        if config.attorneySignsToo, !firm.email.isEmpty, fields.isEmpty || !attorneyFields.isEmpty {
             signers.append([
                 "email": firm.email, "name": firm.attorneyName,
                 "recipientId": "2", "routingOrder": "2",
-                "tabs": tabs(sig: PDFGenerator.attorneySigAnchor, date: PDFGenerator.attorneyDateAnchor)
+                "tabs": fields.isEmpty
+                    ? anchorTabs(sig: PDFGenerator.attorneySigAnchor, date: PDFGenerator.attorneyDateAnchor)
+                    : positioned(attorneyFields)
             ])
         }
         let body: [String: Any] = [
@@ -228,5 +256,12 @@ extension DocuSignClient: ASWebAuthenticationPresentationContextProviding {
             let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
             return scenes.flatMap { $0.windows }.first { $0.isKeyWindow } ?? ASPresentationAnchor()
         }
+    }
+}
+
+enum PDFPageSizes {
+    static func sizes(of data: Data) -> [CGSize] {
+        guard let doc = PDFDocument(data: data) else { return [] }
+        return (0..<doc.pageCount).map { doc.page(at: $0)?.bounds(for: .mediaBox).size ?? CGSize(width: 612, height: 792) }
     }
 }
