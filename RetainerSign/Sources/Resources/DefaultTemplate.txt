@@ -1,0 +1,44 @@
+ATTORNEY-CLIENT RETAINER AGREEMENT
+
+This Retainer Agreement ("Agreement") is entered into on {{date}} between {{firm_name}} ("Attorney"), located at {{firm_address}}, and {{client_name}} ("Client"), residing at {{client_address}}.
+
+1. SCOPE OF REPRESENTATION
+Client retains Attorney to represent Client in the following matter: {{matter}}.
+
+The services to be provided include: {{scope}}.
+
+Attorney's representation is limited to the matter described above. Any additional services, including appeals or related matters, will require a separate written agreement.
+
+2. FEES
+{{fee_terms}}
+
+Payment terms: {{payment_terms}}
+
+3. COSTS AND EXPENSES
+In addition to fees, Client agrees to pay all costs and expenses reasonably incurred in connection with the matter, including but not limited to filing fees, government fees, courier and postage charges, translation and interpreter costs, and expert fees. Attorney will not incur any single expense over $500 without Client's prior approval.
+
+4. RETAINER DEPOSIT AND TRUST ACCOUNT
+Any retainer deposit paid by Client will be held in Attorney's client trust account and applied against fees and costs as they are earned or incurred. Attorney will provide Client with periodic statements. Any unearned portion of the deposit will be refunded to Client upon conclusion of the representation.
+
+5. CLIENT RESPONSIBILITIES
+Client agrees to cooperate fully with Attorney, to provide complete and truthful information and documents in a timely manner, to keep Attorney informed of any change in address, telephone number, or email, and to pay Attorney's statements when due.
+
+6. COMMUNICATION
+Attorney will keep Client reasonably informed about the status of the matter and will respond to Client's inquiries within a reasonable time. Client consents to communication by email and text message, understanding that such communication is not perfectly secure.
+
+7. NO GUARANTEE OF OUTCOME
+Attorney has made no promise or guarantee regarding the outcome of the matter. Any statements about possible results are expressions of opinion only.
+
+8. TERMINATION
+Client may terminate this Agreement at any time by written notice. Attorney may withdraw from representation for good cause as permitted by the applicable rules of professional conduct, including nonpayment of fees, failure to cooperate, or any other reason permitted by those rules. Upon termination, Client remains responsible for fees and costs incurred through the date of termination.
+
+9. FILE RETENTION
+Attorney will retain Client's file for five (5) years after the conclusion of the matter, after which it may be destroyed without further notice unless Client requests its return in writing.
+
+10. ENTIRE AGREEMENT; GOVERNING LAW
+This Agreement contains the entire agreement between the parties and may be modified only in a writing signed by both parties. This Agreement is governed by the laws of the State of {{governing_state}}.
+
+11. ELECTRONIC SIGNATURES
+The parties agree that this Agreement may be signed electronically and that electronic signatures are binding to the same extent as original handwritten signatures.
+
+BY SIGNING BELOW, CLIENT ACKNOWLEDGES THAT CLIENT HAS READ AND UNDERSTANDS THIS AGREEMENT, HAS HAD THE OPPORTUNITY TO ASK QUESTIONS, AND AGREES TO ITS TERMS.
