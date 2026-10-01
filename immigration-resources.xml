@@ -19,6 +19,45 @@
 	   NOTE: the two pages link to each other using the addresses above. If
 	   your site uses a different permalink format, just update the language
 	   link at the top of each page after importing.
+
+	WHAT IS BUILT IN
+	- Each page starts with a JSON-LD WebPage schema block that declares its
+	  language (inLanguage) and points to the other page as its translation
+	  (workTranslation / translationOfWork). Your SEO plugin's own schema is
+	  not replaced; the block uses its own @id (#resource-page) to avoid
+	  conflicts. If the importer strips <script> tags (this happens on
+	  multisite or for non-admin authors), paste the block back in using the
+	  "Custom HTML" block, or skip it; the pages work without it.
+	- The Spanish page body is wrapped in <div lang="es"> and each language
+	  banner carries its own lang attribute, so screen readers and search
+	  engines read the right language even if the site's <html lang> is en-US.
+	- No tables, images, scripts, fixed widths, or pixel font sizes: the
+	  layout is fluid and renders on phones without horizontal scrolling.
+	- All 216 external links open in a new tab with rel="noopener noreferrer".
+	  Comments and pingbacks are closed on both pages.
+
+	AFTER PUBLISHING: SEO CHECKLIST (do these once, in order)
+	1. Set the SEO title and meta description (the excerpt text is a good
+	   description) in your SEO plugin for each page.
+	2. hreflang: if you use Polylang, WPML, or TranslatePress, link the two
+	   pages as translations so hreflang tags are emitted. Otherwise add to
+	   the site <head> (SEO plugin "head code" or theme):
+	     <link rel="alternate" hreflang="en" href="https://patrickbrookslaw.com/immigration-resources/">
+	     <link rel="alternate" hreflang="es" href="https://patrickbrookslaw.com/recursos-legales-de-inmigracion/">
+	     <link rel="alternate" hreflang="x-default" href="https://patrickbrookslaw.com/immigration-resources/">
+	3. Confirm both URLs appear in your XML sitemap
+	   (https://patrickbrookslaw.com/sitemap.xml or sitemap_index.xml) and that
+	   https://patrickbrookslaw.com/robots.txt still lists the Sitemap: line
+	   and does not Disallow these paths.
+	4. Google Search Console: URL Inspection on both URLs, then "Request
+	   indexing". Check the Page Indexing and Mobile Usability / Core Web
+	   Vitals reports a week later.
+	5. Bing Webmaster Tools: submit both URLs (URL Submission) and re-submit
+	   the sitemap.
+	6. Mobile: open both pages on a phone (or Chrome DevTools device mode).
+	   Expect no horizontal scroll and tappable links at 375px width.
+	7. Rich results: paste each URL into https://search.google.com/test/rich-results
+	   and https://validator.schema.org/ to confirm the WebPage schema parses.
 -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
@@ -56,8 +95,23 @@
 		<guid isPermaLink="false">https://patrickbrookslaw.com/?page_id=90001</guid>
 		<description></description>
 		<content:encoded><![CDATA[
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://patrickbrookslaw.com/immigration-resources/#resource-page",
+  "url": "https://patrickbrookslaw.com/immigration-resources/",
+  "name": "Immigration Legal Resources",
+  "description": "A community referral list of nonprofit immigration legal-aid and advocacy organizations and trusted guides, with an emphasis on Tennessee, Mississippi, and Arkansas.",
+  "inLanguage": "en",
+  "isPartOf": { "@type": "WebSite", "@id": "https://patrickbrookslaw.com/#website", "url": "https://patrickbrookslaw.com/", "name": "Patrick Brooks Law" },
+  "about": { "@type": "Thing", "name": "Immigration legal aid resources" },
+  "workTranslation": { "@type": "WebPage", "@id": "https://patrickbrookslaw.com/recursos-legales-de-inmigracion/#resource-page", "url": "https://patrickbrookslaw.com/recursos-legales-de-inmigracion/", "inLanguage": "es" },
+  "dateModified": "2026-05-16"
+}
+</script>
 <div style="background:#eef4fb;border:1px solid #c5d8ee;padding:12px 18px;margin:0 0 22px;border-radius:3px;text-align:center;">
-<p style="margin:0;font-size:1.05em;">&iquest;Habla espa&ntilde;ol? <a href="https://patrickbrookslaw.com/recursos-legales-de-inmigracion/"><strong>Vea esta p&aacute;gina en espa&ntilde;ol &raquo;</strong></a></p>
+<p lang="es" style="margin:0;font-size:1.05em;">&iquest;Habla espa&ntilde;ol? <a href="https://patrickbrookslaw.com/recursos-legales-de-inmigracion/"><strong>Vea esta p&aacute;gina en espa&ntilde;ol &raquo;</strong></a></p>
 </div>
 
 <p><em>This page is provided as a free community resource. Last reviewed May 2026.</em></p>
@@ -568,8 +622,24 @@
 		<guid isPermaLink="false">https://patrickbrookslaw.com/?page_id=90002</guid>
 		<description></description>
 		<content:encoded><![CDATA[
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://patrickbrookslaw.com/recursos-legales-de-inmigracion/#resource-page",
+  "url": "https://patrickbrookslaw.com/recursos-legales-de-inmigracion/",
+  "name": "Recursos Legales de Inmigración",
+  "description": "Una lista de referencias comunitarias de organizaciones de inmigración sin fines de lucro y guías confiables, con énfasis en Tennessee, Misisipi y Arkansas.",
+  "inLanguage": "es",
+  "isPartOf": { "@type": "WebSite", "@id": "https://patrickbrookslaw.com/#website", "url": "https://patrickbrookslaw.com/", "name": "Patrick Brooks Law" },
+  "about": { "@type": "Thing", "name": "Immigration legal aid resources" },
+  "translationOfWork": { "@type": "WebPage", "@id": "https://patrickbrookslaw.com/immigration-resources/#resource-page", "url": "https://patrickbrookslaw.com/immigration-resources/", "inLanguage": "en" },
+  "dateModified": "2026-05-16"
+}
+</script>
+<div lang="es">
 <div style="background:#eef4fb;border:1px solid #c5d8ee;padding:12px 18px;margin:0 0 22px;border-radius:3px;text-align:center;">
-<p style="margin:0;font-size:1.05em;">Do you speak English? <a href="https://patrickbrookslaw.com/immigration-resources/"><strong>View this page in English &raquo;</strong></a></p>
+<p lang="en" style="margin:0;font-size:1.05em;">Do you speak English? <a href="https://patrickbrookslaw.com/immigration-resources/"><strong>View this page in English &raquo;</strong></a></p>
 </div>
 
 <p><em>Esta página se ofrece como un recurso comunitario gratuito. Última revisión: mayo de 2026.</em></p>
@@ -1055,6 +1125,7 @@
 <hr />
 
 <p><em>Si no está seguro de por dónde empezar, comience con los directorios nacionales en la parte superior de esta página; lo dirigirán a una organización sin fines de lucro confiable cerca de usted. Esta página se mantiene como un servicio público y se actualiza periódicamente; si nota un enlace roto o información desactualizada, por favor infórmelo a nuestra oficina.</em></p>
+</div>
 ]]></content:encoded>
 		<excerpt:encoded><![CDATA[Una lista de referencias comunitarias de organizaciones de inmigración sin fines de lucro y guías confiables, con énfasis en Tennessee, Misisipi y Arkansas.]]></excerpt:encoded>
 		<wp:post_id>90002</wp:post_id>
